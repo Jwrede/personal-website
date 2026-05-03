@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+};
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const fmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: '2-digit' });
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  author: {
+    '@type': 'Person',
+    name: 'Jonathan Wrede',
+    url: 'https://jonathanwrede.de/',
+  },
+  publisher: {
+    '@type': 'Person',
+    name: 'Jonathan Wrede',
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `https://jonathanwrede.de/blog/${post.slug}/`,
+  },
+  keywords: post.data.tags.join(', '),
+  inLanguage: post.data.lang,
+};
+---
+<BaseLayout
+  title={`${post.data.title} | Jonathan Wrede`}
+  description={post.data.description}
+  canonicalPath={`/blog/${post.slug}/`}
+  ogType="article"
+  articleMeta={{
+    publishedTime: post.data.pubDate.toISOString(),
+    modifiedTime: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+    tags: post.data.tags,
+  }}
+  jsonLd={articleJsonLd}
+>
+  <article class="max-w-3xl mx-auto space-y-6">
+    <nav class="bg-card p-4 rounded-xl border border-slate-700/50 flex items-center justify-between text-xs font-mono">
+      <a href="/" class="text-slate-400 hover:text-accent">
+        <i class="fas fa-arrow-left mr-1.5"></i> jonathanwrede.de
+      </a>
+      <a href="/blog/" class="text-slate-400 hover:text-accent">
+        <i class="fas fa-list mr-1.5"></i> All posts
+      </a>
+    </nav>
+
+    <header class="bg-card p-6 md:p-10 rounded-xl border-l-4 border-accent shadow-lg">
+      <div class="flex items-center gap-3 text-[11px] text-slate-500 font-mono mb-3">
+        <time datetime={post.data.pubDate.toISOString()}>{fmt.format(post.data.pubDate)}</time>
+        {post.data.tags.length > 0 && (
+          <>
+            <span class="text-slate-700">|</span>
+            <span>{post.data.tags.join(' / ')}</span>
+          </>
+        )}
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold mb-3 break-words hyphens-auto">{post.data.title}</h1>
+      <p class="text-slate-400 text-base md:text-lg leading-relaxed">{post.data.description}</p>
+    </header>
+
+    <div class="bg-card p-6 md:p-10 rounded-xl border border-slate-700/50 shadow-lg">
+      <div class="prose prose-invert max-w-none prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-700 prose-code:before:content-none prose-code:after:content-none prose-img:rounded-lg">
+        <Content />
+      </div>
+    </div>
+
+    <footer class="bg-card p-5 md:p-6 rounded-xl border border-slate-700/50 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div class="text-sm text-slate-300">
+        <div class="font-bold text-white">Jonathan Wrede</div>
+        <div class="text-slate-400 text-xs">ML & Platform Engineer - Münster</div>
+      </div>
+      <div class="flex gap-3 text-xs">
+        <a href="mailto:kontakt@jonathanwrede.de" class="bg-accent text-bg font-bold py-2 px-3 rounded">
+          <i class="fas fa-paper-plane mr-1"></i> Get in touch
+        </a>
+        <a href="https://linkedin.com/in/jonathan-wrede" target="_blank" rel="noopener" class="border border-accent text-accent font-bold py-2 px-3 rounded">
+          <i class="fab fa-linkedin mr-1"></i> LinkedIn
+        </a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>

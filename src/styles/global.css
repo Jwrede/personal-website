@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #0f172a; }
+  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #475569; }
+}
+
+@layer components {
+  .pipeline-glow { box-shadow: 0 0 15px rgba(56, 189, 248, 0.15); }
+  .lang-en { display: none; }
+  .in-progress-badge {
+    background: linear-gradient(135deg, #f59e0b22, #a78bfa22);
+    border: 1px solid #a78bfa44;
+  }
+}

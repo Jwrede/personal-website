@@ -1,0 +1,1062 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const title = 'Jonathan Wrede | ML & Platform Engineer - Dagster, dbt, Kubernetes';
+const description = 'Jonathan Wrede - ML & Platform Engineer aus Münster. Ich baue produktionsreife ML-Systeme und Dateninfrastruktur für IoT-Flotten: Dagster, dbt, Kubernetes, Python, FastAPI.';
+---
+<BaseLayout title={title} description={description} ogType="profile" canonicalPath="/">
+
+    <div class="max-w-5xl mx-auto space-y-6 relative">
+
+        <!-- Language toggle -->
+        <div class="absolute top-0 right-0 z-50 p-2">
+            <div class="flex items-center bg-slate-800/80 backdrop-blur border border-slate-700 rounded-full p-1 shadow-2xl">
+                <button id="btn-de" onclick="setLanguage('de')" class="px-4 py-1.5 text-xs font-bold rounded-full transition-all duration-300 bg-accent text-bg shadow-[0_0_10px_rgba(56,189,248,0.4)]">DE</button>
+                <button id="btn-en" onclick="setLanguage('en')" class="px-4 py-1.5 text-xs font-bold rounded-full text-slate-400 hover:text-white transition-all duration-300">EN</button>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="bg-card p-5 md:p-10 rounded-xl border-l-4 border-accent shadow-lg flex flex-col-reverse md:flex-row items-center gap-6 md:gap-10 mt-12 md:mt-0">
+            <div class="flex-1 text-center md:text-left">
+                <div class="font-mono text-green text-xs md:text-sm mb-2">> initializing_profile.py... Done.</div>
+                <h1 class="text-3xl md:text-5xl font-bold mb-2 break-words hyphens-auto">Jonathan Wrede</h1>
+                <h2 class="text-slate-400 text-lg md:text-xl font-medium">ML &amp; Platform Engineer</h2>
+                <div class="text-accent font-mono text-xs md:text-sm mt-1 tracking-wide">
+                    Dagster &nbsp;|&nbsp; dbt &nbsp;|&nbsp; Kubernetes &nbsp;|&nbsp; Python &nbsp;|&nbsp; FastAPI
+                </div>
+
+                <p class="mt-4 text-slate-300 text-sm md:text-base leading-relaxed lang-de">
+                    Ich baue produktionsreife ML-Systeme und Dateninfrastruktur für IoT-Flotten - von Kapazitätsalgorithmen über Analytics-Warehouses bis zum Fleet-Monitoring für 100.000+ Geräte.
+                </p>
+                <p class="mt-4 text-slate-300 text-sm md:text-base leading-relaxed lang-en">
+                    I build production-grade ML systems and data infrastructure for IoT fleets - capacity prediction algorithms, analytics warehouses, and fleet monitoring for 100,000+ devices.
+                </p>
+
+                <div class="mt-5 flex flex-row gap-2 justify-center md:justify-start flex-wrap">
+                    <a id="contact-link" href="mailto:kontakt@jonathanwrede.de" class="text-center bg-accent text-bg text-sm font-bold py-2 px-4 rounded-lg hover:bg-sky-300 transition shadow-md shadow-accent/20">
+                        <i class="fas fa-paper-plane mr-1.5"></i>
+                        <span class="lang-de">Kontakt</span><span class="lang-en">Get in touch</span>
+                    </a>
+                    <a id="cv-link" href="cv_de.pdf" target="_blank" class="text-center border border-slate-500 text-slate-300 hover:text-white hover:border-white text-sm font-bold py-2 px-4 rounded-lg transition bg-slate-800/50">
+                        <i class="fas fa-file-pdf mr-1.5"></i>
+                        <span class="lang-de">Lebenslauf</span><span class="lang-en">Resume</span>
+                    </a>
+                    <a href="https://linkedin.com/in/jonathan-wrede" target="_blank" class="text-center border border-accent text-accent text-sm font-bold py-2 px-4 rounded-lg hover:bg-slate-700 transition">
+                        <i class="fab fa-linkedin mr-1.5"></i>LinkedIn
+                    </a>
+                </div>
+            </div>
+            <div class="relative group flex-shrink-0">
+                <div class="absolute -inset-1 bg-gradient-to-r from-accent to-green rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                <img src="profilbild.webp" onerror="this.src='https://ui-avatars.com/api/?name=Jonathan+Wrede&background=38bdf8&color=0f172a&size=256&bold=true'" alt="Jonathan Wrede - ML & Platform Engineer" width="192" height="192" fetchpriority="high" class="relative w-32 h-32 md:w-48 md:h-48 object-cover object-[50%_25%] rounded-full border-4 border-card shadow-2xl">
+            </div>
+        </header>
+
+        <!-- Pipeline animation -->
+        <div class="p-6 bg-card/50 rounded-xl border border-slate-700/50 shadow-lg pipeline-glow relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/circuit-board.png')] opacity-5 mix-blend-overlay"></div>
+            <div class="relative z-10 flex justify-between items-center text-center">
+                <div class="flex flex-col items-center space-y-2 z-10">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-slate-800/80 border-2 border-indigo rounded-full flex items-center justify-center shadow-lg shadow-indigo/20">
+                        <i class="fas fa-satellite-dish text-xl sm:text-2xl text-indigo"></i>
+                    </div>
+                    <div class="text-xs sm:text-sm font-bold text-indigo tracking-wider">IoT</div>
+                </div>
+                <div class="flex-1 h-1 bg-slate-700/50 mx-2 sm:mx-4 rounded-full relative overflow-hidden">
+                    <div class="absolute top-1/2 -translate-y-1/2 w-8 h-3 bg-gradient-to-r from-indigo to-accent rounded-full blur-[2px] animate-flow"></div>
+                </div>
+                <div class="flex flex-col items-center space-y-2 z-10">
+                    <div class="w-14 h-14 sm:w-20 sm:h-20 bg-slate-800/80 border-2 border-accent rounded-xl flex items-center justify-center shadow-lg shadow-accent/30 relative">
+                        <i class="fas fa-cogs text-2xl sm:text-3xl text-accent animate-spin-slow opacity-20 absolute"></i>
+                        <i class="fab fa-python text-xl sm:text-3xl text-accent z-10 relative"></i>
+                        <span class="absolute bottom-1 right-1 text-[10px] font-black text-orange-400">dbt</span>
+                    </div>
+                    <div class="text-xs sm:text-sm font-bold text-accent tracking-wider animate-pulse">ML</div>
+                </div>
+                <div class="flex-1 h-1 bg-slate-700/50 mx-2 sm:mx-4 rounded-full relative overflow-hidden">
+                    <div class="absolute top-1/2 -translate-y-1/2 w-8 h-3 bg-gradient-to-r from-accent to-green rounded-full blur-[2px] animate-flow-delay"></div>
+                </div>
+                <div class="flex flex-col items-center space-y-2 z-10">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-slate-800/80 border-2 border-green rounded-full flex items-center justify-center shadow-lg shadow-green/20">
+                        <i class="fas fa-chart-line text-xl sm:text-2xl text-green"></i>
+                    </div>
+                    <div class="text-xs sm:text-sm font-bold text-green tracking-wider">IMPACT</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two info cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+
+            <!-- Impact numbers card -->
+            <div class="bg-card p-6 rounded-xl shadow-lg border border-slate-700/50 flex flex-col h-full">
+                <h3 class="text-slate-400 uppercase text-xs font-bold mb-4">
+                    <i class="fas fa-bolt mr-2"></i>
+                    <span class="lang-de">Messbare Wirkung</span>
+                    <span class="lang-en">Measurable Impact</span>
+                </h3>
+                <div class="grid grid-cols-2 gap-3 flex-1">
+                    <div class="bg-slate-800/50 rounded-lg p-4 border border-accent/20 flex flex-col justify-between group hover:border-accent/50 transition">
+                        <div class="text-2xl font-black text-accent">100k+</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-de">IoT-Thermostate überwacht</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-en">IoT thermostats monitored</div>
+                    </div>
+                    <div class="bg-slate-800/50 rounded-lg p-4 border border-green/20 flex flex-col justify-between group hover:border-green/50 transition">
+                        <div class="text-2xl font-black text-green">~400</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-de">Kundenprojekte mit aktiver Batterieprognose</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-en">customer sites with active battery prediction</div>
+                    </div>
+                    <div class="bg-slate-800/50 rounded-lg p-4 border border-indigo/20 flex flex-col justify-between group hover:border-indigo/50 transition">
+                        <div class="text-2xl font-black text-indigo">95+</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-de">dbt-Modelle im Analytics-Warehouse</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-en">dbt models in analytics warehouse</div>
+                    </div>
+                    <div class="bg-slate-800/50 rounded-lg p-4 border border-violet/20 flex flex-col justify-between group hover:border-violet/50 transition">
+                        <div class="text-2xl font-black text-violet">61-99%</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-de">Speicherreduktion bei SNNI (Thesis)</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-en">Memory reduction for SNNI (thesis)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actual stack card -->
+            <div class="bg-card p-6 rounded-xl shadow-lg border border-slate-700/50 flex flex-col h-full">
+                <h3 class="text-slate-400 uppercase text-xs font-bold mb-4"><i class="fas fa-layer-group mr-2"></i>
+                    <span class="lang-de">Eingesetzter Stack</span>
+                    <span class="lang-en">Production Stack</span>
+                </h3>
+                <div class="flex-1 space-y-4 font-mono text-sm relative">
+                    <div class="absolute left-[19px] top-4 bottom-4 w-0.5 bg-slate-700 z-0"></div>
+                    <div class="relative z-10 flex items-center group cursor-default">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center group-hover:border-accent group-hover:text-accent transition"><i class="fas fa-satellite-dish text-slate-400 group-hover:text-accent"></i></div>
+                        <div class="ml-4 flex-1 bg-slate-800/50 p-2 rounded border border-transparent group-hover:border-slate-600 transition">
+                            <div class="text-xs text-slate-500 font-bold uppercase">Ingest</div>
+                            <div class="text-slate-300">Python / IoT APIs / TimescaleDB</div>
+                        </div>
+                    </div>
+                    <div class="relative z-10 flex items-center group cursor-default">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center group-hover:border-orange-400 group-hover:text-orange-400 transition"><i class="fas fa-cogs text-slate-400 group-hover:text-orange-400"></i></div>
+                        <div class="ml-4 flex-1 bg-slate-800/50 p-2 rounded border border-transparent group-hover:border-slate-600 transition">
+                            <div class="text-xs text-slate-500 font-bold uppercase">Transform</div>
+                            <div class="text-slate-300">dbt Core / Polars / SQL</div>
+                        </div>
+                    </div>
+                    <div class="relative z-10 flex items-center group cursor-default">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center group-hover:border-accent group-hover:text-accent transition"><i class="fas fa-clock text-slate-400 group-hover:text-accent"></i></div>
+                        <div class="ml-4 flex-1 bg-slate-800/50 p-2 rounded border border-transparent group-hover:border-slate-600 transition">
+                            <div class="text-xs text-slate-500 font-bold uppercase">Orchestrate</div>
+                            <div class="text-slate-300">Dagster / Docker / Cron</div>
+                        </div>
+                    </div>
+                    <div class="relative z-10 flex items-center group cursor-default">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center group-hover:border-indigo group-hover:text-indigo transition"><i class="fas fa-dharmachakra text-slate-400 group-hover:text-indigo"></i></div>
+                        <div class="ml-4 flex-1 bg-slate-800/50 p-2 rounded border border-transparent group-hover:border-slate-600 transition">
+                            <div class="text-xs text-slate-500 font-bold uppercase">Deploy</div>
+                            <div class="text-slate-300">Kubernetes / Helm / ArgoCD</div>
+                        </div>
+                    </div>
+                    <div class="relative z-10 flex items-center group cursor-default">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center group-hover:border-green group-hover:text-green transition"><i class="fas fa-chart-bar text-slate-400 group-hover:text-green"></i></div>
+                        <div class="ml-4 flex-1 bg-slate-800/50 p-2 rounded border border-transparent group-hover:border-slate-600 transition">
+                            <div class="text-xs text-slate-500 font-bold uppercase">Observe</div>
+                            <div class="text-slate-300">Grafana / Prometheus</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CASE STUDIES ==================== -->
+        <div class="bg-card p-6 md:p-8 rounded-xl shadow-lg border border-slate-700/50">
+            <h3 class="text-slate-400 uppercase text-xs font-bold mb-6 flex items-center">
+                <i class="fas fa-briefcase mr-2"></i>
+                <span class="lang-de">Ausgewählte Projekterfahrung</span>
+                <span class="lang-en">Selected Project Experience</span>
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+
+                <!-- CS1: IoT Analytics Platform -->
+                <div onclick="openModal('cs1Modal')" class="bg-slate-800/40 p-5 md:p-6 rounded-lg border border-accent/30 hover:border-accent cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(56,189,248,0.05)] hover:shadow-[0_0_15px_rgba(56,189,248,0.15)]">
+                    <div class="absolute top-0 right-0 bg-accent text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">
+                        <span class="lang-de">GEBÄUDETECHNIK / IoT</span><span class="lang-en">BUILDING TECH / IoT</span>
+                    </div>
+                    <div class="flex gap-3 items-start mb-3 mt-2">
+                        <div class="bg-accent/10 text-accent p-2.5 rounded-lg"><i class="fas fa-database text-xl"></i></div>
+                        <div>
+                            <h4 class="text-base md:text-lg text-white font-bold group-hover:text-accent transition">
+                                <span class="lang-de">IoT Analytics-Plattform</span><span class="lang-en">IoT Analytics Platform</span>
+                            </h4>
+                            <span class="text-[10px] text-accent/70 font-mono">ELT / dbt / Dagster / ArgoCD</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                        <span class="lang-de">Zentrales Analytics-Warehouse für 100.000+ IoT-Thermostate - von der rohen Gerätetelemetrie zu getesteten dbt-Modellen, Dagster-Orchestrierung und Grafana-Dashboards auf Kubernetes.</span>
+                        <span class="lang-en">Central analytics warehouse for 100,000+ IoT thermostats - from raw device telemetry to tested dbt models, Dagster orchestration, and Grafana dashboards on Kubernetes.</span>
+                    </p>
+                    <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono border-t border-slate-700/50 pt-3 flex-wrap">
+                        <span>dbt</span><span class="text-slate-700">|</span><span>Dagster</span><span class="text-slate-700">|</span><span>Grafana</span><span class="text-slate-700">|</span><span>ArgoCD</span><span class="text-slate-700">|</span><span>K8s</span>
+                        <span class="ml-auto text-accent font-bold group-hover:translate-x-1 transition"><i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- CS2: Battery Intelligence System -->
+                <div onclick="openModal('cs2Modal')" class="bg-slate-800/40 p-5 md:p-6 rounded-lg border border-green/30 hover:border-green cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(74,222,128,0.05)] hover:shadow-[0_0_15px_rgba(74,222,128,0.15)]">
+                    <div class="absolute top-0 right-0 bg-green text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">MLOps / IoT</div>
+                    <div class="flex gap-3 items-start mb-3 mt-2">
+                        <div class="bg-green/10 text-green p-2.5 rounded-lg"><i class="fas fa-brain text-xl"></i></div>
+                        <div>
+                            <h4 class="text-base md:text-lg text-white font-bold group-hover:text-green transition">
+                                <span class="lang-de">Batterie-Intelligenz-System</span><span class="lang-en">Battery Intelligence System</span>
+                            </h4>
+                            <span class="text-[10px] text-green/70 font-mono">Python Library / Algorithmen / Fleet</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                        <span class="lang-de">ML-gestützte Kapazitäts- und Laufzeitvorhersage für 100.000+ IoT-Geräte - als produktionsreife Python-Bibliothek mit Konfidenzintervallen und hardwarespezifischen Defaults.</span>
+                        <span class="lang-en">ML-powered capacity and runtime prediction for 100,000+ IoT devices - shipped as a production Python library with confidence intervals and per-hardware defaults.</span>
+                    </p>
+                    <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono border-t border-slate-700/50 pt-3 flex-wrap">
+                        <span>Python</span><span class="text-slate-700">|</span><span>Polars</span><span class="text-slate-700">|</span><span>pydantic</span><span class="text-slate-700">|</span><span>Dagster</span><span class="text-slate-700">|</span><span>Docker</span>
+                        <span class="ml-auto text-green font-bold group-hover:translate-x-1 transition"><i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- CS3: Battery Operations Dashboard -->
+                <div onclick="openModal('cs3Modal')" class="bg-slate-800/40 p-5 md:p-6 rounded-lg border border-indigo/30 hover:border-indigo cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(129,140,248,0.05)] hover:shadow-[0_0_15px_rgba(129,140,248,0.15)]">
+                    <div class="absolute top-0 right-0 bg-indigo text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">PLATFORM / OPS</div>
+                    <div class="flex gap-3 items-start mb-3 mt-2">
+                        <div class="bg-indigo/10 text-indigo p-2.5 rounded-lg"><i class="fas fa-tachometer-alt text-xl"></i></div>
+                        <div>
+                            <h4 class="text-base md:text-lg text-white font-bold group-hover:text-indigo transition">
+                                <span class="lang-de">Batterie-Operations-Dashboard</span><span class="lang-en">Battery Operations Dashboard</span>
+                            </h4>
+                            <span class="text-[10px] text-indigo/70 font-mono">FastAPI / Alpine.js / Docker</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                        <span class="lang-de">Internes Ops-Tool für Batterietestmanagement, Kapazitätsmessung und automatisiertes Alerting - FastAPI-Backend, Alpine.js-Frontend, 3-Service Docker-Compose-Setup.</span>
+                        <span class="lang-en">Internal ops tool for battery test management, capacity measurement, and automated alerting - FastAPI backend, Alpine.js frontend, 3-service Docker Compose setup.</span>
+                    </p>
+                    <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono border-t border-slate-700/50 pt-3 flex-wrap">
+                        <span>FastAPI</span><span class="text-slate-700">|</span><span>Alpine.js</span><span class="text-slate-700">|</span><span>Plotly</span><span class="text-slate-700">|</span><span>Docker</span>
+                        <span class="ml-auto text-indigo font-bold group-hover:translate-x-1 transition"><i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- CS4: Secure Neural Network Inference (thesis) -->
+                <div onclick="openModal('cs4Modal')" class="bg-slate-800/40 p-5 md:p-6 rounded-lg border border-violet/30 hover:border-violet cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(167,139,250,0.05)] hover:shadow-[0_0_15px_rgba(167,139,250,0.15)]">
+                    <div class="absolute top-0 right-0 bg-violet text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">AI SECURITY</div>
+                    <div class="flex gap-3 items-start mb-3 mt-2">
+                        <div class="bg-violet/10 text-violet p-2.5 rounded-lg relative">
+                            <i class="fas fa-shield-alt text-xl"></i>
+                            <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber rounded-full animate-pulse-slow border border-bg"></span>
+                        </div>
+                        <div>
+                            <h4 class="text-base md:text-lg text-white font-bold group-hover:text-violet transition">
+                                Secure Neural Network Inference
+                            </h4>
+                            <span class="text-[10px] text-violet/70 font-mono">
+                                <span class="lang-de">M.Sc.-Thesis · In Arbeit · 2026</span>
+                                <span class="lang-en">M.Sc. Thesis · In Progress · 2026</span>
+                            </span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                        <span class="lang-de">Speicher-Profiling und Optimierung für 4 SNNI-Systeme auf BERT und ViT - 61-99 % Speicherreduktion, analytische Modelle und ein Deployability-Framework.</span>
+                        <span class="lang-en">Memory profiling and optimization across 4 SNNI systems on BERT and ViT - 61-99% memory reduction, analytical models, and a deployability framework.</span>
+                    </p>
+                    <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono border-t border-slate-700/50 pt-3 flex-wrap">
+                        <span>Python</span><span class="text-slate-700">|</span><span>PyTorch</span><span class="text-slate-700">|</span><span>HE / CKKS</span><span class="text-slate-700">|</span><span>MPC</span>
+                        <span class="ml-auto flex items-center gap-1.5 text-amber text-[10px] font-bold">
+                            <span class="w-1.5 h-1.5 bg-amber rounded-full animate-pulse-slow"></span>
+                            <span class="lang-de">In Arbeit</span><span class="lang-en">In progress</span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== EXPERIENCE ==================== -->
+        <div class="bg-card p-5 md:p-8 rounded-xl shadow-lg border border-slate-700/50">
+            <h3 class="text-slate-400 uppercase text-xs font-bold mb-6">
+                <i class="fas fa-history mr-2"></i>
+                <span class="lang-de">Erfahrung</span><span class="lang-en">Experience</span>
+            </h3>
+            <div class="space-y-8 pl-2">
+                <div class="relative border-l-2 border-accent pl-5 pb-2">
+                    <div class="absolute -left-[7px] top-0 w-3 h-3 bg-accent rounded-full ring-4 ring-card"></div>
+                    <span class="font-mono text-accent text-xs block mb-1">Jan 2025 - <span class="lang-de">Heute</span><span class="lang-en">Present</span></span>
+                    <h4 class="text-lg font-bold">Machine Learning Engineer | Vilisto</h4>
+                    <p class="text-slate-400 mt-1 text-sm">
+                        <span class="lang-de">Batterie-Vorhersage-Algorithmen, IoT-Datenplattform (dbt + Dagster + ArgoCD) und Fleet-Monitoring für 100.000+ Geräte.</span>
+                        <span class="lang-en">Battery prediction algorithms, IoT data platform (dbt + Dagster + ArgoCD), and fleet monitoring for 100,000+ devices.</span>
+                    </p>
+                </div>
+                <div class="relative border-l-2 border-slate-600 pl-5 pb-2">
+                    <div class="absolute -left-[7px] top-0 w-3 h-3 bg-slate-500 rounded-full ring-4 ring-card"></div>
+                    <span class="font-mono text-slate-400 text-xs block mb-1">Jan 2023 - Dec 2024</span>
+                    <h4 class="text-lg font-bold text-slate-200">Big Data Consultant | Saracus</h4>
+                    <p class="text-slate-400 mt-1 text-sm">
+                        <span class="lang-de">Cloud Data Warehouses (Snowflake / BigQuery / Azure Synapse), Python-ETL-Pipelines und Streamlit-Apps mit OAuth SSO für Enterprise-Kunden.</span>
+                        <span class="lang-en">Cloud data warehouses (Snowflake / BigQuery / Azure Synapse), Python ETL pipelines, and Streamlit apps with OAuth SSO for enterprise clients.</span>
+                    </p>
+                </div>
+                <div class="relative border-l-2 border-slate-600 pl-5 pb-2">
+                    <div class="absolute -left-[7px] top-0 w-3 h-3 bg-slate-500 rounded-full ring-4 ring-card"></div>
+                    <span class="font-mono text-slate-400 text-xs block mb-1">Sep 2021 - Oct 2022</span>
+                    <h4 class="text-lg font-bold text-slate-200">Working Student - Data Scientist | Vilisto</h4>
+                    <p class="text-slate-400 mt-1 text-sm">
+                        <span class="lang-de">ML-Modelle zur Präsenzerkennung (Python, scikit-learn), PostgreSQL/TimescaleDB-Pipelines, Vue.js-Frontend und internes Labeling-Tool.</span>
+                        <span class="lang-en">Presence-detection ML models (Python, scikit-learn), PostgreSQL/TimescaleDB pipelines, Vue.js frontend, and internal labeling tool.</span>
+                    </p>
+                </div>
+                <div class="relative border-l-2 border-slate-600 pl-5">
+                    <div class="absolute -left-[7px] top-0 w-3 h-3 bg-slate-500 rounded-full ring-4 ring-card"></div>
+                    <span class="font-mono text-slate-400 text-xs block mb-1"><span class="lang-de">Ausbildung</span><span class="lang-en">Education</span></span>
+                    <h4 class="text-lg font-bold text-slate-200">M.Sc. Computer Science - AI / ML / Statistics</h4>
+                    <p class="text-slate-400 mt-1 text-sm">
+                        <span class="lang-de">Universität Münster | Thesis: Speicheroptimierung für Secure Neural Network Inference in Transformern</span>
+                        <span class="lang-en">University of Münster | Thesis: Optimizing memory footprints for secure neural network inference in transformers</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== BLOG ==================== -->
+        <div class="bg-card p-5 md:p-8 rounded-xl shadow-lg border border-slate-700/50">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-slate-400 uppercase text-xs font-bold flex items-center">
+                    <i class="fas fa-pen-nib mr-2"></i>
+                    <span class="lang-de">Aktuelle Beiträge</span>
+                    <span class="lang-en">Latest writing</span>
+                </h3>
+                <a href="/blog/" class="text-xs text-accent hover:text-sky-300 font-bold">
+                    <span class="lang-de">Alle ansehen</span><span class="lang-en">View all</span>
+                    <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+            <div id="blog-teasers" class="grid grid-cols-1 gap-3"></div>
+        </div>
+
+        <footer class="text-center text-slate-500 text-xs py-8">
+            <p class="mb-2">&copy; 2025-2026 Jonathan Wrede.</p>
+            <div class="flex justify-center gap-4">
+                <button onclick="openModal('legalModal', 'impressum')" class="hover:text-accent transition underline">Impressum</button>
+                <span class="text-slate-700">|</span>
+                <button onclick="openModal('legalModal', 'datenschutz')" class="hover:text-accent transition underline">Datenschutz</button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ==================== CS1 MODAL: IoT Analytics Platform ==================== -->
+    <div id="cs1Modal" class="fixed inset-0 z-50 hidden flex items-center justify-center md:p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal('cs1Modal')"></div>
+        <div class="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-4xl bg-bg border border-accent/30 md:rounded-xl shadow-2xl flex flex-col animate-fade-in-up overflow-hidden">
+            <div class="bg-card p-5 border-b border-accent/20 flex justify-between items-center flex-shrink-0">
+                <div>
+                    <h2 class="text-lg md:text-2xl font-bold text-white flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded text-xs w-fit">BUILDING TECH / IoT</span>
+                        <span><span class="lang-de">IoT Analytics-Plattform</span><span class="lang-en">IoT Analytics Platform</span></span>
+                    </h2>
+                </div>
+                <button onclick="closeModal('cs1Modal')" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
+            </div>
+            <div class="overflow-y-auto p-6 md:p-10 space-y-6 flex-1 bg-bg">
+                <div>
+                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-2 tracking-wider">
+                        <span class="lang-de">Kontext</span><span class="lang-en">Context</span>
+                    </h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        <span class="lang-de">ELT-Plattform für IoT-Telemetrie von 100.000+ Thermostaten. Kernproblem: Rohdaten leben in einer transaktionalen Zeitreihendatenbank - nicht für analytische Abfragen geeignet. Ziel war ein von der Produktion getrenntes Analytics-Warehouse mit getesteten Transformationen und nachvollziehbarer Lineage.</span>
+                        <span class="lang-en">ELT platform for IoT telemetry from 100,000+ thermostats. Core problem: raw data lives in a transactional time-series database - unsuitable for analytical queries. Goal was an analytics warehouse fully separate from production, with tested transformations and traceable data lineage.</span>
+                    </p>
+                </div>
+
+                <!-- Architecture Diagram -->
+                <div class="bg-slate-900/60 p-4 md:p-6 rounded-lg border border-slate-700/50">
+                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-4 text-center tracking-widest">
+                        <span class="lang-de">Architektur</span><span class="lang-en">Architecture</span>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-red-500/30 rounded-lg flex items-center justify-center"><i class="fas fa-satellite-dish text-red-400 text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">IoT Sources</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-yellow-500/30 rounded-lg flex items-center justify-center"><i class="fab fa-python text-yellow-400 text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">EL Job (PII-safe)</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-blue-500/30 rounded-lg flex items-center justify-center"><i class="fas fa-database text-blue-400 text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Timescale raw</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-orange-500/30 rounded-lg flex items-center justify-center"><span class="text-orange-400 text-xs md:text-sm font-black">dbt</span></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Models + Tests</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-accent/30 rounded-lg flex items-center justify-center"><i class="fas fa-clock text-accent text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Dagster</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-green/30 rounded-lg flex items-center justify-center"><i class="fas fa-chart-line text-green text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Grafana</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-center gap-2 mt-3 flex-wrap text-[9px] text-slate-600 font-mono">
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50"><i class="fas fa-dharmachakra mr-1"></i>Kubernetes + Helm</span>
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50"><i class="fas fa-sync mr-1"></i>ArgoCD</span>
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50"><i class="fas fa-stream mr-1"></i>Sqitch migrations</span>
+                    </div>
+                </div>
+
+                <!-- dbt model layers -->
+                <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700/50">
+                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-3 tracking-widest">
+                        <span class="lang-de">dbt-Modellschichten (95+ Modelle)</span><span class="lang-en">dbt Model Layers (95+ models)</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="bg-slate-800/60 rounded p-2 border border-orange-500/20">
+                            <div class="text-[9px] text-orange-400 font-bold uppercase mb-1">Staging</div>
+                            <div class="space-y-0.5 text-[9px] text-slate-400 font-mono">
+                                <div>stg_valve_movement_daily</div>
+                                <div>stg_last_updates_per_day</div>
+                                <div>stg_battery_fleet_daily</div>
+                                <div>stg_thermostat_hierarchy</div>
+                                <div class="text-slate-600">+ 4 more…</div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-800/60 rounded p-2 border border-green/20">
+                            <div class="text-[9px] text-green font-bold uppercase mb-1">Mart</div>
+                            <div class="space-y-0.5 text-[9px] text-slate-400 font-mono">
+                                <div>device_states_per_day</div>
+                                <div>battery_algorithm_eval</div>
+                                <div>online_ratios_by_firmware</div>
+                                <div>hardware_fw_distributions</div>
+                                <div class="text-slate-600">+ many more…</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-3 tracking-wider">
+                        <span class="lang-de">Umsetzung</span><span class="lang-en">Implementation</span>
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-accent text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">ELT statt ETL: Daten werden roh geladen und im Warehouse transformiert. PII wird im Ingestion-Layer entfernt, bevor Daten das Analytics-Schema erreichen. 12-stündliche und tägliche Dagster-Assets mit automatischer Backfill-Unterstützung.</span>
+                            <span class="lang-en">ELT over ETL: data is loaded raw and transformed inside the warehouse. PII is stripped in the ingestion layer before data reaches the analytics schema. 12-hourly and daily Dagster assets with automatic backfill support.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-accent text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Zwei-Schicht dbt-Architektur: Staging-Modelle sind 1:1 mit Rohdatenquellen (nur Casting, Renaming, Deduplication) - keine Business-Logik. Mart-Modelle enthalten Aggregationen und Joins. Chunked Upserts für historische Backfills ohne Speicherprobleme.</span>
+                            <span class="lang-en">Two-layer dbt architecture: staging models are 1:1 with raw sources (only casting, renaming, deduplication) - no business logic. Mart models own aggregations and joins. Chunked upserts for historical backfills without memory issues.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-accent text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Sqitch verwaltet das Raw-Schema (EL-Zielschema), dbt verwaltet sein eigenes Analytics-Schema - keine Migrationskonflikte zwischen beiden Tools. ArgoCD GitOps: Staging-App trackt den main-Branch automatisch, Prod-App wird manuell promotet.</span>
+                            <span class="lang-en">Sqitch owns the raw schema (EL target), dbt owns its own analytics schema - no migration conflicts between the two tools. ArgoCD GitOps: staging app auto-syncs to main branch, prod app is manually promoted.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-accent text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Dagster Software-Defined Assets mit explizitem Abhängigkeitsgraph: die Orchestrierung ergibt sich aus den deklarierten Asset-Dependencies, nicht aus manuell definierten DAGs. Ermöglicht automatisches Erkennen veralteter Assets bei Schema-Änderungen.</span>
+                            <span class="lang-en">Dagster software-defined assets with explicit dependency graph: orchestration is derived from declared asset dependencies, not manually wired DAGs. Enables automatic detection of stale assets when schemas change.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-accent/5 border border-accent/20 rounded-lg p-4">
+                    <h3 class="text-xs text-accent uppercase font-bold mb-2 tracking-wider"><i class="fas fa-lightbulb mr-1"></i>
+                        <span class="lang-de">Designentscheidungen</span><span class="lang-en">Design Decisions</span>
+                    </h3>
+                    <p class="text-sm text-slate-300">
+                        <span class="lang-de">ELT statt ETL ermöglicht das Neuausführen von Transformationen ohne erneuten Extract. Die strikte Staging/Mart-Trennung verhindert, dass Rohdaten-Strukturen direkt in Applikationscode durchsickern. Sqitch und dbt besitzen separate Schemas, damit dbt-Migrationen niemals Rohdaten-Tabellen berühren.</span>
+                        <span class="lang-en">ELT over ETL allows re-running transformations without re-extracting. The strict staging/mart split prevents raw data structures from leaking into application code. Sqitch and dbt own separate schemas so dbt migrations never touch raw data tables.</span>
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">dbt</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Dagster</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">PostgreSQL / TimescaleDB</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Grafana</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Prometheus</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">ArgoCD</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Kubernetes</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Helm</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Python</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Sqitch</span>
+                </div>
+                <div class="md:hidden pt-2">
+                    <button onclick="closeModal('cs1Modal')" class="w-full bg-slate-800 text-white py-3 rounded font-bold">
+                        <span class="lang-de">Schließen</span><span class="lang-en">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CS2 MODAL: Battery Intelligence System ==================== -->
+    <div id="cs2Modal" class="fixed inset-0 z-50 hidden flex items-center justify-center md:p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal('cs2Modal')"></div>
+        <div class="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-4xl bg-bg border border-green/30 md:rounded-xl shadow-2xl flex flex-col animate-fade-in-up overflow-hidden">
+            <div class="bg-card p-5 border-b border-green/20 flex justify-between items-center flex-shrink-0">
+                <div>
+                    <h2 class="text-lg md:text-2xl font-bold text-white flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
+                        <span class="bg-green/20 text-green px-2 py-1 rounded text-xs w-fit">MLOps / IoT</span>
+                        <span><span class="lang-de">Batterie-Intelligenz-System</span><span class="lang-en">Battery Intelligence System</span></span>
+                    </h2>
+                </div>
+                <button onclick="closeModal('cs2Modal')" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
+            </div>
+            <div class="overflow-y-auto p-6 md:p-10 space-y-6 flex-1 bg-bg">
+                <div>
+                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-2 tracking-wider">
+                        <span class="lang-de">Kontext</span><span class="lang-en">Context</span>
+                    </h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        <span class="lang-de">IoT-Thermostate steuern Heizkörperventile per Motor. Ventilbewegungsschritte und Klemmenspannung sind die einzigen verfügbaren Signale zur Batterieeinschätzung - kein direkter Stromsensor. Die Herausforderung: genaue Kapazitäts- und Laufzeitschätzung aus indirekten, verrauschten Signalen über ~400 Deployments mit unterschiedlichen Hardware-Generationen.</span>
+                        <span class="lang-en">IoT thermostats actuate radiator valves via a motor. Valve movement step counts and terminal voltage are the only signals available for battery estimation - no direct current sensor. The challenge: accurate capacity and runtime estimation from indirect, noisy signals across ~400 deployments with different hardware generations.</span>
+                    </p>
+                </div>
+
+                <!-- Architecture Diagram -->
+                <div class="bg-slate-900/60 p-4 md:p-6 rounded-lg border border-slate-700/50">
+                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-4 text-center tracking-widest">
+                        <span class="lang-de">System-Architektur</span><span class="lang-en">System Architecture</span>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-4">
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-red-500/30 rounded-lg flex items-center justify-center"><i class="fas fa-battery-three-quarters text-red-400 text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Valve + Voltage</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-16 h-12 md:w-20 md:h-14 bg-slate-800 border border-green/30 rounded-lg flex items-center justify-center px-1">
+                                <span class="text-green text-[9px] md:text-[10px] font-black text-center leading-tight">datavil<br/>library</span>
+                            </div>
+                            <span class="text-[9px] text-slate-500 font-mono">Algorithms</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-yellow-500/30 rounded-lg flex items-center justify-center"><i class="fas fa-cogs text-yellow-400 text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">thermostat-<br/>supervisor</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-blue-500/30 rounded-lg flex items-center justify-center"><i class="fas fa-database text-blue-400 text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">PostgreSQL</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-accent/30 rounded-lg flex items-center justify-center"><i class="fas fa-satellite-dish text-accent text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">100k+ devices</span>
+                        </div>
+                    </div>
+                    <!-- datavil internals -->
+                    <div class="bg-green/5 border border-green/20 rounded-lg p-3">
+                        <div class="text-[9px] text-green font-bold uppercase mb-2 tracking-wider">datavil - Core Algorithms</div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[9px] font-mono text-slate-400">
+                            <div class="bg-slate-800/60 rounded p-1.5 border border-green/10 text-center">Capacity<br/>Estimation</div>
+                            <div class="bg-slate-800/60 rounded p-1.5 border border-green/10 text-center">Faulty Day<br/>Detection</div>
+                            <div class="bg-slate-800/60 rounded p-1.5 border border-green/10 text-center">p5 / p95<br/>Intervals</div>
+                            <div class="bg-slate-800/60 rounded p-1.5 border border-green/10 text-center">Runtime<br/>Prediction</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center gap-2 mt-3 flex-wrap text-[9px] text-slate-600 font-mono">
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50"><i class="fab fa-gitlab mr-1"></i>GitLab CI/CD</span>
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">private PyPI · v0.10.3</span>
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50"><i class="fas fa-docker mr-1"></i>Docker</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-3 tracking-wider">
+                        <span class="lang-de">Umsetzung</span><span class="lang-en">Implementation</span>
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-green text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Ventilbewegung als Energieproxy: jeder Motorschritt hat einen bekannten mAh-Verbrauch pro Hardware-Version. Coulomb-Konvertierung summiert diese Schrittkosten über die Zeit. Geräte ohne gemessene Kapazität erhalten hardwarespezifische Fallback-Defaults.</span>
+                            <span class="lang-en">Valve movement as energy proxy: each motor step has a known mAh cost per hardware version. Coulomb conversion accumulates these step costs over time. Devices without measured capacity fall back to per-hardware-version defaults.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-green text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Fehlerhafter-Tag-Erkennung mit zwei Schwellwert-Typen: Spannungsabfall-Threshold UND Aktivitätsanomalie. Einzelne Tagesausreißer (Fenster &lt; 6h) erhalten eine geringere Strafe als mehrtägige Fehlersegmente, um kurzes Sensorjauschen nicht überzubestrafen.</span>
+                            <span class="lang-en">Faulty day detection uses two threshold types: voltage drop AND activity anomaly. Single-day dips (window &lt; 6h) receive a lighter penalty than sustained multi-day segments, to avoid over-penalizing brief sensor noise.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-green text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Konfidenzintervalle: empirische Verteilung gemessener Kapazitäten je Hardware-Version bildet einen Prior. Fehlende Tage addieren eine Kapazitätsstrafe. p5/p95 werden aus dieser Verteilung abgeleitet - das Ergebnis ist ein Laufzeitintervall, keine Punktschätzung.</span>
+                            <span class="lang-en">Confidence intervals: empirical distribution of measured capacities per hardware version forms a prior. Missing days add a capacity penalty term. p5/p95 are derived from this distribution - the output is a runtime interval, not a point estimate.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-green text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Bibliotheks-Design: reine Funktionen ohne DB-Zugriffe oder Seiteneffekte in datavil. Polars DataFrames mit pandera-Schemas an Funktionsgrenzen erzwingen korrekte Spaltentypen vor jeder Berechnung. beartype ergänzt pyright-Statikanalyse mit Runtime-Checks.</span>
+                            <span class="lang-en">Library design: pure functions only - no DB access or side effects inside datavil. Polars DataFrames with pandera schemas at function boundaries enforce correct column types before any computation. beartype adds runtime checks on top of pyright static analysis.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-green text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Release-Pipeline: commitizen parst Conventional-Commit-Messages und bumpt semver automatisch (fix - patch, feat - minor, breaking - major), aktualisiert CHANGELOG.md, setzt Git-Tag und triggert den GitLab-CI-Publish-Job ins private PyPI-Registry.</span>
+                            <span class="lang-en">Release pipeline: commitizen parses conventional commit messages to auto-bump semver (fix - patch, feat - minor, breaking - major), updates CHANGELOG.md, sets a git tag, and triggers the GitLab CI publish job to the private PyPI registry.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-green/5 border border-green/20 rounded-lg p-4">
+                    <h3 class="text-xs text-green uppercase font-bold mb-2 tracking-wider"><i class="fas fa-lightbulb mr-1"></i>
+                        <span class="lang-de">Designentscheidungen</span><span class="lang-en">Design Decisions</span>
+                    </h3>
+                    <p class="text-sm text-slate-300">
+                        <span class="lang-de">Die Trennung von Algorithmus-Bibliothek (datavil) und Scheduler (thermostat-supervisor) hält Domänenlogik ohne Datenbankzugriff testbar. Reine Funktionen mit strikter Schema-Validierung bedeuten: Algorithmusfehler tauchen in Unit-Tests auf, nicht in Produktions-Cron-Runs. Die Bibliothek wird als versioniertes PyPI-Paket ausgeliefert, damit andere Services dieselben Algorithmen konsumieren können ohne Code-Duplikation.</span>
+                        <span class="lang-en">Separating the algorithm library (datavil) from the scheduler (thermostat-supervisor) keeps domain logic testable without a database. Pure functions with strict schema validation mean algorithm bugs surface in unit tests, not in production cron runs. Shipping the library as a versioned PyPI package lets other services consume the same algorithms without duplicating code.</span>
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Python</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Polars</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">pydantic</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">beartype</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">pandera</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Docker</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">GitLab CI/CD</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">uv</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">PostgreSQL</span>
+                </div>
+                <div class="md:hidden pt-2">
+                    <button onclick="closeModal('cs2Modal')" class="w-full bg-slate-800 text-white py-3 rounded font-bold">
+                        <span class="lang-de">Schließen</span><span class="lang-en">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CS3 MODAL: Battery Operations Dashboard ==================== -->
+    <div id="cs3Modal" class="fixed inset-0 z-50 hidden flex items-center justify-center md:p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal('cs3Modal')"></div>
+        <div class="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-4xl bg-bg border border-indigo/30 md:rounded-xl shadow-2xl flex flex-col animate-fade-in-up overflow-hidden">
+            <div class="bg-card p-5 border-b border-indigo/20 flex justify-between items-center flex-shrink-0">
+                <div>
+                    <h2 class="text-lg md:text-2xl font-bold text-white flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
+                        <span class="bg-indigo/20 text-indigo px-2 py-1 rounded text-xs w-fit">PLATFORM / OPS</span>
+                        <span><span class="lang-de">Batterie-Operations-Dashboard</span><span class="lang-en">Battery Operations Dashboard</span></span>
+                    </h2>
+                </div>
+                <button onclick="closeModal('cs3Modal')" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
+            </div>
+            <div class="overflow-y-auto p-6 md:p-10 space-y-6 flex-1 bg-bg">
+                <div>
+                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-2 tracking-wider">
+                        <span class="lang-de">Kontext</span><span class="lang-en">Context</span>
+                    </h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        <span class="lang-de">Internes Ops-Tool für Batterietestmanagement auf einer VM ohne Kubernetes-Overhead. Wichtige Design-Einschränkung: drei Prozesse mit sehr unterschiedlichen Anforderungen - zustandsloser API, Singleton-Scheduler (doppelte Ausführung würde Daten korrumpieren) und Polling-Loop mit In-Memory-Zustand - müssen koexistieren ohne sich gegenseitig zu beeinflussen.</span>
+                        <span class="lang-en">Internal ops tool for battery test management, deployed on a single VM without Kubernetes overhead. Key design constraint: three processes with very different requirements - stateless API, singleton scheduler (duplicate runs would corrupt data), and polling loop with in-memory state - need to coexist without interfering with each other.</span>
+                    </p>
+                </div>
+
+                <!-- Architecture Diagram -->
+                <div class="bg-slate-900/60 p-4 md:p-6 rounded-lg border border-slate-700/50">
+                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-4 text-center tracking-widest">
+                        <span class="lang-de">Architektur (3-Service Docker Compose)</span><span class="lang-en">Architecture (3-Service Docker Compose)</span>
+                    </div>
+                    <!-- Main flow -->
+                    <div class="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-4">
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-blue-500/30 rounded-lg flex items-center justify-center"><i class="fas fa-database text-blue-400 text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">PostgreSQL +<br/>External API</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-indigo/30 rounded-lg flex items-center justify-center"><i class="fas fa-server text-indigo text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">FastAPI :8000</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-slate-500/30 rounded-lg flex items-center justify-center"><i class="fas fa-globe text-slate-400 text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">nginx :8081</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-accent/30 rounded-lg flex items-center justify-center"><i class="fas fa-chart-area text-accent text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Alpine.js<br/>+ Plotly</span>
+                        </div>
+                    </div>
+                    <!-- Background services -->
+                    <div class="grid grid-cols-2 gap-2 mt-2">
+                        <div class="bg-slate-800/60 rounded p-2 border border-amber/20 flex items-center gap-2">
+                            <i class="fas fa-clock text-amber text-sm flex-shrink-0"></i>
+                            <div>
+                                <div class="text-[9px] text-amber font-bold uppercase">backend-cron</div>
+                                <div class="text-[9px] text-slate-400 font-mono">daily 00:10 UTC · auto-stop · capacity sync</div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-800/60 rounded p-2 border border-red-500/20 flex items-center gap-2">
+                            <i class="fas fa-heartbeat text-red-400 text-sm flex-shrink-0"></i>
+                            <div>
+                                <div class="text-[9px] text-red-400 font-bold uppercase">backend-monitor</div>
+                                <div class="text-[9px] text-slate-400 font-mono">every 5 min · Teams alert · 1h cooldown</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API routers -->
+                <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700/50">
+                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-3 tracking-widest">FastAPI Routers</div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[9px] font-mono text-slate-400">
+                        <div class="bg-slate-800/60 rounded p-2 border border-indigo/20 text-center">
+                            <div class="text-indigo font-bold mb-0.5">/channels</div>
+                            <div>list · hosts</div>
+                        </div>
+                        <div class="bg-slate-800/60 rounded p-2 border border-indigo/20 text-center">
+                            <div class="text-indigo font-bold mb-0.5">/measurements</div>
+                            <div>series (30m agg)</div>
+                        </div>
+                        <div class="bg-slate-800/60 rounded p-2 border border-indigo/20 text-center">
+                            <div class="text-indigo font-bold mb-0.5">/patches</div>
+                            <div>sync · batch insert</div>
+                        </div>
+                        <div class="bg-slate-800/60 rounded p-2 border border-indigo/20 text-center">
+                            <div class="text-indigo font-bold mb-0.5">/external</div>
+                            <div>customers · hexes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-3 tracking-wider">
+                        <span class="lang-de">Umsetzung</span><span class="lang-en">Implementation</span>
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-indigo text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">3-Service Docker-Compose-Split: API (zustandslos, kann frei neustarten), backend-cron (Singleton - doppelte Ausführung würde Daten doppelt schreiben), backend-monitor (persistente Polling-Schleife mit In-Memory-Cooldown-State). Separate Container verhindern, dass diese Anforderungen kollidieren.</span>
+                            <span class="lang-en">3-service Docker Compose split: API (stateless, can restart freely), backend-cron (singleton - duplicate runs would double-write data), backend-monitor (persistent polling loop with in-memory cooldown state). Separate containers prevent these requirements from colliding.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-indigo text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Messwerte werden auf 30-Minuten-Fenster aggregiert in der API-Schicht. Rohe Zeitreihen bleiben in PostgreSQL; Aggregation erfolgt zur Abfragezeit mit Zeitbereichs-Limit, um Antwortzeiten zu begrenzen.</span>
+                            <span class="lang-en">Measurements are aggregated to 30-minute windows in the API layer. Raw time series stay in PostgreSQL; aggregation happens at query time with a time-range limit to keep response times bounded.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-indigo text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Patch-System: Patches sind manuelle Korrekturen/Annotationen auf Messwerten. Der /patches/sync-Endpoint führt einen 3-Wege-Diff durch (erstellen fehlender, aktualisieren geänderter, löschen entfernter Patches) ohne vollständigen Re-Import.</span>
+                            <span class="lang-en">Patch system: patches are manual corrections/annotations on measurements. The /patches/sync endpoint performs a three-way diff - create missing, update changed, delete removed - without a full re-import.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-indigo text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Monitor nutzt eine In-Memory-Map mit Last-Seen-Timestamps pro Host. Beim Überschreiten des Schwellwerts wird ein Teams-Webhook gefeuert; der 1h-Cooldown pro Host verhindert Alert-Storms bei Netzwerkausfällen ganzer Segmente.</span>
+                            <span class="lang-en">Monitor uses an in-memory map of last-seen timestamps per host. When a threshold is exceeded a Teams webhook fires; the 1-hour per-host cooldown prevents alert storms when an entire network segment goes down.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-indigo text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Kein JavaScript-Build-Schritt: Alpine.js + Tailwind per CDN, Frontend sind reine statische Dateien hinter nginx. Keine Node.js-Toolchain nötig auf der Ziel-VM.</span>
+                            <span class="lang-en">No JavaScript build step: Alpine.js + Tailwind via CDN, frontend is plain static files behind nginx. No Node.js toolchain required on the target VM.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-indigo/5 border border-indigo/20 rounded-lg p-4">
+                    <h3 class="text-xs text-indigo uppercase font-bold mb-2 tracking-wider"><i class="fas fa-lightbulb mr-1"></i>
+                        <span class="lang-de">Designentscheidungen</span><span class="lang-en">Design Decisions</span>
+                    </h3>
+                    <p class="text-sm text-slate-300">
+                        <span class="lang-de">Der Cron-Job ist ein separater Container statt eines Hintergrund-Threads im API-Prozess, damit er einzeln über die CLI debuggt werden kann ohne API oder Frontend zu berühren. Der Monitor speichert Cooldown-State in-process statt in der DB, da kurze Unterbrechungen beim Neustart akzeptabel sind und kein persistenter State-Store nötig ist.</span>
+                        <span class="lang-en">The cron job is a separate container rather than a background thread in the API process, so it can be invoked standalone via CLI without touching the API or frontend. The monitor stores cooldown state in-process rather than in the DB because brief resets on restart are acceptable and no persistent state store is needed.</span>
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">FastAPI</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Alpine.js</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Plotly</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Tailwind CSS</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Docker Compose</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">nginx</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Python</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">PostgreSQL</span>
+                </div>
+                <div class="md:hidden pt-2">
+                    <button onclick="closeModal('cs3Modal')" class="w-full bg-slate-800 text-white py-3 rounded font-bold">
+                        <span class="lang-de">Schließen</span><span class="lang-en">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CS4 MODAL: Secure Neural Network Inference ==================== -->
+    <div id="cs4Modal" class="fixed inset-0 z-50 hidden flex items-center justify-center md:p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal('cs4Modal')"></div>
+        <div class="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-4xl bg-bg border border-violet/30 md:rounded-xl shadow-2xl flex flex-col animate-fade-in-up overflow-hidden">
+            <div class="bg-card p-5 border-b border-violet/20 flex justify-between items-center flex-shrink-0">
+                <div>
+                    <h2 class="text-lg md:text-2xl font-bold text-white flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
+                        <span class="bg-violet/20 text-violet px-2 py-1 rounded text-xs w-fit">AI SECURITY / RESEARCH</span>
+                        <span>Secure Neural Network Inference</span>
+                    </h2>
+                </div>
+                <button onclick="closeModal('cs4Modal')" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
+            </div>
+            <div class="overflow-y-auto p-6 md:p-10 space-y-6 flex-1 bg-bg">
+
+                <!-- In-progress banner -->
+                <div class="in-progress-badge rounded-lg p-3 flex items-center gap-3">
+                    <span class="w-2.5 h-2.5 bg-amber rounded-full animate-pulse-slow flex-shrink-0"></span>
+                    <p class="text-xs text-slate-300">
+                        <span class="lang-de"><strong class="text-amber">M.Sc.-Thesis in Arbeit</strong> - Universität Münster · Abschluss geplant Oktober 2026</span>
+                        <span class="lang-en"><strong class="text-amber">M.Sc. thesis in progress</strong> - University of Münster · Expected completion October 2026</span>
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-2 tracking-wider">
+                        <span class="lang-de">Problemstellung</span><span class="lang-en">Problem</span>
+                    </h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        <span class="lang-de">Secure Neural Network Inference (SNNI) ermöglicht private Inferenz - weder Clientdaten noch das Servermodell werden offengelegt. Der Speicherbedarf von Dutzenden bis Hunderten GB macht SNNI-Deployments praktisch unmöglich. Bisherige Evaluierungen ignorieren Speicher weitgehend.</span>
+                        <span class="lang-en">Secure Neural Network Inference (SNNI) enables private inference - neither client data nor the server model is revealed. Memory requirements of tens to hundreds of GB make SNNI deployments practically infeasible. Prior evaluations largely ignore memory.</span>
+                    </p>
+                </div>
+
+                <!-- SNNI concept diagram -->
+                <div class="bg-slate-900/60 p-4 md:p-6 rounded-lg border border-slate-700/50">
+                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-4 text-center tracking-widest">
+                        <span class="lang-de">SNNI-Protokoll</span><span class="lang-en">SNNI Protocol</span>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center gap-2 md:gap-4 mb-4">
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-14 h-14 md:w-16 md:h-16 bg-slate-800 border border-accent/30 rounded-lg flex items-center justify-center"><i class="fas fa-user-secret text-accent text-xl"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Client<br/>(private input)</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <i class="fas fa-arrows-alt-h text-violet text-lg"></i>
+                            <span class="text-[9px] text-violet font-mono font-bold">HE / MPC</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-14 h-14 md:w-16 md:h-16 bg-slate-800 border border-violet/30 rounded-lg flex items-center justify-center"><i class="fas fa-brain text-violet text-xl"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Server<br/>(private model)</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <i class="fas fa-arrow-right text-slate-600 text-sm"></i>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-14 h-14 md:w-16 md:h-16 bg-slate-800 border border-green/30 rounded-lg flex items-center justify-center"><i class="fas fa-lock-open text-green text-xl"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Encrypted<br/>result</span>
+                        </div>
+                    </div>
+                    <!-- 4 systems -->
+                    <div class="bg-violet/5 border border-violet/20 rounded-lg p-3">
+                        <div class="text-[9px] text-violet font-bold uppercase mb-2 tracking-wider lang-de">4 SNNI-Systeme · 4 kryptographische Paradigmen</div>
+                        <div class="text-[9px] text-violet font-bold uppercase mb-2 tracking-wider lang-en">4 SNNI Systems · 4 Cryptographic Paradigms</div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[9px] font-mono text-slate-400">
+                            <div class="bg-slate-800/60 rounded p-1.5 border border-violet/10 text-center">HE / CKKS</div>
+                            <div class="bg-slate-800/60 rounded p-1.5 border border-violet/10 text-center">MPC</div>
+                            <div class="bg-slate-800/60 rounded p-1.5 border border-violet/10 text-center">Hybrid HE+MPC</div>
+                            <div class="bg-slate-800/60 rounded p-1.5 border border-violet/10 text-center">SHARK</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-center gap-2 mt-3 flex-wrap text-[9px] text-slate-600 font-mono">
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">BERT-base</span>
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">ViT-Base/16</span>
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">SNNI-Benchmark repo</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-3 tracking-wider">
+                        <span class="lang-de">Beiträge</span><span class="lang-en">Contributions</span>
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-violet text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">HE/CKKS verschlüsselt den Client-Input homomorph: der Server wertet das Netz auf Ciphertext aus ohne zu entschlüsseln - hoher Rechenaufwand, aber keine Kommunikation während der Inferenz. MPC (Secret Sharing) verteilt Input und Gewichte über mehrere Parteien; günstigere Grundoperationen, aber hohe Kommunikationslast proportional zu Aktivierungsgrößen.</span>
+                            <span class="lang-en">HE/CKKS homomorphically encrypts the client input: the server evaluates the network on ciphertext without decrypting - high compute cost but no communication during inference. MPC (secret sharing) distributes input and weights across parties; cheaper base operations but high communication overhead proportional to activation sizes.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-violet text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Speicher-Profiling der 4 Systeme auf BERT-base und ViT-Base/16: RSS-Tracking auf Layer-Ebene, um zu identifizieren wo Allokationen entstehen. Stock-Implementierungen: 3,3 GB bis über 192 GB Peak - großteils durch Puffer, die für die gesamte Inferenz pre-allokiert werden statt schichtweise freigegeben.</span>
+                            <span class="lang-en">Memory profiling of 4 systems on BERT-base and ViT-Base/16: layer-level RSS tracking to identify where allocations occur. Stock implementations: 3.3 GB to over 192 GB peak - largely due to buffers pre-allocated for the full inference pass rather than released layer-by-layer.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-violet text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Waste Factors quantifizieren, wie viel mehr Speicher ein System allokiert als rechnerisch minimal nötig ist. Analytische Modelle leiten den Waste Factor aus Paradigma-Eigenschaften (Ciphertext-Expansion, Kommunikationspuffer, Protokoll-Overhead) ab - vorhersagbar ohne Profiling.</span>
+                            <span class="lang-en">Waste factors quantify how much more memory a system allocates than the theoretical minimum. Analytical models derive the waste factor from paradigm properties (ciphertext expansion, communication buffers, protocol overhead) - predictable without profiling.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-violet text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Optimierungen (Layer-Fusion, In-Place-Operationen, schrittweise Puffer-Freigabe) reduzieren Peak-Speicher um 61-99 % und generalisieren über Paradigmen und Modellarchitekturen. Das Deployability-Framework mappt Hardware-Speicher-Budgets auf machbare System-/Modell-Kombinationen.</span>
+                            <span class="lang-en">Optimizations (layer fusion, in-place operations, incremental buffer release) reduce peak memory by 61-99% and generalize across paradigms and model architectures. The deployability framework maps hardware memory budgets to feasible system/model combinations.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Memory reduction visual -->
+                <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700/50">
+                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-3 tracking-widest lang-de">Speicherreduktion (schematisch)</div>
+                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-3 tracking-widest lang-en">Memory Reduction (schematic)</div>
+                    <div class="space-y-2">
+                        <div>
+                            <div class="flex justify-between text-[9px] text-slate-500 mb-1 font-mono">
+                                <span>Stock</span><span class="text-red-400">3.3 GB - 192 GB+</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded h-2"><div class="bg-red-500/60 h-2 rounded" style="width:100%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[9px] text-slate-500 mb-1 font-mono">
+                                <span class="lang-de">Optimiert</span><span class="lang-en">Optimized</span>
+                                <span class="text-green">61-99% reduction</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded h-2"><div class="bg-green/60 h-2 rounded" style="width:20%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Python</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">PyTorch</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">HE / CKKS</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">MPC</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">BERT</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">ViT</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Transformers</span>
+                </div>
+                <div class="md:hidden pt-2">
+                    <button onclick="closeModal('cs4Modal')" class="w-full bg-slate-800 text-white py-3 rounded font-bold">
+                        <span class="lang-de">Schließen</span><span class="lang-en">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== LEGAL MODAL ==================== -->
+    <div id="legalModal" class="fixed inset-0 z-50 hidden flex items-center justify-center md:p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('legalModal')"></div>
+        <div class="relative w-full h-full md:h-auto md:max-h-[80vh] md:max-w-2xl bg-card border border-slate-600 md:rounded-xl shadow-2xl flex flex-col">
+            <div class="p-4 border-b border-slate-700 flex justify-between items-center flex-shrink-0">
+                <h2 id="legalTitle" class="font-bold text-white">Rechtliche Hinweise</h2>
+                <button onclick="closeModal('legalModal')" class="text-slate-400 hover:text-white text-3xl leading-none">&times;</button>
+            </div>
+            <div id="legalContent" class="p-6 overflow-y-auto text-slate-300 text-sm leading-relaxed flex-1 bg-card"></div>
+            <div class="md:hidden p-4 border-t border-slate-700 flex-shrink-0 bg-card">
+                <button onclick="closeModal('legalModal')" class="w-full bg-slate-700 text-white py-3 rounded font-bold">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <script is:inline>
+        const urlLang = new URLSearchParams(window.location.search).get('lang');
+        let currentLang = urlLang === 'en' ? 'en' : 'de';
+        document.documentElement.lang = currentLang;
+
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            currentLang = lang;
+            const deBtn = document.getElementById('btn-de');
+            const enBtn = document.getElementById('btn-en');
+            const contactBtn = document.getElementById('contact-link');
+            const cvBtn = document.getElementById('cv-link');
+
+            if (lang === 'de') {
+                deBtn.classList.add('bg-accent', 'text-bg', 'shadow-[0_0_10px_rgba(56,189,248,0.4)]');
+                deBtn.classList.remove('text-slate-400', 'hover:text-white');
+                enBtn.classList.remove('bg-accent', 'text-bg', 'shadow-[0_0_10px_rgba(56,189,248,0.4)]');
+                enBtn.classList.add('text-slate-400', 'hover:text-white');
+                contactBtn.href = "mailto:kontakt@jonathanwrede.de";
+                cvBtn.href = "cv_de.pdf";
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-de').forEach(el => el.style.display = 'inline');
+                document.querySelectorAll('p.lang-de, div.lang-de, span.lang-de').forEach(el => el.style.display = 'block');
+            } else {
+                enBtn.classList.add('bg-accent', 'text-bg', 'shadow-[0_0_10px_rgba(56,189,248,0.4)]');
+                enBtn.classList.remove('text-slate-400', 'hover:text-white');
+                deBtn.classList.remove('bg-accent', 'text-bg', 'shadow-[0_0_10px_rgba(56,189,248,0.4)]');
+                deBtn.classList.add('text-slate-400', 'hover:text-white');
+                contactBtn.href = "mailto:contact@jonathanwrede.de";
+                cvBtn.href = "cv_intl.pdf";
+                document.querySelectorAll('.lang-de').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'inline');
+                document.querySelectorAll('p.lang-en, div.lang-en, span.lang-en').forEach(el => el.style.display = 'block');
+            }
+        }
+
+        function openModal(modalId, contentKey) {
+            if (modalId === 'legalModal') {
+                const content = document.getElementById('legalContent');
+                const title = document.getElementById('legalTitle');
+                if (contentKey === 'impressum') {
+                    title.innerText = 'Impressum';
+                    content.innerHTML = impressumText;
+                } else {
+                    title.innerText = 'Datenschutzerklärung';
+                    content.innerHTML = datenschutzText;
+                }
+            }
+            document.getElementById(modalId).classList.remove('hidden');
+            setLanguage(currentLang);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") {
+                ['cs1Modal', 'cs2Modal', 'cs3Modal', 'cs4Modal', 'legalModal'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.add('hidden');
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        const impressumText = `
+            <h2 class="text-xl font-bold text-white mb-4">Impressum</h2>
+            <p class="mb-4">Angaben gemäß § 5 TMG</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <strong class="text-white block mb-1">Betreiber:</strong>
+                    Jonathan Wrede<br>Geiststr. 78<br>48151 Münster<br>Deutschland
+                </div>
+                <div>
+                    <strong class="text-white block mb-1">Kontakt:</strong>
+                    Tel: <a href="tel:+4915129499386" class="hover:text-accent">+49 151 29499386</a><br>
+                    Mail:
+                    <a href="mailto:kontakt@jonathanwrede.de" class="hover:text-accent lang-de">kontakt@jonathanwrede.de</a>
+                    <a href="mailto:contact@jonathanwrede.de" class="hover:text-accent lang-en">contact@jonathanwrede.de</a>
+                </div>
+            </div>
+            <p class="mb-4"><strong>Umsatzsteuer-ID:</strong><br>Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet.</p>
+        `;
+
+        const datenschutzText = `
+            <h2 class="text-xl font-bold text-white mb-4">Datenschutzerklärung</h2>
+            <p class="mb-2"><strong>Allgemeine Hinweise:</strong> Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Hosting via GitHub Pages &amp; Hetzner.</p>
+        `;
+
+        if (currentLang === 'en') setLanguage('en');
+    </script>
+
+  <script is:inline define:vars={{ posts: posts.map(p => ({ slug: p.slug, title: p.data.title, description: p.data.description, pubDate: p.data.pubDate.toISOString() })) }}>
+    (function () {
+      const root = document.getElementById('blog-teasers');
+      if (!root || !posts.length) {
+        if (root) {
+          root.innerHTML = '<p class="text-slate-500 text-sm font-mono">Coming soon.</p>';
+        }
+        return;
+      }
+      root.innerHTML = posts.map(function (p) {
+        const date = new Date(p.pubDate).toISOString().slice(0, 10);
+        return '<a href="/blog/' + p.slug + '/" class="block bg-slate-800/40 rounded-lg p-4 border border-slate-700/50 hover:border-accent transition group">' +
+               '<div class="text-[10px] text-slate-500 font-mono mb-1">' + date + '</div>' +
+               '<h4 class="text-white font-bold group-hover:text-accent transition mb-1">' + p.title + '</h4>' +
+               '<p class="text-xs text-slate-400 leading-relaxed">' + p.description + '</p>' +
+               '</a>';
+      }).join('');
+    })();
+  </script>
+</BaseLayout>
