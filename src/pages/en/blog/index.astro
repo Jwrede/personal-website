@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { t, blogPostPath } from '../../i18n/strings';
+import { t, blogPostPath } from '../../../i18n/strings';
 
-const locale = 'de';
+const locale = 'en';
 const tr = t(locale);
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft && data.lang === locale))
@@ -12,14 +12,14 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft && data.lan
 const title = `${tr.blogTitle} | Jonathan Wrede`;
 const description = tr.blogIndexDesc;
 
-const fmt = new Intl.DateTimeFormat('de-DE', { year: 'numeric', month: 'short', day: '2-digit' });
+const fmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
 
 const blogJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  url: 'https://jonathanwrede.de/blog/',
+  url: 'https://jonathanwrede.de/en/blog/',
   name: 'Jonathan Wrede, Blog',
-  inLanguage: 'de',
+  inLanguage: 'en',
   author: { '@type': 'Person', name: 'Jonathan Wrede' },
   blogPost: posts.map((p) => ({
     '@type': 'BlogPosting',
@@ -35,17 +35,17 @@ const blogJsonLd = {
   title={title}
   description={description}
   locale={locale}
-  canonicalPath="/blog/"
+  canonicalPath="/en/blog/"
   alternates={{ de: '/blog/', en: '/en/blog/' }}
   jsonLd={blogJsonLd}
 >
   <div class="max-w-3xl mx-auto space-y-6">
     <header class="bg-card p-6 md:p-10 rounded-xl border-l-4 border-accent shadow-lg">
       <div class="flex items-center justify-between mb-4">
-        <a href="/" class="text-xs text-slate-400 hover:text-accent font-mono inline-flex items-center">
+        <a href="/en/" class="text-xs text-slate-400 hover:text-accent font-mono inline-flex items-center">
           <i class="fas fa-arrow-left mr-1.5"></i> jonathanwrede.de
         </a>
-        <a href="/en/blog/" hreflang="en" class="text-[11px] text-slate-400 hover:text-accent font-mono">EN</a>
+        <a href="/blog/" hreflang="de" class="text-[11px] text-slate-400 hover:text-accent font-mono">DE</a>
       </div>
       <h1 class="text-3xl md:text-4xl font-bold mb-2">{tr.blogTitle}</h1>
       <p class="text-slate-400 text-sm md:text-base">{tr.blogTagline}</p>
@@ -78,7 +78,7 @@ const blogJsonLd = {
     </div>
 
     <footer class="text-center text-slate-500 text-xs py-8">
-      <a href="/" class="hover:text-accent">{tr.blogBackHome}</a>
+      <a href="/en/" class="hover:text-accent">{tr.blogBackHome}</a>
     </footer>
   </div>
 </BaseLayout>

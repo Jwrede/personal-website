@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Homepage from '../../components/Homepage.astro';
+import { t } from '../../i18n/strings';
+
+const tr = t('en');
+---
+<BaseLayout
+  title={tr.siteTitle}
+  description={tr.siteDescription}
+  locale="en"
+  ogType="profile"
+  canonicalPath="/en/"
+  alternates={{ de: '/', en: '/en/' }}
+>
+  <Homepage locale="en" />
+</BaseLayout>

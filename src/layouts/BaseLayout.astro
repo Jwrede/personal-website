@@ -1,10 +1,13 @@
 ---
 import '../styles/global.css';
+import type { Locale } from '../i18n/strings';
 
 interface Props {
   title: string;
   description: string;
+  locale?: Locale;
   canonicalPath?: string;
+  alternates?: { de?: string; en?: string };
   ogType?: 'website' | 'profile' | 'article';
   ogImage?: string;
   articleMeta?: {
@@ -18,7 +21,9 @@ interface Props {
 const {
   title,
   description,
+  locale = 'de',
   canonicalPath = Astro.url.pathname,
+  alternates,
   ogType = 'website',
   ogImage = '/profilbild.webp',
   articleMeta,
@@ -29,14 +34,20 @@ const site = 'https://jonathanwrede.de';
 const canonical = new URL(canonicalPath, site).toString();
 const ogImageUrl = new URL(ogImage, site).toString();
 
+const ogLocale = locale === 'de' ? 'de_DE' : 'en_US';
+const ogLocaleAlternate = locale === 'de' ? 'en_US' : 'de_DE';
+
+const altDeUrl = alternates?.de ? new URL(alternates.de, site).toString() : null;
+const altEnUrl = alternates?.en ? new URL(alternates.en, site).toString() : null;
+
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Jonathan Wrede',
-  jobTitle: 'ML & Platform Engineer',
+  jobTitle: locale === 'de' ? 'ML & Platform Engineer' : 'ML & Platform Engineer',
   url: `${site}/`,
   image: `${site}/profilbild.webp`,
-  email: 'kontakt@jonathanwrede.de',
+  email: locale === 'de' ? 'kontakt@jonathanwrede.de' : 'contact@jonathanwrede.de',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Münster',
@@ -64,7 +75,7 @@ const websiteJsonLd = {
 };
 ---
 <!DOCTYPE html>
-<html lang="de" class="scroll-smooth">
+<html lang={locale} class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -75,8 +86,13 @@ const websiteJsonLd = {
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href={canonical} />
 
+  {altDeUrl && <link rel="alternate" hreflang="de" href={altDeUrl} />}
+  {altEnUrl && <link rel="alternate" hreflang="en" href={altEnUrl} />}
+  {altDeUrl && <link rel="alternate" hreflang="x-default" href={altDeUrl} />}
+
   <meta property="og:type" content={ogType} />
-  <meta property="og:locale" content="de_DE" />
+  <meta property="og:locale" content={ogLocale} />
+  <meta property="og:locale:alternate" content={ogLocaleAlternate} />
   <meta property="og:url" content={canonical} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
@@ -111,6 +127,11 @@ const websiteJsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
   {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+  <style is:global>
+    html[lang="de"] .lang-en { display: none !important; }
+    html[lang="en"] .lang-de { display: none !important; }
+  </style>
 
   <slot name="head" />
 </head>

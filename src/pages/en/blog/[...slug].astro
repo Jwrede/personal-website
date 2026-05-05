@@ -1,33 +1,33 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
-import { t, blogPostPath } from '../../i18n/strings';
+import { t, blogPostPath } from '../../../i18n/strings';
 
-const locale = 'de';
+const locale = 'en';
 const tr = t(locale);
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getCollection('blog', ({ data }) => !data.draft && data.lang === 'de');
+  const posts = await getCollection('blog', ({ data }) => !data.draft && data.lang === 'en');
   const allPosts = await getCollection('blog', ({ data }) => !data.draft);
   return posts.map((post) => {
     const translation = post.data.translationKey
-      ? allPosts.find((p) => p.data.translationKey === post.data.translationKey && p.data.lang === 'en')
+      ? allPosts.find((p) => p.data.translationKey === post.data.translationKey && p.data.lang === 'de')
       : undefined;
     return {
       params: { slug: post.slug },
-      props: { post, enSlug: translation?.slug },
+      props: { post, deSlug: translation?.slug },
     };
   });
 };
 
-const { post, enSlug } = Astro.props;
+const { post, deSlug } = Astro.props;
 const { Content } = await post.render();
 
-const fmt = new Intl.DateTimeFormat('de-DE', { year: 'numeric', month: 'long', day: '2-digit' });
+const fmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: '2-digit' });
 
-const dePath = blogPostPath('de', post.slug);
-const enPath = enSlug ? blogPostPath('en', enSlug) : undefined;
+const enPath = blogPostPath('en', post.slug);
+const dePath = deSlug ? blogPostPath('de', deSlug) : undefined;
 
 const articleJsonLd = {
   '@context': 'https://schema.org',
@@ -47,7 +47,7 @@ const articleJsonLd = {
   },
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `https://jonathanwrede.de${dePath}`,
+    '@id': `https://jonathanwrede.de${enPath}`,
   },
   keywords: post.data.tags.join(', '),
   inLanguage: post.data.lang,
@@ -57,7 +57,7 @@ const articleJsonLd = {
   title={`${post.data.title} | Jonathan Wrede`}
   description={post.data.description}
   locale={locale}
-  canonicalPath={dePath}
+  canonicalPath={enPath}
   alternates={{ de: dePath, en: enPath }}
   ogType="article"
   articleMeta={{
@@ -69,14 +69,14 @@ const articleJsonLd = {
 >
   <article class="max-w-3xl mx-auto space-y-6">
     <nav class="bg-card p-4 rounded-xl border border-slate-700/50 flex items-center justify-between text-xs font-mono">
-      <a href="/" class="text-slate-400 hover:text-accent">
+      <a href="/en/" class="text-slate-400 hover:text-accent">
         <i class="fas fa-arrow-left mr-1.5"></i> jonathanwrede.de
       </a>
       <div class="flex items-center gap-3">
-        {enPath && (
-          <a href={enPath} hreflang="en" class="text-slate-400 hover:text-accent">EN</a>
+        {dePath && (
+          <a href={dePath} hreflang="de" class="text-slate-400 hover:text-accent">DE</a>
         )}
-        <a href="/blog/" class="text-slate-400 hover:text-accent">
+        <a href="/en/blog/" class="text-slate-400 hover:text-accent">
           <i class="fas fa-list mr-1.5"></i> {tr.blogAllPosts}
         </a>
       </div>
