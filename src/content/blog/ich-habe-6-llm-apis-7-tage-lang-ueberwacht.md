@@ -107,6 +107,55 @@ Gesamtdurchsatz ohne Latenzstrafe.
 Fehler ueber je 10.000+ Probes. Enge Verteilungen. Keine tageszeitabhaengige
 Variation.
 
+## Einsatz als CI/CD-Gate
+
+Die Zahlen oben zeigen, dass Provider-Performance nicht konstant ist. Ein
+Modell, das gestern gut lief, kann heute degradiert sein. llmprobe kann
+Deployments blockieren, wenn das passiert.
+
+```yaml
+# .github/workflows/deploy.yml
+- name: LLM-Provider pruefen
+  env:
+    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  run: |
+    go install github.com/Jwrede/llmprobe@latest
+    llmprobe probe --fail-on degraded
+```
+
+`--fail-on degraded` beendet mit Exit-Code 1, wenn ein Endpoint seine
+TTFT- oder Latenz-Schwellenwerte ueberschreitet. Das Deployment stoppt.
+Kein degradiertes Modell erreicht Production.
+
+Schwellenwerte werden pro Modell in `probes.yml` konfiguriert:
+
+```yaml
+providers:
+  - name: openai
+    api_key: ${OPENAI_API_KEY}
+    models:
+      - name: gpt-4o-mini
+        thresholds:
+          max_ttft: 2s
+          max_latency: 5s
+          min_tokens_per_sec: 50
+```
+
+Basierend auf den 7-Tage-Daten waeren sinnvolle TTFT-Schwellenwerte:
+
+| Modell | Empfohlener max_ttft | Begruendung |
+|--------|----------------------|-------------|
+| GPT-4o-mini | 1,5s | Deckt p95 (1.094ms) mit Puffer ab |
+| Claude 3.5 Haiku | 1,5s | Deckt p95 (1.106ms) mit Puffer ab |
+| Gemini 2.0 Flash | 3s | Breiter Tail, braucht Spielraum |
+| Llama 3.3 70B | 3s | p95 bei 2.221ms |
+| DeepSeek Chat | 5s | Natuerlich langsam, enger Schwellenwert wuerde flappen |
+| Mistral Small | 15s | p95 bei 10.852ms, nur Ausfaelle gaten |
+
+So wird aus "Ich hoffe, die API funktioniert" ein "Ich weiss, dass die
+API funktioniert, die Pipeline hat es vor 30 Sekunden geprueft."
+
 ## Das Tool
 
 llmprobe unterstuetzt OpenAI, Anthropic, Google, Azure, AWS Bedrock und

@@ -103,6 +103,54 @@ throughput without the latency penalty.
 **Reliability** (SLA-bound): GPT-4o-mini and Claude 3.5 Haiku. Zero errors
 over 10,000+ probes each. Tight distributions. No time-of-day variation.
 
+## Using it as a CI/CD gate
+
+The numbers above show that provider performance is not constant. A model
+that was fine yesterday might be degraded right now. llmprobe can block
+deploys when that happens.
+
+```yaml
+# .github/workflows/deploy.yml
+- name: Check LLM providers
+  env:
+    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  run: |
+    go install github.com/Jwrede/llmprobe@latest
+    llmprobe probe --fail-on degraded
+```
+
+`--fail-on degraded` exits with code 1 if any endpoint exceeds its TTFT or
+latency thresholds. The deploy stops. No degraded model reaches production.
+
+You configure thresholds per model in `probes.yml`:
+
+```yaml
+providers:
+  - name: openai
+    api_key: ${OPENAI_API_KEY}
+    models:
+      - name: gpt-4o-mini
+        thresholds:
+          max_ttft: 2s
+          max_latency: 5s
+          min_tokens_per_sec: 50
+```
+
+Based on the 7-day data, reasonable TTFT thresholds would be:
+
+| Model | Suggested max_ttft | Rationale |
+|-------|--------------------|-----------|
+| GPT-4o-mini | 1.5s | Covers p95 (1,094ms) with margin |
+| Claude 3.5 Haiku | 1.5s | Covers p95 (1,106ms) with margin |
+| Gemini 2.0 Flash | 3s | Wide tail, needs headroom |
+| Llama 3.3 70B | 3s | p95 at 2,221ms |
+| DeepSeek Chat | 5s | Naturally slow, tight threshold would flap |
+| Mistral Small | 15s | p95 is 10,852ms, only gate on outages |
+
+This turns "I hope the API is fine" into "I know the API is fine, the
+pipeline checked 30 seconds ago."
+
 ## The tool
 
 llmprobe supports OpenAI, Anthropic, Google, Azure, AWS Bedrock, and any
