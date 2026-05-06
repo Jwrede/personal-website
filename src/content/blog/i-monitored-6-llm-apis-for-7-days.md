@@ -165,3 +165,19 @@ llmprobe watch --tui --interval 60s
 ```
 
 GitHub: [github.com/Jwrede/llmprobe](https://github.com/Jwrede/llmprobe)
+
+## Live benchmark
+
+Since this article was published, I have expanded the experiment into a
+continuous, automated benchmark. It now tracks 15 frontier models across
+OpenAI, Anthropic, Google, DeepSeek, and xAI, probed every hour. The model
+list updates daily based on OpenRouter's weekly popularity rankings, so new
+models are picked up automatically.
+
+The live dashboard is at
+[bench.jonathanwrede.de](https://bench.jonathanwrede.de) and all raw data
+is published as JSONL at
+[github.com/Jwrede/llm-bench-data](https://github.com/Jwrede/llm-bench-data).
+
+Infrastructure code:
+[github.com/Jwrede/llm-bench](https://github.com/Jwrede/llm-bench)
