@@ -13,7 +13,7 @@ At Vilisto we predict battery lifetime for 100k+ smart thermostats. The
 algorithms estimate remaining capacity (mAh) and runtime (days) per device,
 and those predictions drive maintenance decisions for building managers.
 
-The algorithms live in an internal Python library called datavil. New versions
+The algorithms live in an internal Python library. New versions
 ship regularly with improved prediction logic. But how do you know a new
 version is actually better? You can't A/B test battery predictions — by the
 time a battery dies, the experiment has run for months.
@@ -69,7 +69,7 @@ letting domain experts apply judgment that's hard to encode in rules.
 
 ## Isolated environments per algorithm version
 
-The core evaluation question is: how does datavil v0.8.0 compare to v0.9.0 on
+The core evaluation question is: how does v0.8.0 compare to v0.9.0 on
 the same dataset? Running both versions in the same Python process isn't
 possible — they're different package versions with potentially incompatible
 dependencies.
@@ -77,15 +77,15 @@ dependencies.
 The pipeline creates a temporary virtual environment for each version label:
 
 ```python
-# For each datavil version (v0.6.0, v0.8.0, latest, a git ref...)
+# For each library version (v0.6.0, v0.8.0, latest, a git ref...)
 # 1. Create temp venv
-# 2. pip install datavil=={version} from GitLab PyPI
+# 2. pip install battery-lib=={version} from a private PyPI index
 # 3. Run evaluation in subprocess
 # 4. Collect results, tear down venv
 ```
 
 Version labels can be semantic versions (`v0.9.0`), `latest`, or even git
-refs. Dagster's multi-partition support (month × datavil version) means the
+refs. Dagster's multi-partition support (month × library version) means the
 pipeline tracks every combination.
 
 This is the part I'm happiest with. No container builds, no separate CI
@@ -115,7 +115,7 @@ evaluation pipeline processes curated samples — hundreds of devices. The fleet
 has 100k+.
 
 A separate FastAPI application handles this. It spawns background worker
-processes, each running in its own venv with the target datavil version:
+processes, each running in its own venv with the target library version:
 
 - Workers process devices in batches of 250
 - Each batch checkpoints progress to disk (JSON + CSV snapshots)
@@ -171,6 +171,6 @@ versioned Parquet.
 | Experiment tracking | MLflow |
 | Review UI | Streamlit |
 | Fleet computation | FastAPI + subprocess workers |
-| Algorithm library | datavil (internal, installed from GitLab PyPI) |
+| Algorithm library | Internal Python package (private PyPI) |
 | Data processing | Polars, PyArrow |
 | Databases | PostgreSQL (Analytics DB, Battery DB) |

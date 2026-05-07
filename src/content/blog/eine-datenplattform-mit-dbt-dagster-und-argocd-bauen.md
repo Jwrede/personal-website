@@ -56,11 +56,11 @@ Daten pro Kunde:
 
 ```python
 BACKEND_SHARDS = [
-    "backend.vilisto.net",
-    "backend-sprinkenhof.vilisto.net",
-    "backend003.vilisto.net",
-    "backend004.vilisto.net",
-    "staging-backend.vilisto.net",
+    "backend-1.example.com",
+    "backend-2.example.com",
+    "backend-3.example.com",
+    "backend-4.example.com",
+    "backend-5.example.com",
 ]
 ```
 
@@ -71,15 +71,13 @@ Warehouse:
 
 ```python
 CONFIGURATION_PARAMETERS = [
-    "userSetTemp", "lastBatteryChangeDate",
-    "battery_remaining_days", "battery_remaining_capacity",
-    "enableNoiseCapture", "trajectoryMaxTemp",
-    # ... 10 weitere Felder
+    "userSetTemp", "batteryRemainingDays",
+    "heatingMode", "firmwareTarget",
+    # ... ~10 weitere Felder
 ]
 ```
 
-Das `operation`-Feld (Kunden-Metadaten) wird explizit an der Quelle
-entfernt. Wenn ein neues Feld in der API-Antwort auftaucht, erreicht es das
+Sensible Felder werden explizit an der Quelle entfernt. Wenn ein neues Feld in der API-Antwort auftaucht, erreicht es das
 Warehouse nie, es sei denn, jemand fügt es zur Allowlist hinzu.
 
 Für tägliche Aggregate (Ventilbewegung, Temperatur, Luftfeuchtigkeit,
@@ -118,8 +116,8 @@ resources = {
 # Prod: echte Shards, Produktions-DB, echtes MinIO
 resources = {
     "ovis_client": ShardedOvisAPIClient(shards=BACKEND_SHARDS),
-    "db_client": DBClient(host="192.168.191.180"),
-    "minio_client": MinioEvalResultsClient(endpoint="192.168.191.168:9001"),
+    "db_client": DBClient(host=DB_HOST),
+    "minio_client": MinioEvalResultsClient(endpoint=MINIO_ENDPOINT),
     "dbt": DbtCliResource(target="postgres"),
 }
 ```

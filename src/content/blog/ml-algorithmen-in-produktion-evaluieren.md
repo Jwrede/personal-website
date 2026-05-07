@@ -14,7 +14,7 @@ Thermostate. Die Algorithmen schätzen verbleibende Kapazität (mAh) und
 Laufzeit (Tage) pro Gerät, und diese Vorhersagen steuern
 Wartungsentscheidungen für Gebäudemanager.
 
-Die Algorithmen leben in einer internen Python-Bibliothek namens datavil. Neue
+Die Algorithmen leben in einer internen Python-Bibliothek. Neue
 Versionen werden regelmäßig mit verbesserter Vorhersagelogik veröffentlicht.
 Aber woher weiß man, ob eine neue Version tatsächlich besser ist? Man kann
 Batterievorhersagen nicht per A/B-Test prüfen — bis eine Batterie leer ist,
@@ -74,7 +74,7 @@ das sich schwer in Regeln kodieren lässt.
 
 ## Isolierte Environments pro Algorithmusversion
 
-Die zentrale Evaluierungsfrage: Wie schneidet datavil v0.8.0 im Vergleich
+Die zentrale Evaluierungsfrage: Wie schneidet v0.8.0 im Vergleich
 zu v0.9.0 auf demselben Datensatz ab? Beide Versionen im selben
 Python-Prozess laufen zu lassen ist nicht möglich — es sind verschiedene
 Paketversionen mit potenziell inkompatiblen Dependencies.
@@ -83,15 +83,15 @@ Die Pipeline erstellt ein temporäres Virtual Environment für jedes
 Versions-Label:
 
 ```python
-# Für jede datavil-Version (v0.6.0, v0.8.0, latest, ein Git-Ref...)
+# Für jede Bibliotheksversion (v0.6.0, v0.8.0, latest, ein Git-Ref...)
 # 1. Temp-Venv erstellen
-# 2. pip install datavil=={version} von GitLab PyPI
+# 2. pip install battery-lib=={version} von einem privaten PyPI-Index
 # 3. Evaluierung im Subprocess ausführen
 # 4. Ergebnisse sammeln, Venv abräumen
 ```
 
 Versions-Labels können semantische Versionen (`v0.9.0`), `latest` oder sogar
-Git-Refs sein. Dagsters Multi-Partition-Support (Monat × datavil-Version)
+Git-Refs sein. Dagsters Multi-Partition-Support (Monat × Bibliotheksversion)
 bedeutet, dass die Pipeline jede Kombination trackt.
 
 Das ist der Teil, mit dem ich am zufriedensten bin. Keine Container-Builds,
@@ -123,7 +123,7 @@ hunderte Geräte. Die Flotte hat 100k+.
 
 Eine separate FastAPI-Anwendung übernimmt das. Sie startet
 Hintergrund-Worker-Prozesse, jeder in seinem eigenen Venv mit der
-Ziel-datavil-Version:
+Ziel-Bibliotheksversion:
 
 - Worker verarbeiten Geräte in 250er-Batches
 - Jeder Batch checkpointet den Fortschritt auf die Festplatte (JSON- +
@@ -185,6 +185,6 @@ versioniertes Parquet.
 | Experiment-Tracking | MLflow |
 | Review-UI | Streamlit |
 | Fleet-Berechnung | FastAPI + Subprocess-Worker |
-| Algorithmus-Bibliothek | datavil (intern, installiert von GitLab PyPI) |
+| Algorithmus-Bibliothek | Internes Python-Paket (privater PyPI) |
 | Datenverarbeitung | Polars, PyArrow |
 | Datenbanken | PostgreSQL (Analytics DB, Battery DB) |
