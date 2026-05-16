@@ -2,7 +2,7 @@
 title: "Evaluating ML algorithms in production: from field data to fleet deployment"
 description: "How I built an evaluation pipeline for battery prediction algorithms serving 100k+ IoT devices: Dagster-orchestrated dataset creation from field data, human-in-the-loop review, isolated venv testing across algorithm versions, MLflow tracking, and fleet-wide rollout."
 pubDate: 2026-05-07
-tags: ["mlops", "python", "data-engineering", "building"]
+tags: ["mlops", "python", "data-engineering", "case-study"]
 lang: "en"
 translationKey: "ml-eval-pipeline"
 ---

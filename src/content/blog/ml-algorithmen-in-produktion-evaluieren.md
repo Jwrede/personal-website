@@ -2,7 +2,7 @@
 title: "ML-Algorithmen in Produktion evaluieren: von Felddaten zum Fleet-Rollout"
 description: "Wie ich eine Evaluierungspipeline für Batterie-Vorhersagealgorithmen für 100k+ IoT-Geräte gebaut habe: Dagster-orchestrierte Datensatzerstellung aus Felddaten, Human-in-the-Loop-Review, isolierte Venv-Tests über Algorithmusversionen, MLflow-Tracking und Fleet-Rollout."
 pubDate: 2026-05-07
-tags: ["mlops", "python", "data-engineering", "building"]
+tags: ["mlops", "python", "data-engineering", "case-study"]
 lang: "de"
 translationKey: "ml-eval-pipeline"
 ---

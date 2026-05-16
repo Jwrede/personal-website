@@ -2,7 +2,7 @@
 title: "Building a data platform with dbt, Dagster, and ArgoCD"
 description: "How I built an ELT data platform for 100k+ IoT devices: Dagster for orchestration, dbt for transforms, Sqitch for migrations, ArgoCD for GitOps deployment, and PII-safe extraction from five API shards."
 pubDate: 2026-05-07
-tags: ["data-engineering", "kubernetes", "python", "building"]
+tags: ["data-engineering", "kubernetes", "python", "case-study"]
 lang: "en"
 translationKey: "data-platform-dbt-dagster"
 ---

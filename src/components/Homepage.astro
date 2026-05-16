@@ -182,8 +182,8 @@ const privacyPath = locale === 'de' ? '/datenschutz/' : '/en/privacy/';
             <!-- Actual stack card -->
             <div class="bg-card p-6 rounded-xl shadow-lg border border-slate-700/50 flex flex-col h-full">
                 <h3 class="text-slate-400 uppercase text-xs font-bold mb-4"><i class="fas fa-layer-group mr-2"></i>
-                    <span class="lang-de">Eingesetzter Stack</span>
-                    <span class="lang-en">Production Stack</span>
+                    <span class="lang-de">Produktiv eingesetzter Stack</span>
+                    <span class="lang-en">Proven Production Stack</span>
                 </h3>
                 <div class="flex-1 space-y-4 font-mono text-sm relative">
                     <div class="absolute left-[19px] top-4 bottom-4 w-0.5 bg-slate-700 z-0"></div>
@@ -236,6 +236,28 @@ const privacyPath = locale === 'de' ? '/datenschutz/' : '/en/privacy/';
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
+                <!-- CS0: LLM Inference Readiness Kit -->
+                <a href="#cs0Modal" onclick="openModal('cs0Modal'); return false;" class="block text-left bg-slate-800/40 p-5 md:p-6 rounded-lg border border-accent/30 hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(56,189,248,0.05)] hover:shadow-[0_0_15px_rgba(56,189,248,0.15)]">
+                    <div class="absolute top-0 right-0 bg-accent text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">AI INFRA / OBSERVABILITY</div>
+                    <div class="flex gap-3 items-start mb-3 mt-2">
+                        <div class="bg-accent/10 text-accent p-2.5 rounded-lg"><i class="fas fa-traffic-light text-xl"></i></div>
+                        <div>
+                            <h4 class="text-base md:text-lg text-white font-bold group-hover:text-accent transition">
+                                LLM Inference Readiness Kit
+                            </h4>
+                            <span class="text-[10px] text-accent/70 font-mono">SLA gates / Prometheus / vLLM</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                        <span class="lang-de">Operator-Workflow f&uuml;r LLM-Inferenz-Deployments: externe Probes, SLA-Gates, Prometheus/vLLM-Korrelation, Concurrency-Sweeps, Grafana-Inspektion, Runbooks, Tests und CI.</span>
+                        <span class="lang-en">Operator workflow for LLM inference deployments: external probes, SLA gates, Prometheus/vLLM correlation, concurrency sweeps, Grafana inspection, runbooks, tests, and CI.</span>
+                    </p>
+                    <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono border-t border-slate-700/50 pt-3 flex-wrap">
+                        <span>Python</span><span class="text-slate-700">|</span><span>Go</span><span class="text-slate-700">|</span><span>Prometheus</span><span class="text-slate-700">|</span><span>Grafana</span><span class="text-slate-700">|</span><span>vLLM</span>
+                        <span class="ml-auto text-accent font-bold group-hover:translate-x-1 transition"><i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
                 <!-- CS1: IoT Analytics Platform -->
                 <a href="#cs1Modal" onclick="openModal('cs1Modal'); return false;" class="block text-left bg-slate-800/40 p-5 md:p-6 rounded-lg border border-accent/30 hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(56,189,248,0.05)] hover:shadow-[0_0_15px_rgba(56,189,248,0.15)]">
                     <div class="absolute top-0 right-0 bg-accent text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">
@@ -279,28 +301,6 @@ const privacyPath = locale === 'de' ? '/datenschutz/' : '/en/privacy/';
                     <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono border-t border-slate-700/50 pt-3 flex-wrap">
                         <span>Python</span><span class="text-slate-700">|</span><span>Polars</span><span class="text-slate-700">|</span><span>pydantic</span><span class="text-slate-700">|</span><span>Dagster</span><span class="text-slate-700">|</span><span>Docker</span>
                         <span class="ml-auto text-green font-bold group-hover:translate-x-1 transition"><i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </a>
-
-                <!-- CS3: Battery Operations Dashboard -->
-                <a href="#cs3Modal" onclick="openModal('cs3Modal'); return false;" class="block text-left bg-slate-800/40 p-5 md:p-6 rounded-lg border border-indigo/30 hover:border-indigo focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(129,140,248,0.05)] hover:shadow-[0_0_15px_rgba(129,140,248,0.15)]">
-                    <div class="absolute top-0 right-0 bg-indigo text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">PLATFORM / OPS</div>
-                    <div class="flex gap-3 items-start mb-3 mt-2">
-                        <div class="bg-indigo/10 text-indigo p-2.5 rounded-lg"><i class="fas fa-tachometer-alt text-xl"></i></div>
-                        <div>
-                            <h4 class="text-base md:text-lg text-white font-bold group-hover:text-indigo transition">
-                                <span class="lang-de">Batterie-Operations-Dashboard</span><span class="lang-en">Battery Operations Dashboard</span>
-                            </h4>
-                            <span class="text-[10px] text-indigo/70 font-mono">FastAPI / Alpine.js / Docker</span>
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-400 mb-4 leading-relaxed">
-                        <span class="lang-de">Internes Ops-Tool für Batterietestmanagement, Kapazitätsmessung und automatisiertes Alerting, FastAPI-Backend, Alpine.js-Frontend, 3-Service Docker-Compose-Setup.</span>
-                        <span class="lang-en">Internal ops tool for battery test management, capacity measurement, and automated alerting, FastAPI backend, Alpine.js frontend, 3-service Docker Compose setup.</span>
-                    </p>
-                    <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono border-t border-slate-700/50 pt-3 flex-wrap">
-                        <span>FastAPI</span><span class="text-slate-700">|</span><span>Alpine.js</span><span class="text-slate-700">|</span><span>Plotly</span><span class="text-slate-700">|</span><span>Docker</span>
-                        <span class="ml-auto text-indigo font-bold group-hover:translate-x-1 transition"><i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
@@ -348,8 +348,8 @@ const privacyPath = locale === 'de' ? '/datenschutz/' : '/en/privacy/';
                         <span class="lang-en">Open Source AI Infrastructure</span>
                     </h3>
                     <p class="mt-2 text-sm text-slate-400 leading-relaxed max-w-3xl">
-                        <span class="lang-de">Gemergte Beitr&auml;ge in produktionsnahen AI-/Daten-Infrastrukturprojekten, plus eigene Tools f&uuml;r LLM-Kosten, Endpoint-Health und Latenzmessung.</span>
-                        <span class="lang-en">Merged contributions in production-grade AI/data infrastructure projects, plus my own tools for LLM cost, endpoint health, and latency measurement.</span>
+                        <span class="lang-de">Gemergte Beitr&auml;ge in produktionsnahen AI-/Daten-Infrastrukturprojekten und einsatznahe Werkzeuge f&uuml;r LLM-Betrieb: Deploy-Gates, Endpoint-Health, Latenz und Kosten.</span>
+                        <span class="lang-en">Merged contributions in production-grade AI/data infrastructure projects and applied tools for LLM operations: deploy gates, endpoint health, latency, and cost.</span>
                     </p>
                 </div>
                 <a href="https://github.com/search?q=is%3Apr+author%3AJwrede&type=pullrequests" target="_blank" rel="noopener" class="text-xs text-accent hover:text-sky-300 font-bold whitespace-nowrap">
@@ -398,8 +398,8 @@ const privacyPath = locale === 'de' ? '/datenschutz/' : '/en/privacy/';
 
             <div class="mt-6 pt-5 border-t border-slate-700/60">
                 <p class="text-sm text-slate-400 leading-relaxed mb-4">
-                        <span class="lang-de"><strong class="text-white">Eigene AI-Plattform-Tools:</strong> kleine, einsatznahe Werkzeuge f&uuml;r Probleme, die beim Betrieb von LLM-/Inference-Workloads tats&auml;chlich wehtun: Latenz, Kosten, Endpoint-Health und Deploy-Gates.</span>
-                        <span class="lang-en"><strong class="text-white">Own AI platform tools:</strong> small, production-shaped tools for the problems that actually hurt when operating LLM/inference workloads: latency, cost, endpoint health, and deploy gates.</span>
+                        <span class="lang-de"><strong class="text-white">Einsatznahe AI-Plattform-Werkzeuge:</strong> konkrete Operator-Workflows f&uuml;r Probleme, die beim Betrieb von LLM-/Inference-Workloads tats&auml;chlich wehtun: Deploy-Gates, Endpoint-Health, Latenz und Kosten.</span>
+                        <span class="lang-en"><strong class="text-white">Applied AI platform tools:</strong> concrete operator workflows for the problems that actually hurt when operating LLM/inference workloads: deploy gates, endpoint health, latency, and cost.</span>
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                     <a href="https://github.com/Jwrede/inference-readiness-kit" target="_blank" rel="noopener" class="block rounded-lg border border-accent/30 bg-slate-900/50 p-4 hover:border-accent transition">
@@ -448,8 +448,8 @@ const privacyPath = locale === 'de' ? '/datenschutz/' : '/en/privacy/';
                     <span class="font-mono text-accent text-xs block mb-1">Jan 2025, <span class="lang-de">Heute</span><span class="lang-en">Present</span></span>
                     <h4 class="text-lg font-bold">Machine Learning Engineer | Vilisto</h4>
                     <p class="text-slate-400 mt-1 text-sm">
-                        <span class="lang-de">Batterie-Vorhersage-Algorithmen, IoT-Datenplattform (dbt + Dagster + ArgoCD) und Fleet-Monitoring für 100.000+ Geräte.</span>
-                        <span class="lang-en">Battery prediction algorithms, IoT data platform (dbt + Dagster + ArgoCD), and fleet monitoring for 100,000+ devices.</span>
+                        <span class="lang-de">Batterie-Vorhersagealgorithmen, IoT-Datenplattform (dbt + Dagster + ArgoCD), Fleet-Monitoring und interne FastAPI-Ops-Tools für 100.000+ Geräte.</span>
+                        <span class="lang-en">Battery prediction algorithms, IoT data platform (dbt + Dagster + ArgoCD), fleet monitoring, and internal FastAPI ops tools for 100,000+ devices.</span>
                     </p>
                 </div>
                 <div class="relative border-l-2 border-slate-600 pl-5 pb-2">
@@ -510,6 +510,130 @@ const privacyPath = locale === 'de' ? '/datenschutz/' : '/en/privacy/';
                 </a>
             </div>
         </footer>
+    </div>
+
+    <!-- ==================== CS0 MODAL: LLM Inference Readiness Kit ==================== -->
+    <div id="cs0Modal" class="fixed inset-0 z-50 hidden flex items-center justify-center md:p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal('cs0Modal')"></div>
+        <div class="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-4xl bg-bg border border-accent/30 md:rounded-xl shadow-2xl flex flex-col animate-fade-in-up overflow-hidden">
+            <div class="bg-card p-5 border-b border-accent/20 flex justify-between items-center flex-shrink-0">
+                <div>
+                    <h2 class="text-lg md:text-2xl font-bold text-white flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
+                        <span class="bg-accent/20 text-accent px-2 py-1 rounded text-xs w-fit">AI INFRA / OBSERVABILITY</span>
+                        <span>LLM Inference Readiness Kit</span>
+                    </h2>
+                </div>
+                <button onclick="closeModal('cs0Modal')" aria-label="Close case study" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
+            </div>
+            <div class="overflow-y-auto p-6 md:p-10 space-y-6 flex-1 bg-bg">
+                <div>
+                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-2 tracking-wider">
+                        <span class="lang-de">Kontext</span><span class="lang-en">Context</span>
+                    </h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        <span class="lang-de">LLM-Inferenz-Deployments brauchen ein belastbares Readiness-Signal aus Client-Sicht. Interne Servermetriken zeigen, was im Engine-Prozess passiert, entscheiden aber nicht, ob ein Endpoint aus Nutzersicht Traffic bekommen sollte. inference-readiness-kit verbindet externe Probes mit Prometheus/vLLM-Metriken und macht daraus einen Deployment-Verdict mit Exit-Code.</span>
+                        <span class="lang-en">LLM inference deployments need a reliable readiness signal from the client side. Internal server metrics show what happens inside the engine process, but they do not decide whether an endpoint should receive traffic from the user's perspective. inference-readiness-kit combines external probes with Prometheus/vLLM metrics and turns them into a deployment verdict with an exit code.</span>
+                    </p>
+                </div>
+
+                <div class="bg-slate-900/60 p-4 md:p-6 rounded-lg border border-slate-700/50">
+                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-4 text-center tracking-widest">
+                        <span class="lang-de">Readiness-Workflow</span><span class="lang-en">Readiness Workflow</span>
+                    </div>
+                    <div class="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-accent/30 rounded-lg flex items-center justify-center"><i class="fas fa-terminal text-accent text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">gate.sh</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-green/30 rounded-lg flex items-center justify-center"><i class="fas fa-plug text-green text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">OpenAI API</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-orange-500/30 rounded-lg flex items-center justify-center"><i class="fas fa-chart-line text-orange-400 text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Prometheus</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-violet/30 rounded-lg flex items-center justify-center"><i class="fas fa-file-alt text-violet text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Report</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-amber/30 rounded-lg flex items-center justify-center"><i class="fas fa-code-branch text-amber text-sm md:text-lg"></i></div>
+                            <span class="text-[9px] text-slate-500 font-mono">Exit code</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-center gap-2 mt-3 flex-wrap text-[9px] text-slate-600 font-mono">
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">SLA thresholds</span>
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">TTFT / TPOT</span>
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">vLLM metrics</span>
+                        <span class="bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">CI ready</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-3 tracking-wider">
+                        <span class="lang-de">Umsetzung</span><span class="lang-en">Implementation</span>
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-accent text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Readiness-Gate mit SLA-Schwellen f&uuml;r TTFT, Latenz, Fehlerquote und Durchsatz. Der Exit-Code macht das Ergebnis in CI, Release-Jobs oder manuellen Rollouts verwendbar.</span>
+                            <span class="lang-en">Readiness gate with SLA thresholds for TTFT, latency, error rate, and throughput. The exit code makes the result usable in CI, release jobs, or manual rollout checks.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-accent text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Diagnosemodus korreliert externe Probe-Daten mit Prometheus/vLLM-Metriken. So wird sichtbar, ob Latenz im Modellserver entsteht oder au&szlig;erhalb, etwa Gateway, Proxy, Netzwerk oder Routing.</span>
+                            <span class="lang-en">Diagnosis mode correlates external probe data with Prometheus/vLLM metrics. That shows whether latency comes from the model server or outside it, such as gateway, proxy, network, or routing.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-accent text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Concurrency-Sweeps erzeugen reproduzierbare Run-Verzeichnisse pro Laststufe, inklusive Markdown-Bericht, JSON-Ergebnis und Prometheus-Fenster f&uuml;r sp&auml;tere Analyse.</span>
+                            <span class="lang-en">Concurrency sweeps create reproducible run directories per load level, including Markdown report, JSON result, and Prometheus window for later analysis.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-chevron-right text-accent text-xs mt-1.5 flex-shrink-0"></i>
+                            <span class="lang-de">Grafana-Dashboard und Runbooks bleiben Inspektionswerkzeuge. Die prim&auml;re Schnittstelle ist bewusst der Verdict: route traffic, investigate oder scale.</span>
+                            <span class="lang-en">Grafana dashboard and runbooks remain inspection tools. The primary interface is intentionally the verdict: route traffic, investigate, or scale.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-accent/5 border border-accent/20 rounded-lg p-4">
+                    <h3 class="text-xs text-accent uppercase font-bold mb-2 tracking-wider"><i class="fas fa-lightbulb mr-1"></i>
+                        <span class="lang-de">Designentscheidung</span><span class="lang-en">Design Decision</span>
+                    </h3>
+                    <p class="text-sm text-slate-300">
+                        <span class="lang-de">Das Projekt ist kein Dashboard-first-Demo. Es ist ein Operator-Workflow: eine kleine, testbare Schnittstelle zwischen LLM-Endpoint, Prometheus und Deployment-Entscheidung. Das zeigt genau die Art Infrastrukturarbeit, die f&uuml;r AI-Plattformrollen relevant ist.</span>
+                        <span class="lang-en">The project is not a dashboard-first demo. It is an operator workflow: a small, testable interface between LLM endpoint, Prometheus, and deployment decision. That shows the kind of infrastructure work that matters for AI platform roles.</span>
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Python</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Go</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Prometheus</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Grafana</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">vLLM</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">OpenAI-compatible APIs</span>
+                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">CI</span>
+                </div>
+
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://github.com/Jwrede/inference-readiness-kit" target="_blank" rel="noopener" class="inline-flex items-center bg-accent text-bg text-xs font-bold px-3 py-2 rounded">
+                        GitHub <i class="fas fa-arrow-up-right-from-square ml-1.5"></i>
+                    </a>
+                    <a href={blogPostPath(locale, locale === 'de' ? 'entscheidung-statt-dashboard-readiness-gates-fuer-llm-inferenz' : 'verdict-not-dashboard-readiness-gates-for-llm-inference')} class="inline-flex items-center border border-slate-600 text-slate-300 text-xs font-bold px-3 py-2 rounded hover:border-accent hover:text-white transition">
+                        <span class="lang-de">Technische Fallstudie</span><span class="lang-en">Technical case study</span>
+                    </a>
+                </div>
+
+                <div class="md:hidden pt-2">
+                    <button onclick="closeModal('cs0Modal')" class="w-full bg-slate-800 text-white py-3 rounded font-bold">
+                        <span class="lang-de">Schließen</span><span class="lang-en">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- ==================== CS1 MODAL: IoT Analytics Platform ==================== -->
@@ -795,156 +919,6 @@ const privacyPath = locale === 'de' ? '/datenschutz/' : '/en/privacy/';
         </div>
     </div>
 
-    <!-- ==================== CS3 MODAL: Battery Operations Dashboard ==================== -->
-    <div id="cs3Modal" class="fixed inset-0 z-50 hidden flex items-center justify-center md:p-4">
-        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal('cs3Modal')"></div>
-        <div class="relative w-full h-full md:h-auto md:max-h-[90vh] md:max-w-4xl bg-bg border border-indigo/30 md:rounded-xl shadow-2xl flex flex-col animate-fade-in-up overflow-hidden">
-            <div class="bg-card p-5 border-b border-indigo/20 flex justify-between items-center flex-shrink-0">
-                <div>
-                    <h2 class="text-lg md:text-2xl font-bold text-white flex flex-col md:flex-row md:items-center gap-2 md:gap-3">
-                        <span class="bg-indigo/20 text-indigo px-2 py-1 rounded text-xs w-fit">PLATFORM / OPS</span>
-                        <span><span class="lang-de">Batterie-Operations-Dashboard</span><span class="lang-en">Battery Operations Dashboard</span></span>
-                    </h2>
-                </div>
-                <button onclick="closeModal('cs3Modal')" aria-label="Close case study" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
-            </div>
-            <div class="overflow-y-auto p-6 md:p-10 space-y-6 flex-1 bg-bg">
-                <div>
-                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-2 tracking-wider">
-                        <span class="lang-de">Kontext</span><span class="lang-en">Context</span>
-                    </h3>
-                    <p class="text-sm text-slate-300 leading-relaxed">
-                        <span class="lang-de">Internes Ops-Tool für Batterietestmanagement auf einer VM ohne Kubernetes-Overhead. Wichtige Design-Einschränkung: drei Prozesse mit sehr unterschiedlichen Anforderungen, zustandsloser API, Singleton-Scheduler (doppelte Ausführung würde Daten korrumpieren) und Polling-Loop mit In-Memory-Zustand, müssen koexistieren ohne sich gegenseitig zu beeinflussen.</span>
-                        <span class="lang-en">Internal ops tool for battery test management, deployed on a single VM without Kubernetes overhead. Key design constraint: three processes with very different requirements, stateless API, singleton scheduler (duplicate runs would corrupt data), and polling loop with in-memory state, need to coexist without interfering with each other.</span>
-                    </p>
-                </div>
-
-                <!-- Architecture Diagram -->
-                <div class="bg-slate-900/60 p-4 md:p-6 rounded-lg border border-slate-700/50">
-                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-4 text-center tracking-widest">
-                        <span class="lang-de">Architektur (3-Service Docker Compose)</span><span class="lang-en">Architecture (3-Service Docker Compose)</span>
-                    </div>
-                    <!-- Main flow -->
-                    <div class="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-4">
-                        <div class="flex flex-col items-center gap-1">
-                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-blue-500/30 rounded-lg flex items-center justify-center"><i class="fas fa-database text-blue-400 text-sm md:text-lg"></i></div>
-                            <span class="text-[9px] text-slate-500 font-mono">PostgreSQL +<br/>External API</span>
-                        </div>
-                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
-                        <div class="flex flex-col items-center gap-1">
-                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-indigo/30 rounded-lg flex items-center justify-center"><i class="fas fa-server text-indigo text-sm md:text-lg"></i></div>
-                            <span class="text-[9px] text-slate-500 font-mono">FastAPI :8000</span>
-                        </div>
-                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
-                        <div class="flex flex-col items-center gap-1">
-                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-slate-500/30 rounded-lg flex items-center justify-center"><i class="fas fa-globe text-slate-400 text-sm md:text-lg"></i></div>
-                            <span class="text-[9px] text-slate-500 font-mono">nginx :8081</span>
-                        </div>
-                        <i class="fas fa-chevron-right text-slate-600 text-xs"></i>
-                        <div class="flex flex-col items-center gap-1">
-                            <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-800 border border-accent/30 rounded-lg flex items-center justify-center"><i class="fas fa-chart-area text-accent text-sm md:text-lg"></i></div>
-                            <span class="text-[9px] text-slate-500 font-mono">Alpine.js<br/>+ Plotly</span>
-                        </div>
-                    </div>
-                    <!-- Background services -->
-                    <div class="grid grid-cols-2 gap-2 mt-2">
-                        <div class="bg-slate-800/60 rounded p-2 border border-amber/20 flex items-center gap-2">
-                            <i class="fas fa-clock text-amber text-sm flex-shrink-0"></i>
-                            <div>
-                                <div class="text-[9px] text-amber font-bold uppercase">backend-cron</div>
-                                <div class="text-[9px] text-slate-400 font-mono">daily 00:10 UTC · auto-stop · capacity sync</div>
-                            </div>
-                        </div>
-                        <div class="bg-slate-800/60 rounded p-2 border border-red-500/20 flex items-center gap-2">
-                            <i class="fas fa-heartbeat text-red-400 text-sm flex-shrink-0"></i>
-                            <div>
-                                <div class="text-[9px] text-red-400 font-bold uppercase">backend-monitor</div>
-                                <div class="text-[9px] text-slate-400 font-mono">every 5 min · Teams alert · 1h cooldown</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- API routers -->
-                <div class="bg-slate-900/40 p-4 rounded-lg border border-slate-700/50">
-                    <div class="text-[10px] text-slate-500 uppercase font-bold mb-3 tracking-widest">FastAPI Routers</div>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[9px] font-mono text-slate-400">
-                        <div class="bg-slate-800/60 rounded p-2 border border-indigo/20 text-center">
-                            <div class="text-indigo font-bold mb-0.5">/channels</div>
-                            <div>list · hosts</div>
-                        </div>
-                        <div class="bg-slate-800/60 rounded p-2 border border-indigo/20 text-center">
-                            <div class="text-indigo font-bold mb-0.5">/measurements</div>
-                            <div>series (30m agg)</div>
-                        </div>
-                        <div class="bg-slate-800/60 rounded p-2 border border-indigo/20 text-center">
-                            <div class="text-indigo font-bold mb-0.5">/patches</div>
-                            <div>sync · batch insert</div>
-                        </div>
-                        <div class="bg-slate-800/60 rounded p-2 border border-indigo/20 text-center">
-                            <div class="text-indigo font-bold mb-0.5">/external</div>
-                            <div>customers · hexes</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-xs text-slate-500 uppercase font-bold mb-3 tracking-wider">
-                        <span class="lang-de">Umsetzung</span><span class="lang-en">Implementation</span>
-                    </h3>
-                    <ul class="space-y-2 text-sm text-slate-300">
-                        <li class="flex gap-2"><i class="fas fa-chevron-right text-indigo text-xs mt-1.5 flex-shrink-0"></i>
-                            <span class="lang-de">3-Service Docker-Compose-Split: API (zustandslos, kann frei neustarten), backend-cron (Singleton, doppelte Ausführung würde Daten doppelt schreiben), backend-monitor (persistente Polling-Schleife mit In-Memory-Cooldown-State). Separate Container verhindern, dass diese Anforderungen kollidieren.</span>
-                            <span class="lang-en">3-service Docker Compose split: API (stateless, can restart freely), backend-cron (singleton, duplicate runs would double-write data), backend-monitor (persistent polling loop with in-memory cooldown state). Separate containers prevent these requirements from colliding.</span>
-                        </li>
-                        <li class="flex gap-2"><i class="fas fa-chevron-right text-indigo text-xs mt-1.5 flex-shrink-0"></i>
-                            <span class="lang-de">Messwerte werden auf 30-Minuten-Fenster aggregiert in der API-Schicht. Rohe Zeitreihen bleiben in PostgreSQL; Aggregation erfolgt zur Abfragezeit mit Zeitbereichs-Limit, um Antwortzeiten zu begrenzen.</span>
-                            <span class="lang-en">Measurements are aggregated to 30-minute windows in the API layer. Raw time series stay in PostgreSQL; aggregation happens at query time with a time-range limit to keep response times bounded.</span>
-                        </li>
-                        <li class="flex gap-2"><i class="fas fa-chevron-right text-indigo text-xs mt-1.5 flex-shrink-0"></i>
-                            <span class="lang-de">Patch-System: Patches sind manuelle Korrekturen/Annotationen auf Messwerten. Der /patches/sync-Endpoint führt einen 3-Wege-Diff durch (erstellen fehlender, aktualisieren geänderter, löschen entfernter Patches) ohne vollständigen Re-Import.</span>
-                            <span class="lang-en">Patch system: patches are manual corrections/annotations on measurements. The /patches/sync endpoint performs a three-way diff, create missing, update changed, delete removed, without a full re-import.</span>
-                        </li>
-                        <li class="flex gap-2"><i class="fas fa-chevron-right text-indigo text-xs mt-1.5 flex-shrink-0"></i>
-                            <span class="lang-de">Monitor nutzt eine In-Memory-Map mit Last-Seen-Timestamps pro Host. Beim Überschreiten des Schwellwerts wird ein Teams-Webhook gefeuert; der 1h-Cooldown pro Host verhindert Alert-Storms bei Netzwerkausfällen ganzer Segmente.</span>
-                            <span class="lang-en">Monitor uses an in-memory map of last-seen timestamps per host. When a threshold is exceeded a Teams webhook fires; the 1-hour per-host cooldown prevents alert storms when an entire network segment goes down.</span>
-                        </li>
-                        <li class="flex gap-2"><i class="fas fa-chevron-right text-indigo text-xs mt-1.5 flex-shrink-0"></i>
-                            <span class="lang-de">Kein JavaScript-Build-Schritt: Alpine.js + Tailwind per CDN, Frontend sind reine statische Dateien hinter nginx. Keine Node.js-Toolchain nötig auf der Ziel-VM.</span>
-                            <span class="lang-en">No JavaScript build step: Alpine.js + Tailwind via CDN, frontend is plain static files behind nginx. No Node.js toolchain required on the target VM.</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-indigo/5 border border-indigo/20 rounded-lg p-4">
-                    <h3 class="text-xs text-indigo uppercase font-bold mb-2 tracking-wider"><i class="fas fa-lightbulb mr-1"></i>
-                        <span class="lang-de">Designentscheidungen</span><span class="lang-en">Design Decisions</span>
-                    </h3>
-                    <p class="text-sm text-slate-300">
-                        <span class="lang-de">Der Cron-Job ist ein separater Container statt eines Hintergrund-Threads im API-Prozess, damit er einzeln über die CLI debuggt werden kann ohne API oder Frontend zu berühren. Der Monitor speichert Cooldown-State in-process statt in der DB, da kurze Unterbrechungen beim Neustart akzeptabel sind und kein persistenter State-Store nötig ist.</span>
-                        <span class="lang-en">The cron job is a separate container rather than a background thread in the API process, so it can be invoked standalone via CLI without touching the API or frontend. The monitor stores cooldown state in-process rather than in the DB because brief resets on restart are acceptable and no persistent state store is needed.</span>
-                    </p>
-                </div>
-
-                <div class="flex flex-wrap gap-2">
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">FastAPI</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Alpine.js</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Plotly</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Tailwind CSS</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Docker Compose</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">nginx</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Python</span>
-                    <span class="text-xs bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">PostgreSQL</span>
-                </div>
-                <div class="md:hidden pt-2">
-                    <button onclick="closeModal('cs3Modal')" class="w-full bg-slate-800 text-white py-3 rounded font-bold">
-                        <span class="lang-de">Schließen</span><span class="lang-en">Close</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- ==================== CS4 MODAL: Secure Neural Network Inference ==================== -->
     <div id="cs4Modal" class="fixed inset-0 z-50 hidden flex items-center justify-center md:p-4">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal('cs4Modal')"></div>
@@ -1103,7 +1077,7 @@ const privacyPath = locale === 'de' ? '/datenschutz/' : '/en/privacy/';
 
         document.addEventListener('keydown', (e) => {
             if (e.key === "Escape") {
-                ['cs1Modal', 'cs2Modal', 'cs3Modal', 'cs4Modal'].forEach(id => {
+                ['cs0Modal', 'cs1Modal', 'cs2Modal', 'cs4Modal'].forEach(id => {
                     const el = document.getElementById(id);
                     if (el) el.classList.add('hidden');
                 });

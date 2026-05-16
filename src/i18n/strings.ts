@@ -26,7 +26,7 @@ export const strings = {
 
     // Sections
     impact: 'Messbare Wirkung',
-    stack: 'Eingesetzter Stack',
+    stack: 'Produktiv eingesetzter Stack',
     projects: 'Ausgewählte Projekterfahrung',
     experience: 'Erfahrung',
     latestWriting: 'Aktuelle Beiträge',
@@ -49,10 +49,6 @@ export const strings = {
     cs2Short:
       'ML-gestützte Kapazitäts- und Laufzeitvorhersage für 100.000+ IoT-Geräte, als produktionsreife Python-Bibliothek mit Konfidenzintervallen und hardwarespezifischen Defaults.',
 
-    cs3Title: 'Batterie-Operations-Dashboard',
-    cs3Short:
-      'Internes Ops-Tool für Batterietestmanagement, Kapazitätsmessung und automatisiertes Alerting, FastAPI-Backend, Alpine.js-Frontend, 3-Service Docker-Compose-Setup.',
-
     cs4ThesisLabel: 'M.Sc.-Thesis · In Arbeit · 2026',
     cs4InProgress: 'In Arbeit',
     cs4Short:
@@ -61,7 +57,7 @@ export const strings = {
     // Experience
     expPresent: 'Heute',
     exp1Desc:
-      'Batterie-Vorhersage-Algorithmen, IoT-Datenplattform (dbt + Dagster + ArgoCD) und Fleet-Monitoring für 100.000+ Geräte.',
+      'Batterie-Vorhersagealgorithmen, IoT-Datenplattform (dbt + Dagster + ArgoCD), Fleet-Monitoring und interne FastAPI-Ops-Tools für 100.000+ Geräte.',
     exp2Desc:
       'Cloud Data Warehouses (Snowflake / BigQuery / Azure Synapse), Python-ETL-Pipelines und Streamlit-Apps mit OAuth SSO für Enterprise-Kunden.',
     exp3Desc:
@@ -72,9 +68,9 @@ export const strings = {
 
     // Blog
     blogTitle: 'Blog',
-    blogTagline: 'Notizen zu ML-Engineering, Data Platforms und den Developer-Tools, die ich nebenbei baue.',
+    blogTagline: 'Technische Fallstudien zu produktiver ML-/AI-Infrastruktur, Datenplattformen, Observability und LLM-Betrieb.',
     blogIndexDesc:
-      'Schreiben über ML-Engineering, Data Platforms, Dagster, dbt und Developer Tools.',
+      'Fallstudien zu ML-Engineering, AI-Infrastruktur, Datenplattformen, Observability und Developer Tools.',
     blogEmpty: 'Noch keine Beiträge.',
     blogReadPost: 'Beitrag lesen',
     blogAllPosts: 'Alle Beiträge',
@@ -108,7 +104,7 @@ export const strings = {
     cvFile: '/cv_intl.pdf',
 
     impact: 'Measurable Impact',
-    stack: 'Production Stack',
+    stack: 'Proven Production Stack',
     projects: 'Selected Project Experience',
     experience: 'Experience',
     latestWriting: 'Latest writing',
@@ -129,10 +125,6 @@ export const strings = {
     cs2Short:
       'ML-powered capacity and runtime prediction for 100,000+ IoT devices, shipped as a production Python library with confidence intervals and per-hardware defaults.',
 
-    cs3Title: 'Battery Operations Dashboard',
-    cs3Short:
-      'Internal ops tool for battery test management, capacity measurement, and automated alerting, FastAPI backend, Alpine.js frontend, 3-service Docker Compose setup.',
-
     cs4ThesisLabel: 'M.Sc. Thesis · In Progress · 2026',
     cs4InProgress: 'In progress',
     cs4Short:
@@ -140,7 +132,7 @@ export const strings = {
 
     expPresent: 'Present',
     exp1Desc:
-      'Battery prediction algorithms, IoT data platform (dbt + Dagster + ArgoCD), and fleet monitoring for 100,000+ devices.',
+      'Battery prediction algorithms, IoT data platform (dbt + Dagster + ArgoCD), fleet monitoring, and internal FastAPI ops tools for 100,000+ devices.',
     exp2Desc:
       'Cloud data warehouses (Snowflake / BigQuery / Azure Synapse), Python ETL pipelines, and Streamlit apps with OAuth SSO for enterprise clients.',
     exp3Desc:
@@ -151,9 +143,9 @@ export const strings = {
 
     blogTitle: 'Blog',
     blogTagline:
-      'Notes on ML engineering, data platforms, and the developer tools I build along the way.',
+      'Technical case studies on production ML/AI infrastructure, data platforms, observability, and LLM operations.',
     blogIndexDesc:
-      'Notes on ML engineering, data platforms, Dagster, dbt, and developer tools.',
+      'Case studies on ML engineering, AI infrastructure, data platforms, observability, and developer tools.',
     blogEmpty: 'No posts yet.',
     blogReadPost: 'Read post',
     blogAllPosts: 'All posts',

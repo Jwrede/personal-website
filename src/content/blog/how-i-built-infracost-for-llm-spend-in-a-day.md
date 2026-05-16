@@ -2,7 +2,7 @@
 title: "How I built Infracost for LLM spend in a day"
 description: "Building tokentoll, an Infracost-style cost-impact tool for LLM API spend, in a single day. Architecture, model-name resolution, multi-pass constant propagation, and validation across twenty real codebases."
 pubDate: 2026-05-03
-tags: ["llm", "python", "devtools", "building"]
+tags: ["llm", "python", "devtools", "case-study"]
 lang: "en"
 translationKey: "infracost-llm-spend"
 ---
