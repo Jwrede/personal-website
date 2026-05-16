@@ -35,7 +35,7 @@ export const strings = {
 
     // Impact metrics
     metric1: 'IoT-Thermostate überwacht',
-    metric2: 'Kundenprojekte mit aktiver Batterieprognose',
+    metric2: 'Kundenstandorte mit aktiver Batterieprognose',
     metric3: 'dbt-Modelle im Analytics-Warehouse',
     metric4: 'Speicherreduktion bei SNNI (Thesis)',
 
