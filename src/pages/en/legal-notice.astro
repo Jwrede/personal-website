@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Legal Notice | Jonathan Wrede"
+  description="Legal notice and provider information for jonathanwrede.de."
+  locale="en"
+  canonicalPath="/en/legal-notice/"
+  alternates={{ de: '/impressum/', en: '/en/legal-notice/' }}
+>
+  <main class="max-w-3xl mx-auto space-y-6">
+    <nav class="bg-card p-4 rounded-xl border border-slate-700/50 text-xs font-mono">
+      <a href="/en/" class="text-slate-400 hover:text-accent">
+        <i class="fas fa-arrow-left mr-1.5"></i> jonathanwrede.de
+      </a>
+    </nav>
+
+    <article class="bg-card p-6 md:p-10 rounded-xl border-l-4 border-accent shadow-lg prose prose-invert max-w-none">
+      <h1>Legal Notice</h1>
+      <p>Information according to § 5 DDG, the German Digital Services Act.</p>
+
+      <h2>Operator</h2>
+      <p>
+        Jonathan Wrede<br />
+        Geiststr. 78<br />
+        48151 Muenster<br />
+        Germany
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Phone: <a href="tel:+4915129499386">+49 151 29499386</a><br />
+        Email: <a href="mailto:contact@jonathanwrede.de">contact@jonathanwrede.de</a>
+      </p>
+
+      <h2>VAT</h2>
+      <p>As a small business under § 19 (1) UStG, no VAT is charged.</p>
+
+      <h2>Responsible for Content</h2>
+      <p>Jonathan Wrede, address as above.</p>
+    </article>
+  </main>
+</BaseLayout>

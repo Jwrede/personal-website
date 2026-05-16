@@ -14,7 +14,7 @@ Modellwechsel, ein neuer Endpoint, ein vergessener `max_tokens`-Parameter -
 und plötzlich explodiert die Rechnung.
 
 Infracost hat das für Terraform gelöst: Code-Diffs analysieren und die
-Cloud-Kostenwirkung am Pull Request anzeigen. Ich habe etwas ähnliches für LLMs gebaut.
+Cloud-Kostenwirkung am Pull Request anzeigen. Ich habe etwas Ähnliches für LLMs gebaut.
 
 ![tokentoll Demo](https://raw.githubusercontent.com/Jwrede/tokentoll/main/demo/demo.gif)
 
@@ -42,10 +42,10 @@ Die zentralen Designentscheidungen:
   schreiben, die `can_handle()` und `detect()` implementiert. Keine Änderungen
   am Scanner oder an der Pipeline.
 
-- **Pricing wird lokal gecached.** Beim ersten Run lädt tokentoll die
-  Pricing-Datenbank von LiteLLM (2.200+ Modelle) und cached sie in
-  `~/.tokentoll/`. Es warnt bei einem veralteten Cache und schlägt bei zu
-  altem Cache fehl.
+- **Pricing wird lokal zwischengespeichert.** Beim ersten Run lädt tokentoll
+  die Pricing-Datenbank von LiteLLM (2.200+ Modelle) und speichert sie in
+  `~/.tokentoll/`. Es warnt bei einem veralteten Cache und schlägt bei einem
+  zu alten Cache fehl.
 
 - **SDK-spezifische Defaults.** Wenn ein Modellname dynamisch ist (zur Laufzeit
   aus Config oder Env-Variablen geladen), nimmt tokentoll das gängigste Modell
@@ -61,14 +61,14 @@ Pricing-Datenbank hat Einträge wie `gpt-4o`, `openai/gpt-4o`,
 
 Die Lösung ist eine gestaffelte Auflösungskette:
 
-1. Exakter Match
-2. Case-insensitiver Match
-3. SDK-Prefix anhängen und matchen (`openai/gpt-4o`)
-4. Provider-Prefix aus den DB-Keys entfernen und matchen
-5. Region-Prefix entfernen (`us.`, `eu.`, `apac.`)
-6. Datums-Suffix entfernen (`-2024-08-06`, `-20240806`)
+1. Exakte Übereinstimmung
+2. Groß- und Kleinschreibung ignorieren
+3. SDK-Präfix anhängen und abgleichen (`openai/gpt-4o`)
+4. Provider-Präfix aus den DB-Keys entfernen und abgleichen
+5. Regionspräfix entfernen (`us.`, `eu.`, `apac.`)
+6. Datumssuffix entfernen (`-2024-08-06`, `-20240806`)
 
-Das deckt 95 %+ der realen Modellnamen ab, die ich beim Scan von
+Das deckt 95%+ der realen Modellnamen ab, die ich beim Scan von
 Open-Source-Projekten gefunden habe.
 
 ## Mehrstufige Konstantenpropagation

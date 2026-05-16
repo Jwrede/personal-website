@@ -15,8 +15,8 @@ and those predictions drive maintenance decisions for building managers.
 
 The algorithms live in an internal Python library. New versions
 ship regularly with improved prediction logic. But how do you know a new
-version is actually better? You can't A/B test battery predictions — by the
-time a battery dies, the experiment has run for months.
+version is actually better? You can't A/B test battery predictions because by
+the time a battery dies, the experiment has run for months.
 
 I built two tools to solve this: an evaluation pipeline that compares algorithm
 versions against curated field data, and an operational tool that rolls out the
@@ -47,7 +47,7 @@ v3.2 inputs should be evaluated against v3.2 behavior, not v3.5.
 
 Not every device produces clean evaluation data. A thermostat that was offline
 for two weeks in the middle of the month isn't a fair test for a runtime
-prediction algorithm. But defining "clean" programmatically is hard — the edge
+prediction algorithm. But defining "clean" programmatically is hard because the edge
 cases are endless.
 
 The solution: a Streamlit review UI. After datasets are built, a reviewer
@@ -64,14 +64,14 @@ ghi789,true
 
 These review manifests are CSV files stored in MinIO alongside the datasets.
 The evaluation step only runs on approved samples. This keeps the pipeline
-reproducible — the same manifest always produces the same evaluation — while
-letting domain experts apply judgment that's hard to encode in rules.
+reproducible because the same manifest always produces the same evaluation,
+while letting domain experts apply judgment that's hard to encode in rules.
 
 ## Isolated environments per algorithm version
 
 The core evaluation question is: how does v0.8.0 compare to v0.9.0 on
 the same dataset? Running both versions in the same Python process isn't
-possible — they're different package versions with potentially incompatible
+possible because they're different package versions with potentially incompatible
 dependencies.
 
 The pipeline creates a temporary virtual environment for each version label:
@@ -89,7 +89,7 @@ refs. Dagster's multi-partition support (month × library version) means the
 pipeline tracks every combination.
 
 This is the part I'm happiest with. No container builds, no separate CI
-pipelines per version — just ephemeral venvs that exist for the duration of
+pipelines per version, just ephemeral venvs that exist for the duration of
 one evaluation run.
 
 ## MLflow for version comparison
@@ -111,7 +111,7 @@ an evaluation completed cleanly.
 ## Fleet-wide rollout
 
 Once a version passes evaluation, it needs to run on the entire fleet. The
-evaluation pipeline processes curated samples — hundreds of devices. The fleet
+evaluation pipeline processes curated samples, hundreds of devices. The fleet
 has 100k+.
 
 A separate FastAPI application handles this. It spawns background worker
@@ -146,7 +146,7 @@ Fleet rollout ← Winning version selected ← Human decision ←─┘
 Dagster orchestrates the evaluation side (monthly datasets, multi-version
 evaluation, MLflow logging). FastAPI handles the operational side (fleet-wide
 computation, progress tracking, configuration management). MinIO is the shared
-storage layer — evaluation datasets and fleet results both live there as
+storage layer: evaluation datasets and fleet results both live there as
 versioned Parquet.
 
 ## What I'd do differently

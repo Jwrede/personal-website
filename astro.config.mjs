@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
@@ -14,7 +13,6 @@ export default defineConfig({
     },
   },
   integrations: [
-    tailwind({ applyBaseStyles: false }),
     mdx(),
     sitemap({
       i18n: {

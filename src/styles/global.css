@@ -1,3 +1,5 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,7 +13,6 @@
 
 @layer components {
   .pipeline-glow { box-shadow: 0 0 15px rgba(56, 189, 248, 0.15); }
-  .lang-en { display: none; }
   .in-progress-badge {
     background: linear-gradient(135deg, #f59e0b22, #a78bfa22);
     border: 1px solid #a78bfa44;

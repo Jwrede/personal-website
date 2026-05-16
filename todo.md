@@ -2,12 +2,13 @@
 
 ## Priority 1 — Write now (supports ML/Platform Engineer positioning)
 
-- [ ] **Building a data platform with dbt + Dagster + ArgoCD from scratch**
+- [x] **Building a data platform with dbt + Dagster + ArgoCD from scratch**
   - 103 commits on dbt-poc over 14 months, deepest project
   - Cover: ELT architecture, why Dagster over Airflow, dbt transforms in the Dagster DAG, K8s/Helm/ArgoCD deploy, PII removal during extraction
   - Maps to portfolio signal #2 from CAREER-PLAN.md
 
 - [ ] **Battery lifetime prediction at 100k-device IoT scale**
+  - Partially covered by `evaluating-ml-algorithms-in-production`; still worth a dedicated architecture post focused on prediction and rollout.
   - Ties together datavil (83 commits), thermostat-supervisor (54 commits), battery-algorithm-evaluation, consumption-rate-generator
   - Cover: ML pipeline architecture, data flow from thermostats through supervisor to prediction algorithms, keeping predictions accurate at fleet scale
   - Maps to portfolio signal #1 from CAREER-PLAN.md

@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Privacy Policy | Jonathan Wrede"
+  description="Privacy policy for jonathanwrede.de."
+  locale="en"
+  canonicalPath="/en/privacy/"
+  alternates={{ de: '/datenschutz/', en: '/en/privacy/' }}
+>
+  <main class="max-w-3xl mx-auto space-y-6">
+    <nav class="bg-card p-4 rounded-xl border border-slate-700/50 text-xs font-mono">
+      <a href="/en/" class="text-slate-400 hover:text-accent">
+        <i class="fas fa-arrow-left mr-1.5"></i> jonathanwrede.de
+      </a>
+    </nav>
+
+    <article class="bg-card p-6 md:p-10 rounded-xl border-l-4 border-accent shadow-lg prose prose-invert max-w-none">
+      <h1>Privacy Policy</h1>
+
+      <h2>Controller</h2>
+      <p>
+        Jonathan Wrede<br />
+        Geiststr. 78<br />
+        48151 Muenster<br />
+        Germany<br />
+        Email: <a href="mailto:contact@jonathanwrede.de">contact@jonathanwrede.de</a>
+      </p>
+
+      <h2>Hosting and Server Logs</h2>
+      <p>
+        This website is hosted as a static site with Hetzner and served through Caddy. When you access
+        the site, technically necessary server log data is processed, including IP address, date and time
+        of access, requested URL, HTTP status, referrer, and user agent. This processing is based on
+        Art. 6(1)(f) GDPR for secure and stable website delivery.
+      </p>
+
+      <h2>Cookies and Tracking</h2>
+      <p>
+        jonathanwrede.de does not set its own tracking cookies and does not use web analytics such as
+        Google Analytics. The main pages load icons and styles locally from this site's own build.
+      </p>
+
+      <h2>External Media and Links</h2>
+      <p>
+        Some blog posts may embed externally hosted media, for example demo GIFs from raw.githubusercontent.com.
+        Loading such content can transfer your IP address to the respective provider. External links lead
+        to third-party services; their own privacy notices apply.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        If you contact me by email, your information is processed to handle the request. The legal basis is
+        Art. 6(1)(b) GDPR where the request relates to a contract or pre-contractual steps, otherwise
+        Art. 6(1)(f) GDPR.
+      </p>
+
+      <h2>Your Rights</h2>
+      <p>
+        Within the legal requirements, you have rights to access, rectification, deletion, restriction of
+        processing, data portability, and objection. You also have the right to complain to a data protection
+        supervisory authority.
+      </p>
+    </article>
+  </main>
+</BaseLayout>

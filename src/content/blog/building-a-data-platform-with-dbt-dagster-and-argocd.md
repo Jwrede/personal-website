@@ -150,7 +150,7 @@ calibration_total - lag(calibration_total) over (
 
 **Mart** models join staging tables with seed data (firmware deployments,
 data collection start dates) and add heavy indexing. `last_updates_per_day`
-grows by 1.5–3M rows per month, so indices on `queried_date`, `customer_id`,
+grows by 1.5-3M rows per month, so indices on `queried_date`, `customer_id`,
 `device_id`, `embedded_version`, and `hardware_version` are essential for
 Grafana queries to stay fast.
 
@@ -200,7 +200,7 @@ freshness warning before anyone files a ticket.
 
 This was a PoC, and some decisions show it:
 
-- **PostgreSQL as warehouse.** Fine for our scale (50–100k devices), but the
+- **PostgreSQL as warehouse.** Fine for our scale (50-100k devices), but the
   mart tables are getting large. A columnar store like DuckDB or ClickHouse
   would be a better fit long-term.
 - **Single-source EL.** The platform currently only ingests from ovis-cloud.

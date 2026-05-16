@@ -1,6 +1,6 @@
 ---
-title: "Ich habe 6 LLM-APIs 7 Tage lang ueberwacht. Das habe ich herausgefunden."
-description: "60.000 Probes ueber GPT-4o-mini, Claude 3.5 Haiku, Gemini 2.0 Flash, Llama 3.3 70B, DeepSeek Chat und Mistral Small. Echte Latenzzahlen aus kontinuierlichem Monitoring."
+title: "Ich habe 6 LLM-APIs 7 Tage lang überwacht. Das habe ich herausgefunden."
+description: "60.000 Probes über GPT-4o-mini, Claude 3.5 Haiku, Gemini 2.0 Flash, Llama 3.3 70B, DeepSeek Chat und Mistral Small. Echte Latenzzahlen aus kontinuierlichem Monitoring."
 pubDate: 2026-05-05
 tags: ["llm", "go", "devops", "performance"]
 lang: "de"
@@ -14,18 +14,18 @@ Wer Anwendungen auf LLM-APIs baut, kennt das Problem: Die Latenzzahlen in
 der Provider-Dokumentation zeigen den Best Case. Die Nutzer erleben den p95.
 
 Ich habe [llmprobe](https://github.com/Jwrede/llmprobe) gebaut, ein
-Open-Source Go CLI, das LLM-Endpoints probt und Time to First Token (TTFT),
+Open-Source-Go-CLI, das LLM-Endpoints testet und Time to First Token (TTFT),
 Gesamtlatenz und Generierungsdurchsatz misst. Keine SDKs, nur rohes HTTP
 und SSE-Parsing.
 
-Ich habe das Tool auf 6 Modelle ueber OpenRouter gerichtet und eine Woche
+Ich habe das Tool auf 6 Modelle über OpenRouter gerichtet und eine Woche
 laufen lassen.
 
 ![llmprobe TUI](/blog/llmprobe/tui-thumbnail.png)
 
 ## Setup
 
-Alle 60 Sekunden hat llmprobe einen minimalen Probe ("Hello", max 20 Tokens)
+Alle 60 Sekunden hat llmprobe eine minimale Anfrage ("Hello", max 20 Tokens)
 an jedes Modell geschickt. Der Prompt ist bewusst klein gehalten, um
 Infrastruktur-Latenz von Modell-Rechenzeit zu trennen.
 
@@ -45,7 +45,7 @@ DeepSeek Chat, Mistral Small.
 | DeepSeek Chat | 1.068ms | 3.017ms | 1.656ms | 26,0 | 4 |
 | Mistral Small | 2.735ms | 10.852ms | 3.886ms | 191,6 | 3 |
 
-## p50 vs p95 erzaehlen unterschiedliche Geschichten
+## p50 vs p95 erzählen unterschiedliche Geschichten
 
 ![TTFT-Vergleich](/blog/llmprobe/blog_ttft_comparison.png)
 
@@ -53,31 +53,31 @@ Gemini 2.0 Flash hat den niedrigsten Median-TTFT (556ms), aber der p95
 springt auf 2.313ms. Das ist ein 4x-Multiplikator. GPT-4o-mini und Claude
 3.5 Haiku sind vorhersagbarer: Ihr p95 liegt nur bei etwa 1,7x des Medians.
 
-Mistral Small ist der Ausreisser. p50 von 2.735ms, p95 von 10.852ms. Etwa
-5% der Anfragen brauchen ueber 10 Sekunden, bis das Streaming beginnt. Das
-war ueber die gesamten 7 Tage konsistent, keine temporaere Verschlechterung.
+Mistral Small ist der Ausreißer. p50 von 2.735ms, p95 von 10.852ms. Etwa
+5% der Anfragen brauchen über 10 Sekunden, bis das Streaming beginnt. Das
+war über die gesamten 7 Tage konsistent, keine temporäre Verschlechterung.
 
-## Schnellster erster Token != schnellste Generierung
+## Schnellstes erstes Token != schnellste Generierung
 
-![Latenz-Aufschluesselung](/blog/llmprobe/blog_latency_breakdown.png)
+![Latenz-Aufschlüsselung](/blog/llmprobe/blog_latency_breakdown.png)
 
 Mistral Small hat den schlechtesten TTFT, aber sobald die Generierung
-startet, produziert es Tokens mit 191,6 Tok/s (das schnellste im Test).
+startet, produziert es Token mit 191,6 Tok/s (das schnellste im Test).
 Gemini 2.0 Flash liegt mit 136,8 Tok/s an zweiter Stelle.
 
 DeepSeek Chat ist in beiden Dimensionen langsam: 1.068ms TTFT und nur
 26,0 Tok/s. Die Spanne zwischen schnellstem und langsamstem Durchsatz
-betraegt fast 8x.
+beträgt fast 8x.
 
 ![Durchsatz](/blog/llmprobe/blog_throughput.png)
 
-## Tail-Latenz ist, wo die Zuverlaessigkeit leidet
+## Tail-Latenz ist, wo die Zuverlässigkeit leidet
 
 ![TTFT-Verteilung](/blog/llmprobe/blog_ttft_distribution.png)
 
 GPT-4o-mini und Claude 3.5 Haiku haben die engsten Verteilungen. Man kann
 aggressive Timeouts (2s) setzen und trifft sie selten. Gemini und Llama
-haben laengere Tails. Mistrals Verteilung ist so breit, dass es fuer
+haben längere Tails. Mistrals Verteilung ist so breit, dass es für
 latenzsensitive Anwendungen praktisch unvorhersagbar ist.
 
 ## Die 7-Tage-Ansicht zeigt Muster
@@ -86,12 +86,12 @@ latenzsensitive Anwendungen praktisch unvorhersagbar ist.
 
 7 Tage Monitoring zeigt, was kurze Benchmarks nicht erfassen:
 
-- **Mistral Small** hatte periodische Latenz-Spikes ueber die gesamte
-  Woche, oft ueber 5.000ms.
-- **DeepSeek Chat** zeigte erhoehte Latenz in bestimmten Zeitfenstern,
+- **Mistral Small** hatte periodische Latenz-Spikes über die gesamte
+  Woche, oft über 5.000ms.
+- **DeepSeek Chat** zeigte erhöhte Latenz in bestimmten Zeitfenstern,
   wahrscheinlich korreliert mit Spitzennutzung in asiatischen Zeitzonen.
 - **GPT-4o-mini und Claude 3.5 Haiku** waren bemerkenswert stabil. Ihre
-  Linien schwanken kaum ueber die gesamte Woche.
+  Linien schwanken kaum über die gesamte Woche.
 
 ## Empfehlungen
 
@@ -100,11 +100,11 @@ GPT-4o-mini ist vorhersagbarer; Gemini ist im Median schneller, hat aber
 breitere Tails.
 
 **Durchsatzsensitiv** (Batch, Zusammenfassung): Mistral Small, wenn man den
-TTFT akzeptieren kann. Sonst Gemini 2.0 Flash fuer den besten
+TTFT akzeptieren kann. Sonst Gemini 2.0 Flash für den besten
 Gesamtdurchsatz ohne Latenzstrafe.
 
-**Zuverlaessigkeit** (SLA-gebunden): GPT-4o-mini und Claude 3.5 Haiku. Null
-Fehler ueber je 10.000+ Probes. Enge Verteilungen. Keine tageszeitabhaengige
+**Zuverlässigkeit** (SLA-gebunden): GPT-4o-mini und Claude 3.5 Haiku. Null
+Fehler über je 10.000+ Probes. Enge Verteilungen. Keine tageszeitabhängige
 Variation.
 
 ## Einsatz als CI/CD-Gate
@@ -115,7 +115,7 @@ Deployments blockieren, wenn das passiert.
 
 ```yaml
 # .github/workflows/deploy.yml
-- name: LLM-Provider pruefen
+- name: LLM-Provider prüfen
   env:
     OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -125,7 +125,7 @@ Deployments blockieren, wenn das passiert.
 ```
 
 `--fail-on degraded` beendet mit Exit-Code 1, wenn ein Endpoint seine
-TTFT- oder Latenz-Schwellenwerte ueberschreitet. Das Deployment stoppt.
+TTFT- oder Latenz-Schwellenwerte überschreitet. Das Deployment stoppt.
 Kein degradiertes Modell erreicht Production.
 
 Schwellenwerte werden pro Modell in `probes.yml` konfiguriert:
@@ -142,25 +142,25 @@ providers:
           min_tokens_per_sec: 50
 ```
 
-Basierend auf den 7-Tage-Daten waeren sinnvolle TTFT-Schwellenwerte:
+Basierend auf den 7-Tage-Daten wären sinnvolle TTFT-Schwellenwerte:
 
-| Modell | Empfohlener max_ttft | Begruendung |
+| Modell | Empfohlener max_ttft | Begründung |
 |--------|----------------------|-------------|
 | GPT-4o-mini | 1,5s | Deckt p95 (1.094ms) mit Puffer ab |
 | Claude 3.5 Haiku | 1,5s | Deckt p95 (1.106ms) mit Puffer ab |
 | Gemini 2.0 Flash | 3s | Breiter Tail, braucht Spielraum |
 | Llama 3.3 70B | 3s | p95 bei 2.221ms |
-| DeepSeek Chat | 5s | Natuerlich langsam, enger Schwellenwert wuerde flappen |
-| Mistral Small | 15s | p95 bei 10.852ms, nur Ausfaelle gaten |
+| DeepSeek Chat | 5s | Von Natur aus langsam, enger Schwellenwert würde instabil werden |
+| Mistral Small | 15s | p95 bei 10.852ms, nur Ausfälle gaten |
 
-So wird aus "Ich hoffe, die API funktioniert" ein "Ich weiss, dass die
-API funktioniert, die Pipeline hat es vor 30 Sekunden geprueft."
+So wird aus "Ich hoffe, die API funktioniert" ein "Ich weiß, dass die
+API funktioniert, die Pipeline hat es vor 30 Sekunden geprüft."
 
 ## Das Tool
 
-llmprobe unterstuetzt OpenAI, Anthropic, Google, Azure, AWS Bedrock und
+llmprobe unterstützt OpenAI, Anthropic, Google, Azure, AWS Bedrock und
 jeden OpenAI-kompatiblen Endpoint (Groq, Together, Fireworks, DeepSeek,
-Mistral, OpenRouter, Ollama, vLLM). Jeder Provider ist ein duenner
+Mistral, OpenRouter, Ollama, vLLM). Jeder Provider ist ein dünner
 HTTP-Wrapper mit SSE-Parsing. Der Bedrock-Client implementiert SigV4-Signing
 und AWS Binary Event Stream Parsing von Grund auf.
 
@@ -173,18 +173,18 @@ GitHub: [github.com/Jwrede/llmprobe](https://github.com/Jwrede/llmprobe)
 
 ## Live-Benchmark
 
-Seit der Veroeffentlichung dieses Artikels habe ich das Experiment zu einem
-kontinuierlichen, automatisierten Benchmark ausgebaut. Er trackt jetzt 15
+Seit der Veröffentlichung dieses Artikels habe ich das Experiment zu einem
+kontinuierlichen, automatisierten Benchmark ausgebaut. Er überwacht jetzt 15
 Frontier-Modelle von OpenAI, Anthropic, Google, DeepSeek und xAI, die
-stuendlich geprobt werden. Die Modellliste aktualisiert sich taeglich
-anhand der woechentlichen Popularitaets-Rankings von OpenRouter, sodass
+stündlich geprüft werden. Die Modellliste aktualisiert sich täglich
+anhand der wöchentlichen Popularitäts-Rankings von OpenRouter, sodass
 neue Modelle automatisch aufgenommen werden.
 
 Das Live-Dashboard ist unter
 [bench.jonathanwrede.de](https://bench.jonathanwrede.de) erreichbar und
 alle Rohdaten werden als JSONL unter
 [github.com/Jwrede/llm-bench-data](https://github.com/Jwrede/llm-bench-data)
-veroeffentlicht.
+veröffentlicht.
 
 Infrastruktur-Code:
 [github.com/Jwrede/llm-bench](https://github.com/Jwrede/llm-bench)

@@ -92,20 +92,22 @@ Certificates are managed automatically by Caddy via Let's Encrypt
    - is added to `sitemap-0.xml`
    - emits per-post `BlogPosting` JSON-LD with title, description, pubDate, tags
 
-The schema is enforced in `src/content/config.ts` — typos in frontmatter fail
+The schema is enforced in `src/content.config.ts` — typos in frontmatter fail
 the build.
 
 ## Project layout
 
 ```
 .
-├── astro.config.mjs           # site URL, integrations (sitemap, mdx, tailwind)
+├── astro.config.mjs           # site URL, integrations (sitemap, mdx)
+├── postcss.config.cjs         # Tailwind/PostCSS processing
 ├── tailwind.config.js         # custom colors, animations, prose-invert tweaks
 ├── public/                    # copied verbatim into dist/
 │   ├── profilbild.webp        # OG image, used by hero
 │   ├── cv_de.pdf, cv_intl.pdf
 │   └── robots.txt
 ├── src/
+│   ├── content.config.ts      # blog frontmatter schema and loader
 │   ├── styles/global.css      # tailwind + scrollbar/components
 │   ├── layouts/BaseLayout.astro   # head, meta, OG, Twitter, Person/WebSite JSON-LD
 │   ├── pages/
@@ -114,7 +116,6 @@ the build.
 │   │       ├── index.astro        # post listing
 │   │       └── [...slug].astro    # per-post page (Article JSON-LD)
 │   └── content/
-│       ├── config.ts              # zod schema for blog frontmatter
 │       └── blog/*.md              # posts
 └── dist/                      # build output, served by Caddy
 ```

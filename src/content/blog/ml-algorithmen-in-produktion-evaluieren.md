@@ -17,8 +17,8 @@ Wartungsentscheidungen für Gebäudemanager.
 Die Algorithmen leben in einer internen Python-Bibliothek. Neue
 Versionen werden regelmäßig mit verbesserter Vorhersagelogik veröffentlicht.
 Aber woher weiß man, ob eine neue Version tatsächlich besser ist? Man kann
-Batterievorhersagen nicht per A/B-Test prüfen — bis eine Batterie leer ist,
-hat das Experiment Monate gedauert.
+Batterievorhersagen nicht per A/B-Test prüfen, weil es Monate dauern würde,
+bis eine Batterie leer ist.
 
 Ich habe zwei Tools gebaut, um das zu lösen: eine Evaluierungspipeline, die
 Algorithmusversionen gegen kuratierte Felddaten vergleicht, und ein
@@ -37,12 +37,12 @@ partitionierten Assets. Für jeden Monat:
 
 1. Ventilbewegung und Sensorlogs aus der Analytics-Datenbank abrufen
 2. Kapazitäts-Testdaten von fünf Vilisto-API-Shards holen
-3. Versionshistorie pro Gerät tracken (Hardware und Firmware zum
+3. Versionshistorie pro Gerät erfassen (Hardware und Firmware zum
    Monatsanfang, Software-Änderungen während des Monats)
 4. Alles als Parquet in MinIO speichern mit deterministischen Pfaden:
    `capacity/datasets/year=2026/month=04/dataset.parquet`
 
-Das Versionshistorie-Tracking ist wichtig, weil die Algorithmen sich je nach
+Diese Versionshistorie ist wichtig, weil die Algorithmen sich je nach
 Hardware-Revision und Firmware unterschiedlich verhalten. Eine Vorhersage mit
 Firmware-v3.2-Inputs sollte gegen v3.2-Verhalten evaluiert werden, nicht
 gegen v3.5.
@@ -52,7 +52,7 @@ gegen v3.5.
 Nicht jedes Gerät produziert saubere Evaluierungsdaten. Ein Thermostat, das
 zwei Wochen mitten im Monat offline war, ist kein fairer Test für einen
 Laufzeit-Vorhersagealgorithmus. Aber "sauber" programmatisch zu definieren
-ist schwierig — die Grenzfälle sind endlos.
+ist schwierig: die Grenzfälle sind endlos.
 
 Die Lösung: eine Streamlit-Review-UI. Nach dem Dataset-Build öffnet ein
 Reviewer die UI, sieht pro Sample Visualisierungen (Spannungskurven,
@@ -68,19 +68,19 @@ ghi789,true
 
 Diese Review-Manifeste sind CSV-Dateien, die in MinIO neben den Datensätzen
 gespeichert werden. Der Evaluierungsschritt läuft nur auf genehmigten
-Samples. Das hält die Pipeline reproduzierbar — dasselbe Manifest erzeugt
-immer dieselbe Evaluierung — während Domain-Experten Urteil anwenden können,
+Samples. Das hält die Pipeline reproduzierbar, weil dasselbe Manifest immer
+dieselbe Evaluierung erzeugt, während Domain-Experten Urteil anwenden können,
 das sich schwer in Regeln kodieren lässt.
 
 ## Isolierte Environments pro Algorithmusversion
 
 Die zentrale Evaluierungsfrage: Wie schneidet v0.8.0 im Vergleich
 zu v0.9.0 auf demselben Datensatz ab? Beide Versionen im selben
-Python-Prozess laufen zu lassen ist nicht möglich — es sind verschiedene
+Python-Prozess laufen zu lassen ist nicht möglich, denn es sind verschiedene
 Paketversionen mit potenziell inkompatiblen Dependencies.
 
 Die Pipeline erstellt ein temporäres Virtual Environment für jedes
-Versions-Label:
+Versionslabel:
 
 ```python
 # Für jede Bibliotheksversion (v0.6.0, v0.8.0, latest, ein Git-Ref...)
@@ -90,12 +90,12 @@ Versions-Label:
 # 4. Ergebnisse sammeln, Venv abräumen
 ```
 
-Versions-Labels können semantische Versionen (`v0.9.0`), `latest` oder sogar
+Versionslabels können semantische Versionen (`v0.9.0`), `latest` oder sogar
 Git-Refs sein. Dagsters Multi-Partition-Support (Monat × Bibliotheksversion)
-bedeutet, dass die Pipeline jede Kombination trackt.
+bedeutet, dass die Pipeline jede Kombination nachverfolgt.
 
 Das ist der Teil, mit dem ich am zufriedensten bin. Keine Container-Builds,
-keine separaten CI-Pipelines pro Version — nur kurzlebige Venvs, die für
+keine separaten CI-Pipelines pro Version, nur kurzlebige Venvs, die für
 die Dauer eines Evaluierungslaufs existieren.
 
 ## MLflow für Versionsvergleich
@@ -109,7 +109,7 @@ Jede Evaluierung loggt in MLflow:
 
 MLflow macht es einfach zu beantworten: "Hat v0.9.0 den medianen
 Laufzeit-Vorhersagefehler im Vergleich zu v0.8.0 auf dem April-Datensatz
-reduziert?" — ohne jedes Mal eigene Analyseskripte zu schreiben.
+reduziert?", ohne jedes Mal eigene Analyseskripte zu schreiben.
 
 Die Dagster-Assets zeichnen Metadaten auf (Sample-Anzahl, Fehleranzahl,
 Ausführungsdauer), die in der Dagster-UI sichtbar werden, sodass man auf
@@ -118,7 +118,7 @@ einen Blick sieht, ob eine Evaluierung sauber abgeschlossen wurde.
 ## Fleet-Rollout
 
 Sobald eine Version die Evaluierung besteht, muss sie auf der gesamten
-Flotte laufen. Die Evaluierungspipeline verarbeitet kuratierte Samples —
+Flotte laufen. Die Evaluierungspipeline verarbeitet kuratierte Samples:
 hunderte Geräte. Die Flotte hat 100k+.
 
 Eine separate FastAPI-Anwendung übernimmt das. Sie startet
@@ -157,8 +157,8 @@ Fleet-Rollout ← Beste Version gewählt ← Menschliche Entscheidung ←┘
 
 Dagster orchestriert die Evaluierungsseite (monatliche Datensätze,
 Multi-Versions-Evaluierung, MLflow-Logging). FastAPI übernimmt die operative
-Seite (Fleet-weite Berechnung, Fortschritts-Tracking,
-Konfigurations-Management). MinIO ist die gemeinsame Speicherschicht —
+Seite (flottenweite Berechnung, Fortschritts-Tracking,
+Konfigurations-Management). MinIO ist die gemeinsame Speicherschicht:
 Evaluierungsdatensätze und Fleet-Ergebnisse leben dort beide als
 versioniertes Parquet.
 
@@ -172,8 +172,8 @@ versioniertes Parquet.
   ist aber fragil. Dagster könnte auch Fleet-Runs managen, mit eingebautem
   Retry und Checkpointing.
 - **Automatisches Gating.** Aktuell schaut ein Mensch in MLflow und
-  entscheidet, ob eine Version promoted wird. Ein automatisches Gate (z.B.
-  "promote wenn der Median-Fehler um >5% gesunken ist") würde die Schleife
+  entscheidet, ob eine Version übernommen wird. Ein automatisches Gate (z.B.
+  "übernehmen, wenn der Median-Fehler um >5% gesunken ist") würde die Schleife
   schließen.
 
 ## Stack

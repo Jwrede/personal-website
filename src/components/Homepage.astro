@@ -14,7 +14,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft && data.lan
   .slice(0, 3);
 
 const teasersPayload = posts.map((p) => ({
-  url: blogPostPath(locale, p.slug),
+  url: blogPostPath(locale, p.id),
   title: p.data.title,
   description: p.data.description,
   pubDate: p.data.pubDate.toISOString(),
@@ -28,6 +28,9 @@ const deBtnClass = deActive
 const enBtnClass = enActive
   ? 'px-4 py-1.5 text-xs font-bold rounded-full transition-all duration-300 bg-accent text-bg shadow-[0_0_10px_rgba(56,189,248,0.4)]'
   : 'px-4 py-1.5 text-xs font-bold rounded-full text-slate-400 hover:text-white transition-all duration-300';
+
+const legalPath = locale === 'de' ? '/impressum/' : '/en/legal-notice/';
+const privacyPath = locale === 'de' ? '/datenschutz/' : '/en/privacy/';
 ---
     <div class="max-w-5xl mx-auto space-y-6 relative">
 
@@ -42,18 +45,24 @@ const enBtnClass = enActive
         <!-- Header -->
         <header class="bg-card p-5 md:p-10 rounded-xl border-l-4 border-accent shadow-lg flex flex-col-reverse md:flex-row items-center gap-6 md:gap-10 mt-12 md:mt-0">
             <div class="flex-1 text-center md:text-left">
-                <div class="font-mono text-green text-xs md:text-sm mb-2">> initializing_profile.py... Done.</div>
+                <div class="font-mono text-green text-xs md:text-sm mb-2">AI platform engineering for production ML and inference workloads</div>
                 <h1 class="text-3xl md:text-5xl font-bold mb-2 break-words hyphens-auto">Jonathan Wrede</h1>
-                <h2 class="text-slate-400 text-lg md:text-xl font-medium">ML &amp; Platform Engineer</h2>
+                <h2 class="text-slate-400 text-lg md:text-xl font-medium">AI Platform &amp; ML Infrastructure Engineer</h2>
                 <div class="text-accent font-mono text-xs md:text-sm mt-1 tracking-wide">
-                    Dagster &nbsp;|&nbsp; dbt &nbsp;|&nbsp; Kubernetes &nbsp;|&nbsp; Python &nbsp;|&nbsp; FastAPI
+                    Target stack: vLLM &nbsp;|&nbsp; SGLang &nbsp;|&nbsp; KServe &nbsp;|&nbsp; Prometheus/Grafana &nbsp;|&nbsp; llm-d &nbsp;|&nbsp; OpenTelemetry
                 </div>
 
                 <p class="mt-4 text-slate-300 text-sm md:text-base leading-relaxed lang-de">
-                    Ich baue produktionsreife ML-Systeme und Dateninfrastruktur für IoT-Flotten, von Kapazitätsalgorithmen über Analytics-Warehouses bis zum Fleet-Monitoring für 100.000+ Geräte.
+                    Ich baue produktionsreife AI-/ML-Infrastruktur: Kubernetes-Deployments, Inferenz-Readiness-Gates, Prometheus/Grafana-Observability und Daten-/ML-Plattformen. In Produktion arbeite ich mit 100.000+ IoT-Ger&auml;ten; in Open Source mit inference-readiness-kit, llmprobe, llm-d, OpenTelemetry und Feast.
                 </p>
                 <p class="mt-4 text-slate-300 text-sm md:text-base leading-relaxed lang-en">
-                    I build production-grade ML systems and data infrastructure for IoT fleets, capacity prediction algorithms, analytics warehouses, and fleet monitoring for 100,000+ devices.
+                    I build production-grade AI/ML infrastructure: Kubernetes deployments, inference readiness gates, Prometheus/Grafana observability, and data/ML platforms. In production I work with 100,000+ IoT devices; in open source I build inference-readiness-kit and llmprobe and contribute around llm-d, OpenTelemetry, and Feast.
+                </p>
+                <p class="mt-3 text-slate-400 text-xs md:text-sm leading-relaxed border-l-2 border-accent/60 pl-3 lang-de">
+                    Aktueller Fokus: Readiness und Observability f&uuml;r LLM-Inferenz auf Kubernetes, mit vLLM/SGLang, KServe, Gateway API/Envoy, llm-d, OpenTelemetry und Prometheus/Grafana.
+                </p>
+                <p class="mt-3 text-slate-400 text-xs md:text-sm leading-relaxed border-l-2 border-accent/60 pl-3 lang-en">
+                    Current focus: readiness and observability for LLM inference on Kubernetes, with vLLM/SGLang, KServe, Gateway API/Envoy, llm-d, OpenTelemetry, and Prometheus/Grafana.
                 </p>
 
                 <div class="mt-5 flex flex-row gap-2 justify-center md:justify-start flex-wrap">
@@ -61,30 +70,57 @@ const enBtnClass = enActive
                         <i class="fas fa-paper-plane mr-1.5"></i>
                         {tr.contact}
                     </a>
-                    <a href={tr.cvFile} target="_blank" class="text-center border border-slate-500 text-slate-300 hover:text-white hover:border-white text-sm font-bold py-2 px-4 rounded-lg transition bg-slate-800/50">
+                    <a href={tr.cvFile} target="_blank" rel="noopener" class="text-center border border-slate-500 text-slate-300 hover:text-white hover:border-white text-sm font-bold py-2 px-4 rounded-lg transition bg-slate-800/50">
                         <i class="fas fa-file-pdf mr-1.5"></i>
                         {tr.cv}
                     </a>
-                    <a href="https://linkedin.com/in/jonathan-wrede" target="_blank" class="text-center border border-accent text-accent text-sm font-bold py-2 px-4 rounded-lg hover:bg-slate-700 transition">
+                    <a href="https://github.com/Jwrede" target="_blank" rel="noopener" class="text-center border border-slate-500 text-slate-300 hover:text-white hover:border-white text-sm font-bold py-2 px-4 rounded-lg transition bg-slate-800/50">
+                        <i class="fab fa-github mr-1.5"></i>GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/jonathan-wrede" target="_blank" rel="noopener" class="text-center border border-accent text-accent text-sm font-bold py-2 px-4 rounded-lg hover:bg-slate-700 transition">
                         <i class="fab fa-linkedin mr-1.5"></i>LinkedIn
+                    </a>
+                </div>
+
+                <div class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-2 text-left">
+                    <a href="https://github.com/Jwrede/inference-readiness-kit" target="_blank" rel="noopener" class="block rounded-lg border border-accent/30 bg-slate-900/60 p-3 hover:border-accent transition">
+                        <div class="text-[10px] font-mono font-bold uppercase text-accent">readiness-kit</div>
+                        <div class="mt-1 text-xs text-slate-300 leading-snug">
+                            <span class="lang-de">SLA-Gates und Prometheus-Diagnose f&uuml;r LLM-Inferenz.</span>
+                            <span class="lang-en">SLA gates and Prometheus diagnosis for LLM inference.</span>
+                        </div>
+                    </a>
+                    <a href="https://bench.jonathanwrede.de" target="_blank" rel="noopener" class="block rounded-lg border border-green/30 bg-slate-900/60 p-3 hover:border-green transition">
+                        <div class="text-[10px] font-mono font-bold uppercase text-green">llm-bench</div>
+                        <div class="mt-1 text-xs text-slate-300 leading-snug">
+                            <span class="lang-de">Live-Benchmark f&uuml;r TTFT, Latenz und Durchsatz.</span>
+                            <span class="lang-en">Live benchmark for TTFT, latency, and throughput.</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/Jwrede/tokentoll" target="_blank" rel="noopener" class="block rounded-lg border border-indigo/30 bg-slate-900/60 p-3 hover:border-indigo transition">
+                        <div class="text-[10px] font-mono font-bold uppercase text-indigo">tokentoll</div>
+                        <div class="mt-1 text-xs text-slate-300 leading-snug">
+                            <span class="lang-de">Infracost-&auml;hnliche Kostendiffs f&uuml;r LLM-Code.</span>
+                            <span class="lang-en">Infracost-style cost diffs for LLM code.</span>
+                        </div>
                     </a>
                 </div>
             </div>
             <div class="relative group flex-shrink-0">
                 <div class="absolute -inset-1 bg-gradient-to-r from-accent to-green rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-                <img src="/profilbild.webp" onerror="this.src='https://ui-avatars.com/api/?name=Jonathan+Wrede&background=38bdf8&color=0f172a&size=256&bold=true'" alt="Jonathan Wrede, ML & Platform Engineer" width="192" height="192" fetchpriority="high" class="relative w-32 h-32 md:w-48 md:h-48 object-cover object-[50%_25%] rounded-full border-4 border-card shadow-2xl">
+                <img src="/profilbild.webp" alt="Jonathan Wrede, AI Platform and ML Infrastructure Engineer" width="192" height="192" fetchpriority="high" class="relative w-32 h-32 md:w-48 md:h-48 object-cover object-[50%_25%] rounded-full border-4 border-card shadow-2xl">
             </div>
         </header>
 
         <!-- Pipeline animation -->
         <div class="p-6 bg-card/50 rounded-xl border border-slate-700/50 shadow-lg pipeline-glow relative overflow-hidden">
-            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/circuit-board.png')] opacity-5 mix-blend-overlay"></div>
+            <div class="absolute inset-0 opacity-5 mix-blend-overlay bg-[radial-gradient(circle_at_1px_1px,rgba(148,163,184,0.7)_1px,transparent_0)] bg-[length:18px_18px]"></div>
             <div class="relative z-10 flex justify-between items-center text-center">
                 <div class="flex flex-col items-center space-y-2 z-10">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-slate-800/80 border-2 border-indigo rounded-full flex items-center justify-center shadow-lg shadow-indigo/20">
                         <i class="fas fa-satellite-dish text-xl sm:text-2xl text-indigo"></i>
                     </div>
-                    <div class="text-xs sm:text-sm font-bold text-indigo tracking-wider">IoT</div>
+                    <div class="text-xs sm:text-sm font-bold text-indigo tracking-wider">AI WORKLOAD</div>
                 </div>
                 <div class="flex-1 h-1 bg-slate-700/50 mx-2 sm:mx-4 rounded-full relative overflow-hidden">
                     <div class="absolute top-1/2 -translate-y-1/2 w-8 h-3 bg-gradient-to-r from-indigo to-accent rounded-full blur-[2px] animate-flow"></div>
@@ -92,10 +128,10 @@ const enBtnClass = enActive
                 <div class="flex flex-col items-center space-y-2 z-10">
                     <div class="w-14 h-14 sm:w-20 sm:h-20 bg-slate-800/80 border-2 border-accent rounded-xl flex items-center justify-center shadow-lg shadow-accent/30 relative">
                         <i class="fas fa-cogs text-2xl sm:text-3xl text-accent animate-spin-slow opacity-20 absolute"></i>
-                        <i class="fab fa-python text-xl sm:text-3xl text-accent z-10 relative"></i>
-                        <span class="absolute bottom-1 right-1 text-[10px] font-black text-orange-400">dbt</span>
+                        <i class="fas fa-dharmachakra text-xl sm:text-3xl text-accent z-10 relative"></i>
+                        <span class="absolute bottom-1 right-1 text-[10px] font-black text-orange-400">K8s</span>
                     </div>
-                    <div class="text-xs sm:text-sm font-bold text-accent tracking-wider animate-pulse">ML</div>
+                    <div class="text-xs sm:text-sm font-bold text-accent tracking-wider animate-pulse">OPERATE</div>
                 </div>
                 <div class="flex-1 h-1 bg-slate-700/50 mx-2 sm:mx-4 rounded-full relative overflow-hidden">
                     <div class="absolute top-1/2 -translate-y-1/2 w-8 h-3 bg-gradient-to-r from-accent to-green rounded-full blur-[2px] animate-flow-delay"></div>
@@ -104,7 +140,7 @@ const enBtnClass = enActive
                     <div class="w-12 h-12 sm:w-16 sm:h-16 bg-slate-800/80 border-2 border-green rounded-full flex items-center justify-center shadow-lg shadow-green/20">
                         <i class="fas fa-chart-line text-xl sm:text-2xl text-green"></i>
                     </div>
-                    <div class="text-xs sm:text-sm font-bold text-green tracking-wider">IMPACT</div>
+                    <div class="text-xs sm:text-sm font-bold text-green tracking-wider">SLOs</div>
                 </div>
             </div>
         </div>
@@ -137,8 +173,8 @@ const enBtnClass = enActive
                     </div>
                     <div class="bg-slate-800/50 rounded-lg p-4 border border-violet/20 flex flex-col justify-between group hover:border-violet/50 transition">
                         <div class="text-2xl font-black text-violet">61-99%</div>
-                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-de">Speicherreduktion bei SNNI (Thesis)</div>
-                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-en">Memory reduction for SNNI (thesis)</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-de">Speicherreduktion in Thesis-Experimenten</div>
+                        <div class="text-xs text-slate-400 mt-1 leading-tight lang-en">memory reduction in thesis experiments</div>
                     </div>
                 </div>
             </div>
@@ -201,7 +237,7 @@ const enBtnClass = enActive
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
                 <!-- CS1: IoT Analytics Platform -->
-                <div onclick="openModal('cs1Modal')" class="bg-slate-800/40 p-5 md:p-6 rounded-lg border border-accent/30 hover:border-accent cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(56,189,248,0.05)] hover:shadow-[0_0_15px_rgba(56,189,248,0.15)]">
+                <a href="#cs1Modal" onclick="openModal('cs1Modal'); return false;" class="block text-left bg-slate-800/40 p-5 md:p-6 rounded-lg border border-accent/30 hover:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(56,189,248,0.05)] hover:shadow-[0_0_15px_rgba(56,189,248,0.15)]">
                     <div class="absolute top-0 right-0 bg-accent text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">
                         <span class="lang-de">GEBÄUDETECHNIK / IoT</span><span class="lang-en">BUILDING TECH / IoT</span>
                     </div>
@@ -222,10 +258,10 @@ const enBtnClass = enActive
                         <span>dbt</span><span class="text-slate-700">|</span><span>Dagster</span><span class="text-slate-700">|</span><span>Grafana</span><span class="text-slate-700">|</span><span>ArgoCD</span><span class="text-slate-700">|</span><span>K8s</span>
                         <span class="ml-auto text-accent font-bold group-hover:translate-x-1 transition"><i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
+                </a>
 
                 <!-- CS2: Battery Intelligence System -->
-                <div onclick="openModal('cs2Modal')" class="bg-slate-800/40 p-5 md:p-6 rounded-lg border border-green/30 hover:border-green cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(74,222,128,0.05)] hover:shadow-[0_0_15px_rgba(74,222,128,0.15)]">
+                <a href="#cs2Modal" onclick="openModal('cs2Modal'); return false;" class="block text-left bg-slate-800/40 p-5 md:p-6 rounded-lg border border-green/30 hover:border-green focus-visible:outline focus-visible:outline-2 focus-visible:outline-green cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(74,222,128,0.05)] hover:shadow-[0_0_15px_rgba(74,222,128,0.15)]">
                     <div class="absolute top-0 right-0 bg-green text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">MLOps / IoT</div>
                     <div class="flex gap-3 items-start mb-3 mt-2">
                         <div class="bg-green/10 text-green p-2.5 rounded-lg"><i class="fas fa-brain text-xl"></i></div>
@@ -244,10 +280,10 @@ const enBtnClass = enActive
                         <span>Python</span><span class="text-slate-700">|</span><span>Polars</span><span class="text-slate-700">|</span><span>pydantic</span><span class="text-slate-700">|</span><span>Dagster</span><span class="text-slate-700">|</span><span>Docker</span>
                         <span class="ml-auto text-green font-bold group-hover:translate-x-1 transition"><i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
+                </a>
 
                 <!-- CS3: Battery Operations Dashboard -->
-                <div onclick="openModal('cs3Modal')" class="bg-slate-800/40 p-5 md:p-6 rounded-lg border border-indigo/30 hover:border-indigo cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(129,140,248,0.05)] hover:shadow-[0_0_15px_rgba(129,140,248,0.15)]">
+                <a href="#cs3Modal" onclick="openModal('cs3Modal'); return false;" class="block text-left bg-slate-800/40 p-5 md:p-6 rounded-lg border border-indigo/30 hover:border-indigo focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(129,140,248,0.05)] hover:shadow-[0_0_15px_rgba(129,140,248,0.15)]">
                     <div class="absolute top-0 right-0 bg-indigo text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">PLATFORM / OPS</div>
                     <div class="flex gap-3 items-start mb-3 mt-2">
                         <div class="bg-indigo/10 text-indigo p-2.5 rounded-lg"><i class="fas fa-tachometer-alt text-xl"></i></div>
@@ -266,10 +302,10 @@ const enBtnClass = enActive
                         <span>FastAPI</span><span class="text-slate-700">|</span><span>Alpine.js</span><span class="text-slate-700">|</span><span>Plotly</span><span class="text-slate-700">|</span><span>Docker</span>
                         <span class="ml-auto text-indigo font-bold group-hover:translate-x-1 transition"><i class="fas fa-arrow-right"></i></span>
                     </div>
-                </div>
+                </a>
 
                 <!-- CS4: Secure Neural Network Inference (thesis) -->
-                <div onclick="openModal('cs4Modal')" class="bg-slate-800/40 p-5 md:p-6 rounded-lg border border-violet/30 hover:border-violet cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(167,139,250,0.05)] hover:shadow-[0_0_15px_rgba(167,139,250,0.15)]">
+                <a href="#cs4Modal" onclick="openModal('cs4Modal'); return false;" class="block text-left bg-slate-800/40 p-5 md:p-6 rounded-lg border border-violet/30 hover:border-violet focus-visible:outline focus-visible:outline-2 focus-visible:outline-violet cursor-pointer transition group relative overflow-hidden shadow-[0_0_10px_rgba(167,139,250,0.05)] hover:shadow-[0_0_15px_rgba(167,139,250,0.15)]">
                     <div class="absolute top-0 right-0 bg-violet text-bg text-[10px] font-bold px-2.5 py-1 rounded-bl">AI SECURITY</div>
                     <div class="flex gap-3 items-start mb-3 mt-2">
                         <div class="bg-violet/10 text-violet p-2.5 rounded-lg relative">
@@ -287,8 +323,8 @@ const enBtnClass = enActive
                         </div>
                     </div>
                     <p class="text-xs text-slate-400 mb-4 leading-relaxed">
-                        <span class="lang-de">Speicher-Profiling und Optimierung für 4 SNNI-Systeme auf BERT und ViT, 61-99 % Speicherreduktion, analytische Modelle und ein Deployability-Framework.</span>
-                        <span class="lang-en">Memory profiling and optimization across 4 SNNI systems on BERT and ViT, 61-99% memory reduction, analytical models, and a deployability framework.</span>
+                        <span class="lang-de">Speicher-Profiling und Optimierung für 4 SNNI-Systeme auf BERT und ViT. Aktuelle Thesis-Experimente zeigen 61-99 % Speicherreduktion, plus analytische Modelle und ein Deployability-Framework.</span>
+                        <span class="lang-en">Memory profiling and optimization across 4 SNNI systems on BERT and ViT. Current thesis experiments show 61-99% memory reduction, plus analytical models and a deployability framework.</span>
                     </p>
                     <div class="flex items-center gap-2 text-[10px] text-slate-500 font-mono border-t border-slate-700/50 pt-3 flex-wrap">
                         <span>Python</span><span class="text-slate-700">|</span><span>PyTorch</span><span class="text-slate-700">|</span><span>HE / CKKS</span><span class="text-slate-700">|</span><span>MPC</span>
@@ -297,8 +333,106 @@ const enBtnClass = enActive
                             <span class="lang-de">In Arbeit</span><span class="lang-en">In progress</span>
                         </span>
                     </div>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- ==================== OPEN SOURCE ==================== -->
+        <div class="bg-card p-5 md:p-8 rounded-xl shadow-lg border border-slate-700/50">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-6">
+                <div>
+                    <h3 class="text-slate-400 uppercase text-xs font-bold flex items-center">
+                        <i class="fab fa-github mr-2"></i>
+                        <span class="lang-de">Open-Source AI-Infrastruktur</span>
+                        <span class="lang-en">Open Source AI Infrastructure</span>
+                    </h3>
+                    <p class="mt-2 text-sm text-slate-400 leading-relaxed max-w-3xl">
+                        <span class="lang-de">Gemergte Beitr&auml;ge in produktionsnahen AI-/Daten-Infrastrukturprojekten, plus eigene Tools f&uuml;r LLM-Kosten, Endpoint-Health und Latenzmessung.</span>
+                        <span class="lang-en">Merged contributions in production-grade AI/data infrastructure projects, plus my own tools for LLM cost, endpoint health, and latency measurement.</span>
+                    </p>
+                </div>
+                <a href="https://github.com/search?q=is%3Apr+author%3AJwrede&type=pullrequests" target="_blank" rel="noopener" class="text-xs text-accent hover:text-sky-300 font-bold whitespace-nowrap">
+                    GitHub PRs <i class="fas fa-arrow-up-right-from-square ml-1"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="border-t border-accent/30 pt-4">
+                    <div class="text-[11px] text-accent font-mono font-bold uppercase mb-2">LLM serving</div>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-3">
+                        <span class="lang-de">Security- und Reliability-H&auml;rtung f&uuml;r den llm-d Router.</span>
+                        <span class="lang-en">Security and reliability hardening for the llm-d router.</span>
+                    </p>
+                    <a href="https://github.com/llm-d/llm-d-router/pull/960" target="_blank" rel="noopener" class="inline-flex items-center text-xs text-accent hover:text-sky-300 font-bold">
+                        llm-d/llm-d-router #960 <i class="fas fa-arrow-up-right-from-square ml-1.5"></i>
+                    </a>
                 </div>
 
+                <div class="border-t border-green/30 pt-4">
+                    <div class="text-[11px] text-green font-mono font-bold uppercase mb-2">Observability</div>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-3">
+                        <span class="lang-de">OpenAI-Tool-Definitionen in OpenTelemetry GenAI-Telemetrie durchgereicht.</span>
+                        <span class="lang-en">Passed OpenAI tool definitions through OpenTelemetry GenAI telemetry.</span>
+                    </p>
+                    <a href="https://github.com/open-telemetry/opentelemetry-python-contrib/pull/4554" target="_blank" rel="noopener" class="inline-flex items-center text-xs text-green hover:text-emerald-300 font-bold">
+                        opentelemetry-python-contrib #4554 <i class="fas fa-arrow-up-right-from-square ml-1.5"></i>
+                    </a>
+                </div>
+
+                <div class="border-t border-indigo/30 pt-4">
+                    <div class="text-[11px] text-indigo font-mono font-bold uppercase mb-2">Feature stores</div>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-3">
+                        <span class="lang-de">Feast-Fixes f&uuml;r BigQuery, DynamoDB und Trino Offline Stores.</span>
+                        <span class="lang-en">Feast fixes for BigQuery, DynamoDB, and Trino offline stores.</span>
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://github.com/feast-dev/feast/pull/6362" target="_blank" rel="noopener" class="text-xs text-indigo hover:text-violet font-bold">#6362</a>
+                        <a href="https://github.com/feast-dev/feast/pull/6366" target="_blank" rel="noopener" class="text-xs text-indigo hover:text-violet font-bold">#6366</a>
+                        <a href="https://github.com/feast-dev/feast/pull/6365" target="_blank" rel="noopener" class="text-xs text-indigo hover:text-violet font-bold">#6365</a>
+                        <a href="https://github.com/feast-dev/feast/pull/6381" target="_blank" rel="noopener" class="text-xs text-indigo hover:text-violet font-bold">#6381</a>
+                        <a href="https://github.com/feast-dev/feast/pull/6360" target="_blank" rel="noopener" class="text-xs text-indigo hover:text-violet font-bold">#6360</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-slate-700/60">
+                <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                        <span class="lang-de"><strong class="text-white">Eigene AI-Plattform-Tools:</strong> kleine, einsatznahe Werkzeuge f&uuml;r Probleme, die beim Betrieb von LLM-/Inference-Workloads tats&auml;chlich wehtun: Latenz, Kosten, Endpoint-Health und Deploy-Gates.</span>
+                        <span class="lang-en"><strong class="text-white">Own AI platform tools:</strong> small, production-shaped tools for the problems that actually hurt when operating LLM/inference workloads: latency, cost, endpoint health, and deploy gates.</span>
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <a href="https://github.com/Jwrede/inference-readiness-kit" target="_blank" rel="noopener" class="block rounded-lg border border-accent/30 bg-slate-900/50 p-4 hover:border-accent transition">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="text-sm font-bold text-white">inference-readiness-kit</div>
+                            <i class="fas fa-arrow-up-right-from-square text-xs text-accent"></i>
+                        </div>
+                        <p class="mt-2 text-xs text-slate-400 leading-relaxed">
+                            <span class="lang-de">Operator-Workflow f&uuml;r LLM-Inferenz-Readiness: externe Probes, SLA-Gates, Prometheus/vLLM-Korrelation, Concurrency-Sweeps, Grafana und Runbooks.</span>
+                            <span class="lang-en">Operator workflow for LLM inference readiness: external probes, SLA gates, Prometheus/vLLM correlation, concurrency sweeps, Grafana, and runbooks.</span>
+                        </p>
+                    </a>
+                    <a href="https://github.com/Jwrede/llmprobe" target="_blank" rel="noopener" class="block rounded-lg border border-green/30 bg-slate-900/50 p-4 hover:border-green transition">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="text-sm font-bold text-white">llmprobe</div>
+                            <i class="fas fa-arrow-up-right-from-square text-xs text-green"></i>
+                        </div>
+                        <p class="mt-2 text-xs text-slate-400 leading-relaxed">
+                            <span class="lang-de">Go-CLI f&uuml;r Synthetic Monitoring und CI-Smoke-Tests von LLM-Inference-Endpunkten. Misst TTFT, Latenz, Durchsatz und Fehler.</span>
+                            <span class="lang-en">Go CLI for synthetic monitoring and CI smoke tests of LLM inference endpoints. Measures TTFT, latency, throughput, and errors.</span>
+                        </p>
+                    </a>
+                    <a href="https://github.com/Jwrede/tokentoll" target="_blank" rel="noopener" class="block rounded-lg border border-indigo/30 bg-slate-900/50 p-4 hover:border-indigo transition">
+                        <div class="flex items-center justify-between gap-3">
+                            <div class="text-sm font-bold text-white">tokentoll</div>
+                            <i class="fas fa-arrow-up-right-from-square text-xs text-indigo"></i>
+                        </div>
+                        <p class="mt-2 text-xs text-slate-400 leading-relaxed">
+                            <span class="lang-de">GitHub Action und CLI f&uuml;r LLM-Kostendiffs in Code Reviews: statische Analyse, Preisdatenbank, PR-Kommentare und MCP-Server.</span>
+                            <span class="lang-en">GitHub Action and CLI for LLM cost diffs in code review: static analysis, pricing database, PR comments, and MCP server.</span>
+                        </p>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -321,7 +455,7 @@ const enBtnClass = enActive
                 <div class="relative border-l-2 border-slate-600 pl-5 pb-2">
                     <div class="absolute -left-[7px] top-0 w-3 h-3 bg-slate-500 rounded-full ring-4 ring-card"></div>
                     <span class="font-mono text-slate-400 text-xs block mb-1">Jan 2023, Dec 2024</span>
-                    <h4 class="text-lg font-bold text-slate-200">Big Data Consultant | Saracus</h4>
+                    <h4 class="text-lg font-bold text-slate-200">Data Platform Consultant | Saracus</h4>
                     <p class="text-slate-400 mt-1 text-sm">
                         <span class="lang-de">Cloud Data Warehouses (Snowflake / BigQuery / Azure Synapse), Python-ETL-Pipelines und Streamlit-Apps mit OAuth SSO für Enterprise-Kunden.</span>
                         <span class="lang-en">Cloud data warehouses (Snowflake / BigQuery / Azure Synapse), Python ETL pipelines, and Streamlit apps with OAuth SSO for enterprise clients.</span>
@@ -367,9 +501,13 @@ const enBtnClass = enActive
         <footer class="text-center text-slate-500 text-xs py-8">
             <p class="mb-2">&copy; 2025-2026 Jonathan Wrede.</p>
             <div class="flex justify-center gap-4">
-                <button onclick="openModal('legalModal', 'impressum')" class="hover:text-accent transition underline">Impressum</button>
+                <a href={legalPath} class="hover:text-accent transition underline">
+                    <span class="lang-de">Impressum</span><span class="lang-en">Legal Notice</span>
+                </a>
                 <span class="text-slate-700">|</span>
-                <button onclick="openModal('legalModal', 'datenschutz')" class="hover:text-accent transition underline">Datenschutz</button>
+                <a href={privacyPath} class="hover:text-accent transition underline">
+                    <span class="lang-de">Datenschutz</span><span class="lang-en">Privacy</span>
+                </a>
             </div>
         </footer>
     </div>
@@ -385,7 +523,7 @@ const enBtnClass = enActive
                         <span><span class="lang-de">IoT Analytics-Plattform</span><span class="lang-en">IoT Analytics Platform</span></span>
                     </h2>
                 </div>
-                <button onclick="closeModal('cs1Modal')" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
+                <button onclick="closeModal('cs1Modal')" aria-label="Close case study" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
             </div>
             <div class="overflow-y-auto p-6 md:p-10 space-y-6 flex-1 bg-bg">
                 <div>
@@ -536,7 +674,7 @@ const enBtnClass = enActive
                         <span><span class="lang-de">Batterie-Intelligenz-System</span><span class="lang-en">Battery Intelligence System</span></span>
                     </h2>
                 </div>
-                <button onclick="closeModal('cs2Modal')" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
+                <button onclick="closeModal('cs2Modal')" aria-label="Close case study" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
             </div>
             <div class="overflow-y-auto p-6 md:p-10 space-y-6 flex-1 bg-bg">
                 <div>
@@ -668,7 +806,7 @@ const enBtnClass = enActive
                         <span><span class="lang-de">Batterie-Operations-Dashboard</span><span class="lang-en">Battery Operations Dashboard</span></span>
                     </h2>
                 </div>
-                <button onclick="closeModal('cs3Modal')" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
+                <button onclick="closeModal('cs3Modal')" aria-label="Close case study" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
             </div>
             <div class="overflow-y-auto p-6 md:p-10 space-y-6 flex-1 bg-bg">
                 <div>
@@ -818,7 +956,7 @@ const enBtnClass = enActive
                         <span>Secure Neural Network Inference</span>
                     </h2>
                 </div>
-                <button onclick="closeModal('cs4Modal')" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
+                <button onclick="closeModal('cs4Modal')" aria-label="Close case study" class="text-slate-400 hover:text-white text-3xl leading-none ml-4">&times;</button>
             </div>
             <div class="overflow-y-auto p-6 md:p-10 space-y-6 flex-1 bg-bg">
 
@@ -948,97 +1086,30 @@ const enBtnClass = enActive
         </div>
     </div>
 
-    <!-- ==================== LEGAL MODAL ==================== -->
-    <div id="legalModal" class="fixed inset-0 z-50 hidden flex items-center justify-center md:p-4">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal('legalModal')"></div>
-        <div class="relative w-full h-full md:h-auto md:max-h-[80vh] md:max-w-2xl bg-card border border-slate-600 md:rounded-xl shadow-2xl flex flex-col">
-            <div class="p-4 border-b border-slate-700 flex justify-between items-center flex-shrink-0">
-                <h2 id="legalTitle" class="font-bold text-white">Rechtliche Hinweise</h2>
-                <button onclick="closeModal('legalModal')" class="text-slate-400 hover:text-white text-3xl leading-none">&times;</button>
-            </div>
-            <div id="legalContent" class="p-6 overflow-y-auto text-slate-300 text-sm leading-relaxed flex-1 bg-card"></div>
-            <div class="md:hidden p-4 border-t border-slate-700 flex-shrink-0 bg-card">
-                <button onclick="closeModal('legalModal')" class="w-full bg-slate-700 text-white py-3 rounded font-bold">Schließen</button>
-            </div>
-        </div>
-    </div>
-
     <script is:inline>
-        function openModal(modalId, contentKey) {
-            if (modalId === 'legalModal') {
-                const content = document.getElementById('legalContent');
-                const title = document.getElementById('legalTitle');
-                const lang = document.documentElement.lang;
-                if (contentKey === 'impressum') {
-                    title.innerText = lang === 'de' ? 'Impressum' : 'Legal Notice';
-                    content.innerHTML = lang === 'de' ? impressumDe : impressumEn;
-                } else {
-                    title.innerText = lang === 'de' ? 'Datenschutzerklärung' : 'Privacy Policy';
-                    content.innerHTML = lang === 'de' ? datenschutzDe : datenschutzEn;
-                }
-            }
-            document.getElementById(modalId).classList.remove('hidden');
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal(modalId) {
-            document.getElementById(modalId).classList.add('hidden');
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            modal.classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
 
         document.addEventListener('keydown', (e) => {
             if (e.key === "Escape") {
-                ['cs1Modal', 'cs2Modal', 'cs3Modal', 'cs4Modal', 'legalModal'].forEach(id => {
+                ['cs1Modal', 'cs2Modal', 'cs3Modal', 'cs4Modal'].forEach(id => {
                     const el = document.getElementById(id);
                     if (el) el.classList.add('hidden');
                 });
                 document.body.style.overflow = 'auto';
             }
         });
-
-        const impressumDe = `
-            <h2 class="text-xl font-bold text-white mb-4">Impressum</h2>
-            <p class="mb-4">Angaben gemäß § 5 TMG</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <strong class="text-white block mb-1">Betreiber:</strong>
-                    Jonathan Wrede<br>Geiststr. 78<br>48151 Münster<br>Deutschland
-                </div>
-                <div>
-                    <strong class="text-white block mb-1">Kontakt:</strong>
-                    Tel: <a href="tel:+4915129499386" class="hover:text-accent">+49 151 29499386</a><br>
-                    Mail: <a href="mailto:kontakt@jonathanwrede.de" class="hover:text-accent">kontakt@jonathanwrede.de</a>
-                </div>
-            </div>
-            <p class="mb-4"><strong>Umsatzsteuer-ID:</strong><br>Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet.</p>
-        `;
-
-        const impressumEn = `
-            <h2 class="text-xl font-bold text-white mb-4">Legal Notice</h2>
-            <p class="mb-4">Information per § 5 TMG (German Telemedia Act)</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <strong class="text-white block mb-1">Operator:</strong>
-                    Jonathan Wrede<br>Geiststr. 78<br>48151 Münster<br>Germany
-                </div>
-                <div>
-                    <strong class="text-white block mb-1">Contact:</strong>
-                    Tel: <a href="tel:+4915129499386" class="hover:text-accent">+49 151 29499386</a><br>
-                    Mail: <a href="mailto:contact@jonathanwrede.de" class="hover:text-accent">contact@jonathanwrede.de</a>
-                </div>
-            </div>
-            <p class="mb-4"><strong>VAT:</strong><br>As a small business under § 19 (1) UStG, no VAT is charged.</p>
-        `;
-
-        const datenschutzDe = `
-            <h2 class="text-xl font-bold text-white mb-4">Datenschutzerklärung</h2>
-            <p class="mb-2"><strong>Allgemeine Hinweise:</strong> Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Hosting via Hetzner.</p>
-        `;
-
-        const datenschutzEn = `
-            <h2 class="text-xl font-bold text-white mb-4">Privacy Policy</h2>
-            <p class="mb-2"><strong>General notes:</strong> Data processing on this website is carried out by the website operator. Hosting via Hetzner.</p>
-        `;
     </script>
 
   <script is:inline define:vars={{ posts: teasersPayload, comingSoon: tr.comingSoon, readPost: tr.blogReadPost }}>

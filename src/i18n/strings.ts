@@ -7,18 +7,18 @@ type Strings = typeof strings.de;
 
 export const strings = {
   de: {
-    siteTitle: 'Jonathan Wrede | ML & Platform Engineer, Dagster, dbt, Kubernetes',
+    siteTitle: 'Jonathan Wrede | AI Platform & ML Infrastructure Engineer',
     siteDescription:
-      'Jonathan Wrede, ML & Platform Engineer aus Münster. Ich baue produktionsreife ML-Systeme und Dateninfrastruktur für IoT-Flotten: Dagster, dbt, Kubernetes, Python, FastAPI.',
+      'Jonathan Wrede, AI Platform und ML Infrastructure Engineer aus Münster. Ich baue Kubernetes-basierte ML-Systeme, Inferenz-Readiness, Prometheus/Grafana-Observability und produktive Datenplattformen.',
     ogDescription:
-      'ML & Platform Engineer aus Münster. Produktionsreife ML-Systeme und Dateninfrastruktur für IoT-Flotten.',
-    twitterDescription: 'ML & Platform Engineer aus Münster. Dagster, dbt, Kubernetes, Python.',
+      'AI Platform und ML Infrastructure Engineer aus Münster. Kubernetes-ML-Workloads, Inferenz-Readiness, Prometheus/Grafana-Observability und produktive Datenplattformen.',
+    twitterDescription: 'AI Platform & ML Infrastructure Engineer. Inferenz-Readiness mit vLLM, Prometheus/Grafana, llm-d, OpenTelemetry.',
 
     // Header
-    initLine: '> initializing_profile.py... Done.',
-    role: 'ML & Platform Engineer',
+    initLine: 'AI platform engineering for production ML and inference workloads',
+    role: 'AI Platform & ML Infrastructure Engineer',
     intro:
-      'Ich baue produktionsreife ML-Systeme und Dateninfrastruktur für IoT-Flotten, von Kapazitätsalgorithmen über Analytics-Warehouses bis zum Fleet-Monitoring für 100.000+ Geräte.',
+      'Ich baue produktionsreife AI-/ML-Infrastruktur: Kubernetes-Deployments, Inferenz-Readiness-Gates, Prometheus/Grafana-Observability und Daten-/ML-Plattformen. In Produktion arbeite ich mit 100.000+ IoT-Geräten; in Open Source mit inference-readiness-kit, llmprobe, llm-d, OpenTelemetry und Feast.',
     contact: 'Kontakt',
     cv: 'Lebenslauf',
     contactEmail: 'kontakt@jonathanwrede.de',
@@ -91,17 +91,17 @@ export const strings = {
   },
 
   en: {
-    siteTitle: 'Jonathan Wrede | ML & Platform Engineer, Dagster, dbt, Kubernetes',
+    siteTitle: 'Jonathan Wrede | AI Platform & ML Infrastructure Engineer',
     siteDescription:
-      'Jonathan Wrede, ML & Platform Engineer based in Münster, Germany. I build production-grade ML systems and data infrastructure for IoT fleets: Dagster, dbt, Kubernetes, Python, FastAPI.',
+      'Jonathan Wrede, AI Platform and ML Infrastructure Engineer based in Münster, Germany. I build Kubernetes-based ML systems, inference readiness, Prometheus/Grafana observability, and production data platforms.',
     ogDescription:
-      'ML & Platform Engineer based in Münster, Germany. Production-grade ML systems and data infrastructure for IoT fleets.',
-    twitterDescription: 'ML & Platform Engineer in Münster. Dagster, dbt, Kubernetes, Python.',
+      'AI Platform and ML Infrastructure Engineer based in Münster, Germany. Kubernetes ML workloads, inference readiness, Prometheus/Grafana observability, and production data platforms.',
+    twitterDescription: 'AI Platform & ML Infrastructure Engineer. Inference readiness with vLLM, Prometheus/Grafana, llm-d, OpenTelemetry.',
 
-    initLine: '> initializing_profile.py... Done.',
-    role: 'ML & Platform Engineer',
+    initLine: 'AI platform engineering for production ML and inference workloads',
+    role: 'AI Platform & ML Infrastructure Engineer',
     intro:
-      'I build production-grade ML systems and data infrastructure for IoT fleets, capacity prediction algorithms, analytics warehouses, and fleet monitoring for 100,000+ devices.',
+      'I build production-grade AI/ML infrastructure: Kubernetes deployments, inference readiness gates, Prometheus/Grafana observability, and data/ML platforms. In production I work with 100,000+ IoT devices; in open source I build inference-readiness-kit and llmprobe and contribute around llm-d, OpenTelemetry, and Feast.',
     contact: 'Get in touch',
     cv: 'Resume',
     contactEmail: 'contact@jonathanwrede.de',

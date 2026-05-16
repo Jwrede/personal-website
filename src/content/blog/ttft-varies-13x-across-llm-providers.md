@@ -1,6 +1,6 @@
 ---
-title: "TTFT varies 13x across LLM providers. Here are the numbers."
-description: "Hourly probes across 15 frontier models from OpenAI, Anthropic, Google, DeepSeek, and xAI. Median TTFT ranges from 321ms to 4,226ms. Raw data included."
+title: "TTFT varied 13x in my LLM provider benchmark snapshot"
+description: "Hourly probes across 15 frontier models from OpenAI, Anthropic, Google, DeepSeek, and xAI via OpenRouter. In this snapshot, median TTFT ranged from 321ms to 4,226ms. Raw data included."
 pubDate: 2026-05-08
 tags: ["llm", "go", "devops", "performance", "benchmark"]
 lang: "en"
@@ -15,7 +15,13 @@ token (TTFT) measured continuously from a fixed location.
 
 I set up an automated benchmark that probes 15 frontier models every hour
 and publishes all raw data. After 30+ hours of data across 5 providers,
-the results are clear: TTFT varies 13x depending on which provider you pick.
+this snapshot showed a 13x spread in median TTFT.
+
+Scope caveat: this is not a universal provider benchmark. Requests went through
+OpenRouter from one deployment location, sample counts were still small for
+some models, and provider routing changes over time. Treat the numbers as a
+reproducible snapshot and a reason to measure your own traffic, not as a
+permanent ranking.
 
 ## The setup
 

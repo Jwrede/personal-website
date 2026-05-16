@@ -1,6 +1,6 @@
 ---
-title: "TTFT variiert 13x zwischen LLM-Anbietern. Hier sind die Zahlen."
-description: "Stuendliche Messungen an 15 Frontier-Modellen von OpenAI, Anthropic, Google, DeepSeek und xAI. Der Median-TTFT reicht von 321ms bis 4.226ms. Rohdaten inklusive."
+title: "TTFT variierte 13x in meinem LLM-Provider-Benchmark-Snapshot"
+description: "Stündliche Messungen an 15 Frontier-Modellen von OpenAI, Anthropic, Google, DeepSeek und xAI über OpenRouter. In diesem Snapshot reichte der Median-TTFT von 321ms bis 4.226ms. Rohdaten inklusive."
 pubDate: 2026-05-08
 tags: ["llm", "go", "devops", "performance", "benchmark"]
 lang: "de"
@@ -9,20 +9,26 @@ translationKey: "llm-bench-ttft-13x"
 
 ## Die These
 
-Jeder LLM-Anbieter veroeffentlicht Durchsatzzahlen unter Idealbedingungen.
-Niemand veroeffentlicht, was der Produktionstraffic tatsaechlich erlebt:
+Jeder LLM-Anbieter veröffentlicht Durchsatzzahlen unter Idealbedingungen.
+Niemand veröffentlicht, was der Produktionstraffic tatsächlich erlebt:
 Time to First Token (TTFT), kontinuierlich von einem festen Standort aus
 gemessen.
 
 Ich habe einen automatisierten Benchmark aufgesetzt, der 15 Frontier-Modelle
-stuendlich testet und alle Rohdaten veroeffentlicht. Nach ueber 30 Stunden
-Daten ueber 5 Anbieter hinweg ist das Ergebnis eindeutig: TTFT variiert
-um den Faktor 13, je nachdem welchen Anbieter man waehlt.
+stündlich testet und alle Rohdaten veröffentlicht. Nach über 30 Stunden
+Daten über 5 Anbieter hinweg zeigte dieser Snapshot eine 13x-Spanne beim
+Median-TTFT.
+
+Einschränkung: Das ist kein universeller Provider-Benchmark. Die Requests liefen
+über OpenRouter von einem Deployment-Standort, die Sample-Zahlen waren für
+einige Modelle noch klein, und Provider-Routing ändert sich über die Zeit.
+Die Zahlen sind ein reproduzierbarer Snapshot und ein Grund, den eigenen
+Traffic zu messen, kein dauerhaftes Ranking.
 
 ## Das Setup
 
 Jede Stunde sendet ein Probe eine minimale Anfrage ("Hi", max 20 Tokens)
-an jedes Modell ueber OpenRouter. Der Prompt ist absichtlich winzig, um
+an jedes Modell über OpenRouter. Der Prompt ist absichtlich winzig, um
 die Infrastrukturlatenz von der Modell-Rechenzeit zu isolieren.
 
 **Getestete Modelle:**
@@ -55,14 +61,14 @@ die Infrastrukturlatenz von der Modell-Rechenzeit zu isolieren.
 
 ## Was das bedeutet
 
-**Google gewinnt beim TTFT mit grossem Abstand.** Alle drei Gemini-Modelle
+**Google gewinnt beim TTFT mit großem Abstand.** Alle drei Gemini-Modelle
 antworten im Median in unter 500ms. Gemini 2.5 Flash Lite mit 321ms liefert
-das schnellste erste Token ueber alle 15 Modelle.
+das schnellste erste Token über alle 15 Modelle.
 
 **OpenAI liegt im Mittelfeld.** GPT-5.4 mit 912ms und GPT-5.5 mit 1.158ms
 sind solide, aber nicht herausragend.
 
-**Anthropic hat die groesste Streuung innerhalb eines Anbieters.** Claude
+**Anthropic hat die größte Streuung innerhalb eines Anbieters.** Claude
 Opus 4.6 mit 1.709ms ist akzeptabel. Claude Opus 4.7 mit 2.494ms und
 Sonnet 4.6 mit 2.120ms sind beim ersten Token deutlich langsamer.
 
@@ -70,9 +76,9 @@ Sonnet 4.6 mit 2.120ms sind beim ersten Token deutlich langsamer.
 braucht im Median 4.226ms bis zum ersten Token. Das ist 13x langsamer als
 Gemini Flash Lite.
 
-## Schnellstes TTFT != schnellste Generierung
+## Schnellstes erstes Token != schnellste Generierung
 
-Der Durchsatz erzaehlt eine voellig andere Geschichte. Die xAI-Grok-Modelle
+Der Durchsatz erzählt eine völlig andere Geschichte. Die xAI-Grok-Modelle
 sind am langsamsten beim Start, produzieren aber 1.000 bis 3.000 Tok/s,
 sobald sie loslegen. Grok 4.1 Fast mit 2.985 Tok/s ist 121x schneller als
 DeepSeek v3.2 mit 24,7 Tok/s.
@@ -82,30 +88,30 @@ sind xAI und DeepSeek v4 Flash starke Optionen. Wenn der Anwendungsfall
 interaktiver Chat ist, bei dem Nutzer auf einen Ladebalken starren, gewinnt
 Google.
 
-## Warum das fuer die Produktion wichtig ist
+## Warum das für die Produktion wichtig ist
 
-Wer einen 3-Sekunden-Timeout fuer LLM-Aufrufe fest einstellt, wuerde bei 5
-der 15 Modelle in diesem Benchmark regelmaessig scheitern. Bei 2 Sekunden
-waeren es 8 von 15 im Median.
+Wer einen 3-Sekunden-Timeout für LLM-Aufrufe fest einstellt, würde bei 5
+der 15 Modelle in diesem Benchmark regelmäßig scheitern. Bei 2 Sekunden
+wären es 8 von 15 im Median.
 
-Die meisten Teams setzen Timeouts basierend auf dem, was sich waehrend der
-Entwicklung mit einem Anbieter richtig anfuehlte. Diese Zahlen zeigen, dass
+Die meisten Teams setzen Timeouts basierend auf dem, was sich während der
+Entwicklung mit einem Anbieter richtig anfühlte. Diese Zahlen zeigen, dass
 ein Anbieterwechsel (oder sogar ein Modellwechsel beim selben Anbieter) das
-Timeout ueberschreiten kann, ohne dass sich am Code etwas aendert.
+Timeout überschreiten kann, ohne dass sich am Code etwas ändert.
 
 ## Live-Dashboard und Rohdaten
 
-Dieser Benchmark laeuft kontinuierlich. Das Live-Dashboard mit Diagrammen
+Dieser Benchmark läuft kontinuierlich. Das Live-Dashboard mit Diagrammen
 ist unter [bench.jonathanwrede.de](https://bench.jonathanwrede.de) erreichbar.
 
-Alle Rohdaten werden als JSONL veroeffentlicht und sind frei verfuegbar unter
+Alle Rohdaten werden als JSONL veröffentlicht und sind frei verfügbar unter
 [github.com/Jwrede/llm-bench-data](https://github.com/Jwrede/llm-bench-data).
-Die Modellliste aktualisiert sich taeglich basierend auf OpenRouters
-Popularitaetsrankings.
+Die Modellliste aktualisiert sich täglich basierend auf OpenRouters
+Popularitätsrankings.
 
 Die Probing-Infrastruktur ist mit
 [llmprobe](https://github.com/Jwrede/llmprobe) gebaut, einem
 Open-Source-Go-CLI, das TTFT, Latenz und Durchsatz per HTTP und SSE-Parsing
 misst (keine SDKs). Es funktioniert auch als
-[MCP-Server](https://github.com/Jwrede/llmprobe#mcp-server) fuer Claude
-Code, sodass man die Anbieter-Gesundheit direkt aus dem Editor pruefen kann.
+[MCP-Server](https://github.com/Jwrede/llmprobe#mcp-server) für Claude
+Code, sodass man die Anbieter-Gesundheit direkt aus dem Editor prüfen kann.

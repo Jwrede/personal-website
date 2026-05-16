@@ -44,7 +44,9 @@ const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Jonathan Wrede',
-  jobTitle: locale === 'de' ? 'ML & Platform Engineer' : 'ML & Platform Engineer',
+  jobTitle: locale === 'de'
+    ? 'AI Platform und ML Infrastructure Engineer'
+    : 'AI Platform and ML Infrastructure Engineer',
   url: `${site}/`,
   image: `${site}/profilbild.webp`,
   email: locale === 'de' ? 'kontakt@jonathanwrede.de' : 'contact@jonathanwrede.de',
@@ -53,13 +55,29 @@ const personJsonLd = {
     addressLocality: 'Münster',
     addressCountry: 'DE',
   },
-  sameAs: ['https://linkedin.com/in/jonathan-wrede'],
+  sameAs: ['https://github.com/Jwrede', 'https://linkedin.com/in/jonathan-wrede'],
   knowsAbout: [
     'Machine Learning',
+    'MLOps',
     'Data Engineering',
+    'AI Platform Engineering',
+    'ML Infrastructure',
+    'Kubernetes ML Workloads',
+    'Inference Reliability',
+    'Inference Readiness',
+    'LLM Readiness Gates',
+    'Model Serving',
+    'AI Infrastructure',
+    'Open Source AI Infrastructure',
+    'IoT Fleet Analytics',
+    'Secure Neural Network Inference',
+    'LLM Observability',
+    'Feature Stores',
     'Dagster',
     'dbt',
     'Kubernetes',
+    'OpenTelemetry',
+    'Feast',
     'Python',
     'FastAPI',
     'IoT',
@@ -121,9 +139,6 @@ const websiteJsonLd = {
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#x1f4bb;</text></svg>" />
 
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /></noscript>
-
   <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
   {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
@@ -131,6 +146,7 @@ const websiteJsonLd = {
   <style is:global>
     html[lang="de"] .lang-en { display: none !important; }
     html[lang="en"] .lang-de { display: none !important; }
+    .prose table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   </style>
 
   <slot name="head" />

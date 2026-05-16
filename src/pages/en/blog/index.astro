@@ -27,7 +27,7 @@ const blogJsonLd = {
     description: p.data.description,
     datePublished: p.data.pubDate.toISOString(),
     inLanguage: p.data.lang,
-    url: `https://jonathanwrede.de${blogPostPath(locale, p.slug)}`,
+    url: `https://jonathanwrede.de${blogPostPath(locale, p.id)}`,
   })),
 };
 ---
@@ -56,7 +56,7 @@ const blogJsonLd = {
         <p class="text-slate-500 font-mono text-sm">{tr.blogEmpty}</p>
       )}
       {posts.map((post) => (
-        <a href={blogPostPath(locale, post.slug)} class="block bg-card rounded-xl p-5 md:p-6 border border-slate-700/50 hover:border-accent transition group shadow-lg">
+        <a href={blogPostPath(locale, post.id)} class="block bg-card rounded-xl p-5 md:p-6 border border-slate-700/50 hover:border-accent transition group shadow-lg">
           <div class="flex items-center gap-3 text-[11px] text-slate-500 font-mono mb-2">
             <time datetime={post.data.pubDate.toISOString()}>{fmt.format(post.data.pubDate)}</time>
             {post.data.tags.length > 0 && (
@@ -77,8 +77,12 @@ const blogJsonLd = {
       ))}
     </div>
 
-    <footer class="text-center text-slate-500 text-xs py-8">
-      <a href="/en/" class="hover:text-accent">{tr.blogBackHome}</a>
+    <footer class="text-center text-slate-500 text-xs py-8 space-y-2">
+      <div><a href="/en/" class="hover:text-accent">{tr.blogBackHome}</a></div>
+      <div class="flex justify-center gap-3">
+        <a href="/en/legal-notice/" class="hover:text-accent underline">Legal Notice</a>
+        <a href="/en/privacy/" class="hover:text-accent underline">Privacy</a>
+      </div>
     </footer>
   </div>
 </BaseLayout>

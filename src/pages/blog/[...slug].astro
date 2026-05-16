@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import { t, blogPostPath } from '../../i18n/strings';
 
@@ -15,18 +15,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
       ? allPosts.find((p) => p.data.translationKey === post.data.translationKey && p.data.lang === 'en')
       : undefined;
     return {
-      params: { slug: post.slug },
-      props: { post, enSlug: translation?.slug },
+      params: { slug: post.id },
+      props: { post, enSlug: translation?.id },
     };
   });
 };
 
 const { post, enSlug } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const fmt = new Intl.DateTimeFormat('de-DE', { year: 'numeric', month: 'long', day: '2-digit' });
 
-const dePath = blogPostPath('de', post.slug);
+const dePath = blogPostPath('de', post.id);
 const enPath = enSlug ? blogPostPath('en', enSlug) : undefined;
 
 const articleJsonLd = {
@@ -105,16 +105,24 @@ const articleJsonLd = {
     <footer class="bg-card p-5 md:p-6 rounded-xl border border-slate-700/50 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
       <div class="text-sm text-slate-300">
         <div class="font-bold text-white">Jonathan Wrede</div>
-        <div class="text-slate-400 text-xs">ML & Platform Engineer, Münster</div>
+        <div class="text-slate-400 text-xs">ML Platform Engineer for IoT Fleet Analytics, Münster</div>
       </div>
       <div class="flex gap-3 text-xs">
         <a href={`mailto:${tr.contactEmail}`} class="bg-accent text-bg font-bold py-2 px-3 rounded">
           <i class="fas fa-paper-plane mr-1"></i> {tr.contact}
         </a>
+        <a href="https://github.com/Jwrede" target="_blank" rel="noopener" class="border border-slate-500 text-slate-300 font-bold py-2 px-3 rounded">
+          <i class="fab fa-github mr-1"></i> GitHub
+        </a>
         <a href="https://linkedin.com/in/jonathan-wrede" target="_blank" rel="noopener" class="border border-accent text-accent font-bold py-2 px-3 rounded">
           <i class="fab fa-linkedin mr-1"></i> LinkedIn
         </a>
       </div>
+    </footer>
+    <footer class="text-center text-slate-500 text-xs py-2">
+      <a href="/impressum/" class="hover:text-accent underline">Impressum</a>
+      <span class="mx-2 text-slate-700">|</span>
+      <a href="/datenschutz/" class="hover:text-accent underline">Datenschutz</a>
     </footer>
   </article>
 </BaseLayout>

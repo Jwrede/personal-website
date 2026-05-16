@@ -14,6 +14,12 @@ I pointed [tokentoll](https://github.com/Jwrede/tokentoll) at
 official collection of example code, and asked it one question: if every
 call site ran 1,000 times per month, what would the bill look like?
 
+Snapshot caveat: this is a static code scan, not OpenAI's actual bill. It uses
+tokentoll's pricing database at scan time, assumes 1,000 calls per call site
+per month, and estimates cost from detected model names and token parameters.
+The useful signal is the relative cost concentration, not the exact dollar
+amount.
+
 ```
 $ tokentoll scan openai-cookbook/
 
@@ -54,10 +60,9 @@ many evaluation and generation tasks adequately), the cost drops from
 $1,282 to roughly $53. That is a 24x reduction from changing one string
 per call site.
 
-This is not a hypothetical. Uber burned through their entire 2026 AI
-coding budget by April. Teams report 15-60x cost differences between
-model tiers. The model name is the most expensive line of code in any
-LLM application.
+This is not a hypothetical pattern. Teams routinely see order-of-magnitude
+cost differences between model tiers. The model name is often the most
+expensive line of code in an LLM application.
 
 ## Why this happens silently
 

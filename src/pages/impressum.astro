@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Impressum | Jonathan Wrede"
+  description="Impressum und Anbieterkennzeichnung von jonathanwrede.de."
+  locale="de"
+  canonicalPath="/impressum/"
+  alternates={{ de: '/impressum/', en: '/en/legal-notice/' }}
+>
+  <main class="max-w-3xl mx-auto space-y-6">
+    <nav class="bg-card p-4 rounded-xl border border-slate-700/50 text-xs font-mono">
+      <a href="/" class="text-slate-400 hover:text-accent">
+        <i class="fas fa-arrow-left mr-1.5"></i> jonathanwrede.de
+      </a>
+    </nav>
+
+    <article class="bg-card p-6 md:p-10 rounded-xl border-l-4 border-accent shadow-lg prose prose-invert max-w-none">
+      <h1>Impressum</h1>
+      <p>Angaben gemaess § 5 DDG</p>
+
+      <h2>Betreiber</h2>
+      <p>
+        Jonathan Wrede<br />
+        Geiststr. 78<br />
+        48151 Muenster<br />
+        Deutschland
+      </p>
+
+      <h2>Kontakt</h2>
+      <p>
+        Telefon: <a href="tel:+4915129499386">+49 151 29499386</a><br />
+        E-Mail: <a href="mailto:kontakt@jonathanwrede.de">kontakt@jonathanwrede.de</a>
+      </p>
+
+      <h2>Umsatzsteuer</h2>
+      <p>Als Kleinunternehmer im Sinne von § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet.</p>
+
+      <h2>Verantwortlich fuer den Inhalt</h2>
+      <p>Jonathan Wrede, Anschrift wie oben.</p>
+    </article>
+  </main>
+</BaseLayout>
